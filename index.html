@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rasi by Sindhu – The Designer Studio</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { overflow-x: hidden; }
+    body { overflow-x: hidden; font-family: "Georgia","Times New Roman",serif; color: var(--text); background: var(--bg); line-height: 1.7; }
+
+    :root {
+      --bg: #ffffff; --surface: #faf9f7; --border: #e8e4df;
+      --text: #1a1612; --muted: #6b6560; --accent: #8b6f47;
+      --accent-light: #f5efe8; --gold: #c9a96e; --rose: #b85c6e;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.97); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%; height: 64px; width: 100%;
+    }
+    .nav-logo { font-size: 1.3rem; font-weight: 700; color: var(--text); font-style: italic; line-height: 1.15; }
+    .nav-logo span { display: block; font-size: 0.6rem; font-weight: 400; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; font-style: normal; }
+    .nav-links { display: flex; gap: 24px; font-size: 0.78rem; color: var(--muted); font-family: -apple-system,"Segoe UI",sans-serif; letter-spacing: 0.4px; text-transform: uppercase; flex-wrap: nowrap; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta {
+      white-space: nowrap; background: var(--text); color: #fff;
+      padding: 8px 18px; font-size: 0.75rem; font-weight: 400;
+      letter-spacing: 1px; text-transform: uppercase;
+      font-family: -apple-system,"Segoe UI",sans-serif;
+      border: 1px solid var(--text); transition: all 0.25s; flex-shrink: 0;
+    }
+    .nav-cta:hover { background: transparent; color: var(--text); }
+
+    /* STRIP */
+    .strip {
+      background: var(--text); color: var(--gold);
+      text-align: center; padding: 10px 5%;
+      font-family: -apple-system,"Segoe UI",sans-serif;
+      font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+
+    /* HERO */
+    .hero { display: grid; grid-template-columns: 1fr 1fr; min-height: 52vh; width: 100%; }
+    .hero-left {
+      background: var(--surface);
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 48px 6% 48px 7%;
+    }
+    .hero-eyebrow { font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.68rem; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .hero h1 { font-size: clamp(1.8rem, 3vw, 3.2rem); font-weight: 700; line-height: 1.15; margin-bottom: 18px; }
+    .hero h1 em { color: var(--rose); font-style: italic; }
+    .hero-desc { font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.92rem; color: var(--muted); max-width: 400px; margin-bottom: 32px; line-height: 1.8; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-dark { background: var(--text); color: #fff; padding: 11px 24px; border: 1px solid var(--text); font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all 0.25s; white-space: nowrap; }
+    .btn-dark:hover { background: transparent; color: var(--text); }
+    .btn-ghost { background: transparent; color: var(--text); padding: 11px 24px; border: 1px solid var(--border); font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all 0.25s; white-space: nowrap; }
+    .btn-ghost:hover { border-color: var(--text); }
+    .btn-cat { background: transparent; color: var(--gold); padding: 11px 24px; border: 1px solid var(--gold); font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all 0.25s; white-space: nowrap; }
+    .btn-cat:hover { background: var(--gold); color: #fff; }
+    .hero-right { position: relative; overflow: hidden; background: #e8ddd0; }
+    .hero-right svg { width: 100%; height: 100%; display: block; }
+
+    /* SECTION COMMONS */
+    section { padding: 64px 5%; width: 100%; }
+    .section-eyebrow { font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.66rem; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .section-title { font-size: clamp(1.4rem, 2.2vw, 2rem); font-weight: 700; margin-bottom: 10px; color: var(--text); line-height: 1.2; }
+    .section-sub { font-family: -apple-system,"Segoe UI",sans-serif; color: var(--muted); max-width: 480px; margin-bottom: 40px; font-size: 0.9rem; line-height: 1.8; }
+    .center { text-align: center; }
+    .center .section-sub { margin-left: auto; margin-right: auto; }
+    .divider { display: flex; align-items: center; gap: 14px; justify-content: center; margin: 0 0 40px; }
+    .divider-line { flex: 1; max-width: 60px; height: 1px; background: var(--border); }
+    .divider-diamond { width: 6px; height: 6px; background: var(--gold); transform: rotate(45deg); flex-shrink: 0; }
+
+    /* CATEGORIES */
+    .categories { background: var(--surface); }
+    .cat-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 6px; }
+    .cat-scroll::-webkit-scrollbar { height: 4px; } .cat-scroll::-webkit-scrollbar-thumb { background: var(--border); } .cat-scroll::-webkit-scrollbar-track { background: transparent; }
+    .cat-grid { display: flex; flex-wrap: wrap; gap: 8px; width: 100%; }
+    .cat-card { cursor: pointer; background: var(--bg); border: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px 6px 12px; text-align: center; transition: border-color 0.25s, transform 0.2s; flex: 1 1 calc(14.28% - 8px); min-width: 100px; }
+    .cat-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+    .cat-icon-wrap { width: 48px; height: 48px; margin-bottom: 8px; flex-shrink: 0; }
+    .cat-icon-wrap svg { width: 100%; height: 100%; display: block; }
+    .cat-overlay { display: flex; flex-direction: column; align-items: center; min-width: 0; width: 100%; }
+    .cat-overlay h3 { color: var(--text); font-size: 0.75rem; font-weight: 700; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+    .cat-overlay p { color: var(--muted); font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.65rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+    .cat-overlay .cat-arrow { display: inline-block; margin-top: 4px; color: var(--gold); font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.6rem; letter-spacing: 2px; opacity: 0; transform: translateY(4px); transition: all 0.3s; }
+    .cat-card:hover .cat-arrow { opacity: 1; transform: translateY(0); }
+
+    /* HOW IT WORKS */
+    .how { background: var(--bg); }
+    .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); width: 100%; border: 1px solid var(--border); }
+    .step { padding: 28px 20px; border-right: 1px solid var(--border); background: var(--bg); }
+    .step:last-child { border-right: none; }
+    .step-num { font-size: 1.8rem; font-weight: 700; color: var(--border); font-family: Georgia,serif; margin-bottom: 12px; line-height: 1; }
+    .step h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 6px; }
+    .step p { font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.8rem; color: var(--muted); line-height: 1.7; }
+
+    /* PRODUCTS */
+    .products { background: var(--surface); }
+    .product-filters { display: flex; flex-wrap: wrap; gap: 0; margin-bottom: 32px; border: 1px solid var(--border); max-width: 100%; }
+    .filter-btn { padding: 8px 16px; border: none; border-right: 1px solid var(--border); background: var(--bg); font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.7rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; color: var(--muted); transition: all 0.2s; white-space: nowrap; }
+    .filter-btn:last-child { border-right: none; }
+    .filter-btn.active, .filter-btn:hover { background: var(--text); color: #fff; }
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 2px; width: 100%; }
+    .product-card { background: var(--bg); cursor: pointer; transition: transform 0.2s; min-width: 0; }
+    .product-card:hover { transform: translateY(-3px); }
+    .product-img { aspect-ratio: 3/4; overflow: hidden; background: #ddd5c8; }
+    .product-img svg { width: 100%; height: 100%; display: block; transition: transform 0.5s; }
+    .product-card:hover .product-img svg { transform: scale(1.04); }
+    .product-body { padding: 14px 12px 18px; }
+    .product-tag { font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.64rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; display: block; }
+    .product-body h3 { font-size: 0.92rem; font-weight: 700; margin-bottom: 3px; }
+    .product-body .desc { font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.78rem; color: var(--muted); margin-bottom: 10px; line-height: 1.6; }
+    .product-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+    .price { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+    .add-btn { background: transparent; color: var(--text); padding: 5px 12px; border: 1px solid var(--border); font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.68rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+    .add-btn:hover { background: var(--text); color: #fff; border-color: var(--text); }
+
+    /* CUSTOMISE FORM */
+    .customise { background: var(--bg); }
+    .form-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; width: 100%; }
+    .form-info h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; }
+    .form-info p { font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.86rem; color: var(--muted); line-height: 1.8; margin-bottom: 16px; }
+    .form-promise { border-left: 2px solid var(--gold); padding-left: 14px; margin-top: 24px; }
+    .form-promise p { font-size: 0.8rem; color: var(--muted); margin-bottom: 7px; font-family: -apple-system,"Segoe UI",sans-serif; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; width: 100%; }
+    .form-group { display: flex; flex-direction: column; gap: 5px; }
+    .form-group.full { grid-column: 1 / -1; }
+    .submit-row { grid-column: 1 / -1; margin-top: 6px; }
+    label { font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.7rem; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
+    select, input, textarea { padding: 9px 11px; border: 1px solid var(--border); border-radius: 0; font-size: 0.86rem; color: var(--text); background: var(--surface); font-family: inherit; outline: none; transition: border-color 0.2s; width: 100%; }
+    select:focus, input:focus, textarea:focus { border-color: var(--accent); }
+    textarea { resize: vertical; min-height: 80px; }
+    .color-swatches { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+    .swatch { width: 26px; height: 26px; cursor: pointer; border: 2px solid transparent; transition: border-color 0.2s; outline: 1px solid rgba(0,0,0,0.1); flex-shrink: 0; }
+    .swatch:hover, .swatch.selected { border-color: var(--text); }
+    .btn-submit { background: var(--text); color: #fff; padding: 12px 32px; border: 1px solid var(--text); font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.25s; }
+    .btn-submit:hover { background: transparent; color: var(--text); }
+
+    /* TESTIMONIALS */
+    .testimonials { background: var(--surface); }
+    .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 100%; }
+    .testi-card { background: var(--bg); border: 1px solid var(--border); padding: 22px 20px; }
+    .stars { color: var(--gold); font-size: 0.82rem; letter-spacing: 2px; margin-bottom: 12px; }
+    .testi-card p { font-size: 0.85rem; color: var(--muted); margin-bottom: 16px; font-style: italic; line-height: 1.7; }
+    .testi-author { display: flex; align-items: center; gap: 10px; }
+    .avatar { width: 36px; height: 36px; background: var(--accent-light); color: var(--accent); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.88rem; font-family: sans-serif; flex-shrink: 0; }
+    .testi-author h4 { font-size: 0.82rem; font-weight: 700; margin-bottom: 1px; }
+    .testi-author span { font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.72rem; color: var(--muted); }
+
+    /* WHY */
+    .why { background: var(--bg); }
+    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; width: 100%; }
+    .why-card { padding: 0; }
+    .why-icon { width: 40px; height: 40px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; margin-bottom: 14px; }
+    .why-card h3 { font-size: 0.92rem; font-weight: 700; margin-bottom: 6px; }
+    .why-card p { font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.8rem; color: var(--muted); line-height: 1.7; }
+
+    /* BLOUSE */
+    .blouse { background: var(--surface); }
+    .blouse-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 2px; width: 100%; }
+    .blouse-card { background: var(--bg); cursor: pointer; transition: transform 0.2s; min-width: 0; }
+    .blouse-card:hover { transform: translateY(-3px); }
+    .blouse-img { aspect-ratio: 1/1; overflow: hidden; background: #e8ddd5; }
+    .blouse-img svg { width: 100%; height: 100%; display: block; transition: transform 0.5s; }
+    .blouse-card:hover .blouse-img svg { transform: scale(1.05); }
+    .blouse-body { padding: 12px 10px 16px; border-top: 1px solid var(--border); }
+    .blouse-style { font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.62rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 3px; display: block; }
+    .blouse-body h3 { font-size: 0.88rem; font-weight: 700; margin-bottom: 3px; }
+    .blouse-body p { font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.75rem; color: var(--muted); margin-bottom: 8px; line-height: 1.5; }
+    .blouse-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; }
+
+    /* TASSEL */
+    .tassels { background: var(--bg); }
+    .tassel-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; margin-bottom: 48px; width: 100%; }
+    .tassel-intro-text h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+    .tassel-intro-text p { font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.86rem; color: var(--muted); line-height: 1.8; margin-bottom: 12px; }
+    .tassel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 16px; width: 100%; }
+    .tassel-card { background: var(--surface); border: 1px solid var(--border); padding: 20px 12px; text-align: center; cursor: pointer; transition: border-color 0.25s, transform 0.2s; min-width: 0; }
+    .tassel-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+    .tassel-img { margin: 0 auto 14px; width: 60px; height: 90px; }
+    .tassel-img svg { width: 100%; height: 100%; display: block; }
+    .tassel-card h3 { font-size: 0.85rem; font-weight: 700; margin-bottom: 4px; }
+    .tassel-card p { font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.72rem; color: var(--muted); margin-bottom: 8px; line-height: 1.5; }
+    .tassel-price { font-size: 0.88rem; font-weight: 700; color: var(--gold); }
+
+    /* CTA */
+    .cta-banner { background: var(--text); color: #fff; text-align: center; padding: 64px 5%; width: 100%; }
+    .cta-banner .eyebrow { font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.66rem; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .cta-banner h2 { font-size: clamp(1.5rem, 2.8vw, 2.4rem); font-weight: 700; margin-bottom: 14px; line-height: 1.2; }
+    .cta-banner p { font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.9rem; color: rgba(255,255,255,0.65); margin-bottom: 28px; max-width: 460px; margin-left: auto; margin-right: auto; }
+    .btn-gold { background: var(--gold); color: var(--text); padding: 12px 28px; border: 1px solid var(--gold); font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.76rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; font-weight: 600; transition: all 0.25s; }
+    .btn-gold:hover { background: transparent; color: var(--gold); }
+
+    /* FOOTER */
+    footer { background: #111108; color: #7a756e; padding: 48px 5% 24px; width: 100%; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 28px; margin-bottom: 40px; width: 100%; }
+    .footer-brand .logo { font-size: 1.1rem; font-weight: 700; color: #e8ddd0; font-family: Georgia,serif; font-style: italic; margin-bottom: 8px; }
+    .footer-brand .logo span { display: block; font-size: 0.58rem; font-style: normal; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; font-weight: 400; }
+    .footer-brand p { font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.8rem; line-height: 1.8; margin-top: 8px; }
+    .footer-col h4 { color: #e8ddd0; font-size: 0.68rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px; font-family: -apple-system,"Segoe UI",sans-serif; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .footer-col ul li { font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.8rem; cursor: pointer; transition: color 0.2s; }
+    .footer-col ul li:hover { color: #e8ddd0; }
+    .footer-bottom { border-top: 1px solid #222215; padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.74rem; }
+
+    /* MODAL */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(26,22,18,0.6); z-index: 200; align-items: center; justify-content: center; }
+    .modal-overlay.open { display: flex; }
+    .modal { background: var(--bg); padding: 36px 28px; max-width: 380px; width: 90%; text-align: center; border-top: 3px solid var(--gold); }
+    .modal-icon { font-size: 1.8rem; margin-bottom: 12px; }
+    .modal h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+    .modal p { font-family: -apple-system,"Segoe UI",sans-serif; color: var(--muted); font-size: 0.85rem; margin-bottom: 20px; line-height: 1.7; }
+    .modal-close { background: var(--text); color: #fff; padding: 9px 24px; border: none; font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; }
+
+    /* ─── RESPONSIVE ─── */
+
+    /* Tablet: 900px and below */
+    @media (max-width: 900px) {
+      nav { padding: 0 4%; gap: 12px; }
+      .nav-links { gap: 16px; font-size: 0.72rem; }
+      section { padding: 52px 4%; }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 40px 5%; }
+      .hero-right { height: 45vw; min-height: 200px; max-height: none; display: block; }
+      .cat-grid { gap: 8px; }
+      .cat-card { flex: 1 1 calc(25% - 8px); min-width: 90px; }
+      .steps-grid { grid-template-columns: repeat(2, 1fr); }
+      .step { border-bottom: 1px solid var(--border); }
+      .product-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+      .testi-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .why-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+      .form-wrap { grid-template-columns: 1fr; gap: 32px; }
+      .blouse-grid { grid-template-columns: repeat(3, 1fr); }
+      .tassel-grid { grid-template-columns: repeat(3, 1fr); }
+      .tassel-intro { grid-template-columns: 1fr; gap: 28px; }
+    }
+
+    /* Mobile: 600px and below */
+    @media (max-width: 600px) {
+      nav { padding: 0 4%; height: 56px; }
+      .nav-links { display: none; }
+      .nav-logo { font-size: 1.1rem; }
+      .nav-cta { padding: 7px 14px; font-size: 0.7rem; }
+      .strip { font-size: 0.6rem; letter-spacing: 1px; white-space: normal; }
+      section { padding: 40px 4%; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-left { padding: 32px 4%; }
+      .hero-right { display: none; }
+      .hero h1 { font-size: clamp(1.5rem, 6vw, 2.2rem); }
+      .hero-desc { font-size: 0.85rem; margin-bottom: 24px; }
+      .cat-grid { gap: 6px; }
+      .cat-card { flex: 1 1 calc(25% - 6px); min-width: 80px; }
+      .cat-icon-wrap { width: 36px; height: 36px; }
+      .cat-overlay h3 { font-size: 0.65rem; }
+      .cat-overlay p { display: none; }
+      .steps-grid { grid-template-columns: 1fr 1fr; }
+      .product-filters { width: 100%; }
+      .filter-btn { flex: 1 1 auto; border-right: none; border-bottom: 1px solid var(--border); padding: 7px 8px; font-size: 0.62rem; letter-spacing: 0.5px; }
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
+      .form-wrap { grid-template-columns: 1fr; gap: 24px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full, .submit-row { grid-column: 1; }
+      .testi-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .blouse-grid { grid-template-columns: repeat(2, 1fr); }
+      .tassel-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .tassel-intro { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+      .cta-banner { padding: 48px 4%; }
+      footer { padding: 36px 4% 20px; }
+    }
+
+    /* Small mobile: 420px and below */
+    @media (max-width: 420px) {
+      .cat-card { flex: 1 1 calc(33.33% - 6px); min-width: 72px; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .product-grid { grid-template-columns: 1fr 1fr; }
+      .blouse-grid { grid-template-columns: 1fr 1fr; }
+      .tassel-grid { grid-template-columns: 1fr 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 1.5rem; }
+      .section-title { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Rasi<span>by Sindhu</span></div>
+  <div class="nav-links">
+    <a href="#categories">Categories</a>
+    <a href="#products">Collection</a>
+    <a href="#customise">Customise</a>
+    <a href="#blouse">Blouses</a>
+    <a href="#tassels">Tassels</a>
+    <a href="#testimonials">Reviews</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="#customise" class="nav-cta">Design Now</a>
+</nav>
+
+<!-- ANNOUNCEMENT STRIP -->
+<div class="strip">Custom orders in 7–10 days &nbsp;·&nbsp; Free design consultation</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Rasi by Sindhu &nbsp;·&nbsp; Est. 2018</div>
+    <h1>Crafted for <em>You</em>,<br>Worn with Pride</h1>
+    <p class="hero-desc">Bespoke designer dresses for men, women, kids, and everyone in between — every stitch is personal, every outfit tells your story.</p>
+    <div class="hero-actions">
+      <button class="btn-dark" onclick="document.getElementById('customise').scrollIntoView({behavior:'smooth'})">Start Designing</button>
+      <button class="btn-ghost" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Browse Collection</button>
+      <button class="btn-cat" onclick="document.getElementById('categories').scrollIntoView({behavior:'smooth'})">Shop by Category ↓</button>
+    </div>
+  </div>
+  <div class="hero-right">
+    <!-- Elegant fashion illustration SVG -->
+    <svg viewBox="0 0 500 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <rect width="500" height="700" fill="#e8ddd0"/>
+      <!-- background fabric texture lines -->
+      <line x1="0" y1="100" x2="500" y2="100" stroke="#d4c8b8" stroke-width="1" opacity="0.4"/>
+      <line x1="0" y1="200" x2="500" y2="200" stroke="#d4c8b8" stroke-width="1" opacity="0.4"/>
+      <line x1="0" y1="300" x2="500" y2="300" stroke="#d4c8b8" stroke-width="1" opacity="0.4"/>
+      <line x1="0" y1="400" x2="500" y2="400" stroke="#d4c8b8" stroke-width="1" opacity="0.4"/>
+      <line x1="0" y1="500" x2="500" y2="500" stroke="#d4c8b8" stroke-width="1" opacity="0.4"/>
+      <line x1="0" y1="600" x2="500" y2="600" stroke="#d4c8b8" stroke-width="1" opacity="0.4"/>
+      <!-- Woman silhouette in elegant dress -->
+      <!-- Body -->
+      <ellipse cx="250" cy="120" rx="38" ry="44" fill="#c9a882"/>
+      <!-- Head hair -->
+      <ellipse cx="250" cy="100" rx="36" ry="28" fill="#3a2a1a"/>
+      <ellipse cx="250" cy="118" rx="20" ry="14" fill="#c9a882"/>
+      <!-- Neck -->
+      <rect x="238" y="158" width="24" height="20" rx="4" fill="#c9a882"/>
+      <!-- Elegant gown body -->
+      <path d="M190 175 Q250 160 310 175 L330 340 Q300 360 250 365 Q200 360 170 340 Z" fill="#b85c6e"/>
+      <!-- Gown flare -->
+      <path d="M170 340 Q200 360 250 365 Q300 360 330 340 L380 650 Q250 680 120 650 Z" fill="#b85c6e"/>
+      <!-- Gown overlay shading -->
+      <path d="M250 365 L380 650 Q310 660 250 658 Z" fill="#9c4a5c" opacity="0.35"/>
+      <path d="M250 365 L120 650 Q190 660 250 658 Z" fill="#9c4a5c" opacity="0.2"/>
+      <!-- Gown neckline detail -->
+      <path d="M210 175 Q250 195 290 175" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.6"/>
+      <!-- Embroidery detail on bodice -->
+      <circle cx="250" cy="210" r="3" fill="#c9a96e" opacity="0.8"/>
+      <circle cx="240" cy="225" r="2" fill="#c9a96e" opacity="0.7"/>
+      <circle cx="260" cy="225" r="2" fill="#c9a96e" opacity="0.7"/>
+      <circle cx="232" cy="242" r="2" fill="#c9a96e" opacity="0.6"/>
+      <circle cx="250" cy="240" r="2.5" fill="#c9a96e" opacity="0.8"/>
+      <circle cx="268" cy="242" r="2" fill="#c9a96e" opacity="0.6"/>
+      <!-- Arms -->
+      <path d="M190 190 Q160 230 155 280" stroke="#c9a882" stroke-width="20" stroke-linecap="round" fill="none"/>
+      <path d="M310 190 Q340 230 345 280" stroke="#c9a882" stroke-width="20" stroke-linecap="round" fill="none"/>
+      <!-- Dupatta / shawl -->
+      <path d="M160 180 Q200 170 250 175 Q300 170 340 180 L355 260 Q300 240 250 245 Q200 240 145 260 Z" fill="#c9a96e" opacity="0.55"/>
+      <!-- Studio tag -->
+      <rect x="30" y="30" width="170" height="48" rx="0" fill="none" stroke="#8b6f47" stroke-width="1" opacity="0.5"/>
+      <text x="45" y="50" font-family="Georgia, serif" font-size="11" fill="#8b6f47" opacity="0.8">Rasi by Sindhu</text>
+      <text x="45" y="67" font-family="sans-serif" font-size="8" fill="#8b6f47" letter-spacing="2" opacity="0.6">THE DESIGNER STUDIO</text>
+    </svg>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="categories" id="categories">
+  <div class="center">
+    <div class="section-eyebrow">Shop by Category</div>
+    <h2 class="section-title">Designed for Every Soul</h2>
+    <p class="section-sub">From newborns to grandparents — every age, every occasion, every style.</p>
+    <div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
+  </div>
+  <div class="cat-scroll">
+  <div class="cat-grid">
+
+    <!-- WOMEN -->
+    <div class="cat-card" onclick="filterProducts('Women')">
+      <div class="cat-icon-wrap">
+        <svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="28" cy="12" rx="7" ry="8" fill="#c9a882"/>
+          <ellipse cx="28" cy="9" rx="7" ry="5" fill="#5c3d2e"/>
+          <path d="M18 22 Q28 18 38 22 L42 44 Q28 48 14 44 Z" fill="#b85c6e"/>
+          <path d="M14 44 Q28 48 42 44 L46 56 Q28 58 10 56 Z" fill="#b85c6e"/>
+          <circle cx="28" cy="29" r="1.5" fill="#c9a96e"/>
+          <circle cx="25" cy="33" r="1" fill="#c9a96e" opacity="0.8"/>
+          <circle cx="31" cy="33" r="1" fill="#c9a96e" opacity="0.8"/>
+        </svg>
+      </div>
+      <div class="cat-overlay">
+        <h3>Women</h3>
+        <p>Lehengas, gowns, kurtis</p>
+        <span class="cat-arrow">→</span>
+      </div>
+    </div>
+
+    <!-- MEN -->
+    <div class="cat-card" onclick="filterProducts('Men')">
+      <div class="cat-icon-wrap">
+        <svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="28" cy="11" rx="7" ry="8" fill="#d4a574"/>
+          <ellipse cx="28" cy="8" rx="7" ry="5" fill="#2c1f14"/>
+          <path d="M18 20 Q28 17 38 20 L40 48 Q28 51 16 48 Z" fill="#2c4a3e"/>
+          <path d="M25 20 L28 26 L31 20" fill="#1a3028" stroke="#c9a96e" stroke-width="0.5"/>
+          <line x1="28" y1="27" x2="28" y2="47" stroke="#c9a96e" stroke-width="0.8" stroke-dasharray="2,2"/>
+          <circle cx="28" cy="30" r="1.5" fill="#c9a96e"/>
+          <circle cx="28" cy="36" r="1.5" fill="#c9a96e"/>
+          <circle cx="28" cy="42" r="1.5" fill="#c9a96e"/>
+        </svg>
+      </div>
+      <div class="cat-overlay">
+        <h3>Men</h3>
+        <p>Sherwanis, kurtas</p>
+        <span class="cat-arrow">→</span>
+      </div>
+    </div>
+
+    <!-- KIDS -->
+    <div class="cat-card" onclick="filterProducts('Kids')">
+      <div class="cat-icon-wrap">
+        <svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="28" cy="13" rx="8" ry="9" fill="#e8b896"/>
+          <ellipse cx="28" cy="9" rx="8" ry="6" fill="#8b4513"/>
+          <path d="M20 24 Q28 21 36 24 L38 40 Q28 43 18 40 Z" fill="#e87fa8"/>
+          <path d="M18 40 Q28 43 38 40 L42 56 Q28 58 14 56 Z" fill="#e87fa8"/>
+          <circle cx="28" cy="27" r="2" fill="#fff"/>
+          <circle cx="22" cy="33" r="1.5" fill="#fff" opacity="0.7"/>
+          <circle cx="34" cy="33" r="1.5" fill="#fff" opacity="0.7"/>
+          <path d="M21 9 Q18 5 21 4 Q24 3 23 7" fill="#e87fa8"/>
+          <path d="M35 9 Q38 5 35 4 Q32 3 33 7" fill="#e87fa8"/>
+        </svg>
+      </div>
+      <div class="cat-overlay">
+        <h3>Kids</h3>
+        <p>Frocks, ethnic sets</p>
+        <span class="cat-arrow">→</span>
+      </div>
+    </div>
+
+    <!-- TEENS -->
+    <div class="cat-card" onclick="filterProducts('Teen')">
+      <div class="cat-icon-wrap">
+        <svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="28" cy="12" rx="7" ry="8" fill="#d4956a"/>
+          <path d="M21 9 Q20 22 22 28" stroke="#3a2010" stroke-width="4" stroke-linecap="round" fill="none"/>
+          <path d="M35 9 Q36 22 34 28" stroke="#3a2010" stroke-width="4" stroke-linecap="round" fill="none"/>
+          <ellipse cx="28" cy="8" rx="7" ry="5" fill="#3a2010"/>
+          <path d="M18 22 Q28 19 38 22 L40 38 Q28 41 16 38 Z" fill="#4a7bc8"/>
+          <rect x="16" y="37" width="11" height="19" rx="2" fill="#2c4a6e"/>
+          <rect x="29" y="37" width="11" height="19" rx="2" fill="#2c4a6e"/>
+          <line x1="28" y1="38" x2="28" y2="56" stroke="#1a2f45" stroke-width="1"/>
+        </svg>
+      </div>
+      <div class="cat-overlay">
+        <h3>Teens</h3>
+        <p>Trendy, bold fits</p>
+        <span class="cat-arrow">→</span>
+      </div>
+    </div>
+
+    <!-- COUPLE SETS -->
+    <div class="cat-card" onclick="filterProducts('Couple')">
+      <div class="cat-icon-wrap">
+        <svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="17" cy="11" rx="6" ry="7" fill="#c9a882"/>
+          <ellipse cx="17" cy="8" rx="6" ry="4" fill="#4a2c1a"/>
+          <path d="M10 19 Q17 16 24 19 L26 44 Q17 47 8 44 Z" fill="#b85c6e"/>
+          <path d="M10 21 Q6 30 5 38" stroke="#b85c6e" stroke-width="6" stroke-linecap="round" fill="none"/>
+          <ellipse cx="39" cy="11" rx="6" ry="7" fill="#d4a574"/>
+          <ellipse cx="39" cy="8" rx="6" ry="4" fill="#2c1f14"/>
+          <path d="M32 19 Q39 16 46 19 L48 44 Q39 47 30 44 Z" fill="#2c4a3e"/>
+          <line x1="39" y1="22" x2="39" y2="43" stroke="#c9a96e" stroke-width="0.8" stroke-dasharray="2,2"/>
+          <circle cx="28" cy="35" r="4" fill="#c9a96e" opacity="0.4"/>
+        </svg>
+      </div>
+      <div class="cat-overlay">
+        <h3>Couples</h3>
+        <p>Matching outfits</p>
+        <span class="cat-arrow">→</span>
+      </div>
+    </div>
+
+    <!-- SENIORS -->
+    <div class="cat-card" onclick="filterProducts('Senior')">
+      <div class="cat-icon-wrap">
+        <svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="28" cy="12" rx="7" ry="8" fill="#c9a882"/>
+          <ellipse cx="28" cy="9" rx="7" ry="5" fill="#b8b0a8"/>
+          <path d="M21 9 Q20 20 22 27" stroke="#b8b0a8" stroke-width="4" stroke-linecap="round" fill="none"/>
+          <path d="M35 9 Q36 20 34 27" stroke="#b8b0a8" stroke-width="4" stroke-linecap="round" fill="none"/>
+          <path d="M18 22 Q28 19 38 22 L40 46 Q28 49 16 46 Z" fill="#4a7a5c"/>
+          <path d="M16 46 Q28 49 40 46 L43 56 Q28 58 13 56 Z" fill="#4a7a5c"/>
+          <path d="M16 46 Q28 49 40 46" stroke="#c9a96e" stroke-width="1.5" fill="none"/>
+          <path d="M38 22 Q44 30 46 42" stroke="#3a6a4c" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.7"/>
+        </svg>
+      </div>
+      <div class="cat-overlay">
+        <h3>Seniors</h3>
+        <p>Elegant & comfortable</p>
+        <span class="cat-arrow">→</span>
+      </div>
+    </div>
+
+    <!-- SAREE & TASSELS -->
+    <div class="cat-card" onclick="filterProducts('Saree')">
+      <div class="cat-icon-wrap">
+        <svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+          <!-- saree draped figure -->
+          <ellipse cx="28" cy="11" rx="7" ry="8" fill="#c9a882"/>
+          <ellipse cx="28" cy="8" rx="7" ry="5" fill="#3a1a0a"/>
+          <!-- saree blouse -->
+          <path d="M19 21 Q28 18 37 21 L38 34 Q28 36 18 34 Z" fill="#8b2040"/>
+          <!-- saree drape over shoulder (pallu) -->
+          <path d="M37 21 Q44 26 46 38 Q47 46 44 53" stroke="#c9355a" stroke-width="7" stroke-linecap="round" fill="none" opacity="0.85"/>
+          <!-- saree skirt -->
+          <path d="M18 34 Q28 36 38 34 L40 56 Q28 58 16 56 Z" fill="#c9355a"/>
+          <!-- gold border on saree -->
+          <path d="M18 34 Q28 36 38 34" stroke="#c9a96e" stroke-width="1.8" fill="none"/>
+          <path d="M16 56 Q28 58 40 56" stroke="#c9a96e" stroke-width="1.8" fill="none"/>
+          <!-- TASSELS hanging from pallu end -->
+          <line x1="44" y1="53" x2="42" y2="56" stroke="#c9a96e" stroke-width="1.2"/>
+          <line x1="44" y1="53" x2="44" y2="56" stroke="#c9a96e" stroke-width="1.2"/>
+          <line x1="44" y1="53" x2="46" y2="56" stroke="#c9a96e" stroke-width="1.2"/>
+          <circle cx="42" cy="56" r="1.2" fill="#c9a96e"/>
+          <circle cx="44" cy="56" r="1.2" fill="#c9a96e"/>
+          <circle cx="46" cy="56" r="1.2" fill="#c9a96e"/>
+        </svg>
+      </div>
+      <div class="cat-overlay">
+        <h3>Saree &amp; Tassels</h3>
+        <p>Draped elegance, adorned</p>
+        <span class="cat-arrow">→</span>
+      </div>
+    </div>
+
+  </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="section-eyebrow">Our Collection</div>
+  <h2 class="section-title">Featured Designs</h2>
+  <p class="section-sub">Each piece is a starting point — fully customisable to your taste and measurements.</p>
+
+  <div class="product-filters">
+    <button class="filter-btn active" onclick="filterProducts('All', this)">All</button>
+    <button class="filter-btn" onclick="filterProducts('Women', this)">Women</button>
+    <button class="filter-btn" onclick="filterProducts('Men', this)">Men</button>
+    <button class="filter-btn" onclick="filterProducts('Kids', this)">Kids</button>
+    <button class="filter-btn" onclick="filterProducts('Teen', this)">Teens</button>
+    <button class="filter-btn" onclick="filterProducts('Couple', this)">Couples</button>
+    <button class="filter-btn" onclick="filterProducts('Senior', this)">Seniors</button>
+    <button class="filter-btn" onclick="filterProducts('Saree', this)">Saree &amp; Tassels</button>
+  </div>
+
+  <div class="product-grid" id="product-grid"></div>
+</section>
+
+<!-- CUSTOMISE -->
+<section class="customise" id="customise">
+  <div class="section-eyebrow">Custom Order</div>
+  <h2 class="section-title">Design Your Perfect Outfit</h2>
+  <div class="form-wrap">
+    <div class="form-info">
+      <h3>Tell us your vision</h3>
+      <p>Fill in the details below and Sindhu's team will reach out within 24 hours with a personalised quote, fabric swatches, and a design sketch — completely free.</p>
+      <p>We craft for every age, size, and occasion. No request is too unique.</p>
+      <div class="form-promise">
+        <p>✦ &nbsp;Perfect fit guarantee — free alterations if needed</p>
+        <p>✦ &nbsp;7–10 day standard delivery</p>
+        <p>✦ &nbsp;Dedicated design consultant assigned to your order</p>
+        <p>✦ &nbsp;Worldwide shipping to 50+ countries</p>
+      </div>
+    </div>
+    <form class="form-grid" onsubmit="submitOrder(event)">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" placeholder="Jane Smith" required />
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="jane@example.com" required />
+      </div>
+      <div class="form-group">
+        <label>Phone / WhatsApp</label>
+        <input type="tel" placeholder="+1 234 567 8900" />
+      </div>
+      <div class="form-group">
+        <label>For Whom?</label>
+        <select>
+          <option>Women</option>
+          <option>Men</option>
+          <option>Kids (0–5 yrs)</option>
+          <option>Kids (6–12 yrs)</option>
+          <option>Teens (13–17 yrs)</option>
+          <option>Seniors</option>
+          <option>Couple Set</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Dress Type</label>
+        <select>
+          <option>Casual Wear</option>
+          <option>Formal / Office</option>
+          <option>Wedding / Bridal</option>
+          <option>Party Wear</option>
+          <option>Festival / Ethnic</option>
+          <option>Traditional / Cultural</option>
+          <option>Uniform</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Preferred Fabric</label>
+        <select>
+          <option>Cotton</option>
+          <option>Silk</option>
+          <option>Linen</option>
+          <option>Chiffon</option>
+          <option>Georgette</option>
+          <option>Satin</option>
+          <option>Velvet</option>
+          <option>Denim</option>
+          <option>Not Sure — advise me</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Budget Range</label>
+        <select>
+          <option>Under $50</option>
+          <option>$50 – $100</option>
+          <option>$100 – $200</option>
+          <option>$200 – $500</option>
+          <option>$500+</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Preferred Colour</label>
+        <div class="color-swatches">
+          <div class="swatch selected" style="background:#b85c6e" title="Rose" onclick="selectSwatch(this)"></div>
+          <div class="swatch" style="background:#8b6f47" title="Camel" onclick="selectSwatch(this)"></div>
+          <div class="swatch" style="background:#4a7bc8" title="Blue" onclick="selectSwatch(this)"></div>
+          <div class="swatch" style="background:#4a7a5c" title="Forest Green" onclick="selectSwatch(this)"></div>
+          <div class="swatch" style="background:#c9a96e" title="Gold" onclick="selectSwatch(this)"></div>
+          <div class="swatch" style="background:#7c3a5c" title="Plum" onclick="selectSwatch(this)"></div>
+          <div class="swatch" style="background:#1a1612" title="Black" onclick="selectSwatch(this)"></div>
+          <div class="swatch" style="background:#f5f0ea; outline: 1px solid #ccc" title="Ivory" onclick="selectSwatch(this)"></div>
+        </div>
+      </div>
+      <div class="form-group full">
+        <label>Your Measurements (optional)</label>
+        <input type="text" placeholder="e.g. Chest: 36in, Waist: 30in, Height: 5ft 6in" />
+      </div>
+      <div class="form-group full">
+        <label>Special Requests or Design Details</label>
+        <textarea placeholder="Describe embroidery, patterns, cut preferences, occasion details, reference images, etc."></textarea>
+      </div>
+      <div class="submit-row">
+        <button type="submit" class="btn-submit">Submit Custom Order</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- BLOUSE SECTION -->
+<section class="blouse" id="blouse">
+  <div class="section-eyebrow">Saree Blouses</div>
+  <h2 class="section-title">Blouse Designs</h2>
+  <p class="section-sub">Every saree deserves a perfectly crafted blouse. Choose your neckline, sleeve, back style and fabric — fully custom stitched.</p>
+  <div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
+  <div class="blouse-grid">
+
+    <!-- Deep V-Neck -->
+    <div class="blouse-card" onclick="addToOrder('Deep V-Neck Blouse')">
+      <div class="blouse-img">
+        <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+          <rect width="240" height="240" fill="#f5ece4"/>
+          <!-- fabric texture -->
+          <path d="M0 120 Q60 115 120 120 Q180 125 240 120" stroke="#ecddd2" stroke-width="1" fill="none"/>
+          <path d="M0 140 Q60 135 120 140 Q180 145 240 140" stroke="#ecddd2" stroke-width="1" fill="none"/>
+          <!-- blouse body -->
+          <path d="M60 80 Q120 65 180 80 L185 195 Q120 205 55 195 Z" fill="#8b2040"/>
+          <!-- deep V neckline -->
+          <path d="M92 80 L120 130 L148 80" fill="#8b2040" stroke="#f5ece4" stroke-width="1.5"/>
+          <path d="M92 80 L120 128" stroke="#f5ece4" stroke-width="1.5" fill="none"/>
+          <path d="M148 80 L120 128" stroke="#f5ece4" stroke-width="1.5" fill="none"/>
+          <!-- sleeves short -->
+          <path d="M60 85 Q38 100 34 125" stroke="#8b2040" stroke-width="28" stroke-linecap="round" fill="none"/>
+          <path d="M180 85 Q202 100 206 125" stroke="#8b2040" stroke-width="28" stroke-linecap="round" fill="none"/>
+          <!-- embroidery dots on neckline -->
+          <circle cx="106" cy="95" r="2.5" fill="#c9a96e"/>
+          <circle cx="120" cy="108" r="2.5" fill="#c9a96e"/>
+          <circle cx="134" cy="95" r="2.5" fill="#c9a96e"/>
+          <!-- gold border at hem -->
+          <path d="M55 195 Q120 205 185 195" stroke="#c9a96e" stroke-width="2" fill="none"/>
+          <!-- label -->
+          <text x="120" y="225" text-anchor="middle" font-family="Georgia,serif" font-size="10" fill="#8b6f47" opacity="0.7">Deep V-Neck</text>
+        </svg>
+      </div>
+      <div class="blouse-body">
+        <span class="blouse-style">Bridal · Party</span>
+        <h3>Deep V-Neck Blouse</h3>
+        <p>Plunging V-neckline with zari embroidery trim. Available in all fabrics.</p>
+        <div class="blouse-footer">
+          <span class="price">From $35</span>
+          <button class="add-btn" onclick="addToOrder('Deep V-Neck Blouse')">Customise</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Boat Neck -->
+    <div class="blouse-card" onclick="addToOrder('Boat Neck Blouse')">
+      <div class="blouse-img">
+        <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+          <rect width="240" height="240" fill="#e8f0e4"/>
+          <path d="M60 80 Q120 65 180 80 L185 195 Q120 205 55 195 Z" fill="#4a7a5c"/>
+          <!-- wide boat neckline -->
+          <path d="M75 80 Q120 96 165 80" stroke="#e8f0e4" stroke-width="2" fill="none"/>
+          <path d="M75 80 Q120 94 165 80" fill="#4a7a5c"/>
+          <!-- half sleeves -->
+          <path d="M60 85 Q38 105 36 138" stroke="#4a7a5c" stroke-width="30" stroke-linecap="round" fill="none"/>
+          <path d="M180 85 Q202 105 204 138" stroke="#4a7a5c" stroke-width="30" stroke-linecap="round" fill="none"/>
+          <!-- neckline embroidery -->
+          <path d="M85 83 Q120 97 155 83" stroke="#c9a96e" stroke-width="1.5" fill="none"/>
+          <circle cx="95" cy="86" r="2" fill="#c9a96e" opacity="0.8"/>
+          <circle cx="110" cy="91" r="2" fill="#c9a96e" opacity="0.8"/>
+          <circle cx="120" cy="94" r="2" fill="#c9a96e" opacity="0.8"/>
+          <circle cx="130" cy="91" r="2" fill="#c9a96e" opacity="0.8"/>
+          <circle cx="145" cy="86" r="2" fill="#c9a96e" opacity="0.8"/>
+          <path d="M55 195 Q120 205 185 195" stroke="#c9a96e" stroke-width="2" fill="none"/>
+          <text x="120" y="225" text-anchor="middle" font-family="Georgia,serif" font-size="10" fill="#4a7a5c" opacity="0.7">Boat Neck</text>
+        </svg>
+      </div>
+      <div class="blouse-body">
+        <span class="blouse-style">Casual · Elegant</span>
+        <h3>Boat Neck Blouse</h3>
+        <p>Wide horizontal neckline with delicate gold embroidery border.</p>
+        <div class="blouse-footer">
+          <span class="price">From $30</span>
+          <button class="add-btn" onclick="addToOrder('Boat Neck Blouse')">Customise</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Backless -->
+    <div class="blouse-card" onclick="addToOrder('Backless Blouse')">
+      <div class="blouse-img">
+        <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+          <rect width="240" height="240" fill="#f0e8f5"/>
+          <!-- back view blouse -->
+          <path d="M62 80 Q120 67 178 80 L182 195 Q120 205 58 195 Z" fill="#7c3a5c"/>
+          <!-- open back cutout -->
+          <path d="M95 82 Q120 78 145 82 L148 160 Q120 168 92 160 Z" fill="#f0e8f5"/>
+          <!-- back string ties -->
+          <line x1="120" y1="82" x2="120" y2="78" stroke="#c9a96e" stroke-width="1.5"/>
+          <path d="M108 82 Q120 75 132 82" stroke="#c9a96e" stroke-width="1.5" fill="none"/>
+          <path d="M104 120 Q120 115 136 120" stroke="#c9a96e" stroke-width="1.5" fill="none"/>
+          <path d="M100 155 Q120 150 140 155" stroke="#c9a96e" stroke-width="1.5" fill="none"/>
+          <!-- tassels at back strings -->
+          <line x1="108" y1="82" x2="105" y2="92" stroke="#c9a96e" stroke-width="1.2"/>
+          <line x1="132" y1="82" x2="135" y2="92" stroke="#c9a96e" stroke-width="1.2"/>
+          <circle cx="105" cy="93" r="2" fill="#c9a96e"/>
+          <circle cx="135" cy="93" r="2" fill="#c9a96e"/>
+          <!-- sleeves -->
+          <path d="M62 85 Q40 108 38 135" stroke="#7c3a5c" stroke-width="26" stroke-linecap="round" fill="none"/>
+          <path d="M178 85 Q200 108 202 135" stroke="#7c3a5c" stroke-width="26" stroke-linecap="round" fill="none"/>
+          <path d="M58 195 Q120 205 182 195" stroke="#c9a96e" stroke-width="2" fill="none"/>
+          <text x="120" y="225" text-anchor="middle" font-family="Georgia,serif" font-size="10" fill="#7c3a5c" opacity="0.7">Backless</text>
+        </svg>
+      </div>
+      <div class="blouse-body">
+        <span class="blouse-style">Bridal · Statement</span>
+        <h3>Backless Blouse</h3>
+        <p>Open back design with tassel string ties. Glamorous and bold.</p>
+        <div class="blouse-footer">
+          <span class="price">From $42</span>
+          <button class="add-btn" onclick="addToOrder('Backless Blouse')">Customise</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- High Neck -->
+    <div class="blouse-card" onclick="addToOrder('High Neck Blouse')">
+      <div class="blouse-img">
+        <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+          <rect width="240" height="240" fill="#e8e0f0"/>
+          <path d="M62 85 Q120 68 178 85 L182 195 Q120 205 58 195 Z" fill="#3a2c5e"/>
+          <!-- high neck collar -->
+          <path d="M98 68 Q120 62 142 68 L144 86 Q120 82 96 86 Z" fill="#3a2c5e"/>
+          <path d="M98 68 Q120 62 142 68" stroke="#c9a96e" stroke-width="1.5" fill="none"/>
+          <path d="M96 86 Q120 82 144 86" stroke="#c9a96e" stroke-width="1" fill="none"/>
+          <!-- full sleeves -->
+          <path d="M62 90 Q38 118 36 165" stroke="#3a2c5e" stroke-width="30" stroke-linecap="round" fill="none"/>
+          <path d="M178 90 Q202 118 204 165" stroke="#3a2c5e" stroke-width="30" stroke-linecap="round" fill="none"/>
+          <!-- embroidery on body -->
+          <path d="M100 120 Q120 115 140 120" stroke="#c9a96e" stroke-width="1" fill="none" opacity="0.7"/>
+          <circle cx="120" cy="100" r="2.5" fill="#c9a96e" opacity="0.8"/>
+          <circle cx="110" cy="112" r="2" fill="#c9a96e" opacity="0.7"/>
+          <circle cx="130" cy="112" r="2" fill="#c9a96e" opacity="0.7"/>
+          <path d="M58 195 Q120 205 182 195" stroke="#c9a96e" stroke-width="2" fill="none"/>
+          <text x="120" y="225" text-anchor="middle" font-family="Georgia,serif" font-size="10" fill="#3a2c5e" opacity="0.7">High Neck</text>
+        </svg>
+      </div>
+      <div class="blouse-body">
+        <span class="blouse-style">Formal · Traditional</span>
+        <h3>High Neck Blouse</h3>
+        <p>Elegant stand collar with full sleeves and zari embroidery work.</p>
+        <div class="blouse-footer">
+          <span class="price">From $38</span>
+          <button class="add-btn" onclick="addToOrder('High Neck Blouse')">Customise</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Off-Shoulder -->
+    <div class="blouse-card" onclick="addToOrder('Off-Shoulder Blouse')">
+      <div class="blouse-img">
+        <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+          <rect width="240" height="240" fill="#fce8f0"/>
+          <path d="M50 95 Q120 75 190 95 L192 195 Q120 207 48 195 Z" fill="#b85c6e"/>
+          <!-- off-shoulder wide neckline -->
+          <path d="M50 95 Q120 82 190 95" stroke="#fce8f0" stroke-width="3" fill="none"/>
+          <!-- ruffle detail at shoulders -->
+          <path d="M50 95 Q42 105 44 120" stroke="#b85c6e" stroke-width="22" stroke-linecap="round" fill="none"/>
+          <path d="M190 95 Q198 105 196 120" stroke="#b85c6e" stroke-width="22" stroke-linecap="round" fill="none"/>
+          <path d="M44 90 Q38 100 40 115" stroke="#d47a8a" stroke-width="8" stroke-linecap="round" fill="none" opacity="0.6"/>
+          <path d="M196 90 Q202 100 200 115" stroke="#d47a8a" stroke-width="8" stroke-linecap="round" fill="none" opacity="0.6"/>
+          <!-- neckline embroidery -->
+          <path d="M70 90 Q120 80 170 90" stroke="#c9a96e" stroke-width="1.5" fill="none"/>
+          <circle cx="90" cy="88" r="2" fill="#c9a96e" opacity="0.9"/>
+          <circle cx="120" cy="83" r="2" fill="#c9a96e" opacity="0.9"/>
+          <circle cx="150" cy="88" r="2" fill="#c9a96e" opacity="0.9"/>
+          <path d="M48 195 Q120 207 192 195" stroke="#c9a96e" stroke-width="2" fill="none"/>
+          <text x="120" y="226" text-anchor="middle" font-family="Georgia,serif" font-size="10" fill="#b85c6e" opacity="0.7">Off-Shoulder</text>
+        </svg>
+      </div>
+      <div class="blouse-body">
+        <span class="blouse-style">Party · Modern</span>
+        <h3>Off-Shoulder Blouse</h3>
+        <p>Trendy off-shoulder cut with ruffle detail. Perfect for fusion looks.</p>
+        <div class="blouse-footer">
+          <span class="price">From $40</span>
+          <button class="add-btn" onclick="addToOrder('Off-Shoulder Blouse')">Customise</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Peplum -->
+    <div class="blouse-card" onclick="addToOrder('Peplum Blouse')">
+      <div class="blouse-img">
+        <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+          <rect width="240" height="240" fill="#e4f0e8"/>
+          <path d="M68 82 Q120 68 172 82 L175 170 Q120 178 65 170 Z" fill="#2c6a50"/>
+          <!-- sweetheart neckline -->
+          <path d="M92 82 Q106 92 120 82 Q134 92 148 82" stroke="#e4f0e8" stroke-width="2" fill="none"/>
+          <path d="M92 82 Q106 90 120 80 Q134 90 148 82" fill="#2c6a50"/>
+          <!-- peplum flare -->
+          <path d="M65 170 Q120 178 175 170 L182 210 Q120 222 58 210 Z" fill="#2c6a50" opacity="0.85"/>
+          <!-- peplum ruffle waves -->
+          <path d="M65 170 Q80 183 95 170 Q110 183 125 170 Q140 183 155 170 Q170 183 175 170" stroke="#1a5038" stroke-width="2" fill="none" opacity="0.5"/>
+          <!-- sleeves 3/4 -->
+          <path d="M68 88 Q46 115 44 150" stroke="#2c6a50" stroke-width="28" stroke-linecap="round" fill="none"/>
+          <path d="M172 88 Q194 115 196 150" stroke="#2c6a50" stroke-width="28" stroke-linecap="round" fill="none"/>
+          <!-- neckline embroidery -->
+          <circle cx="107" cy="88" r="2" fill="#c9a96e" opacity="0.9"/>
+          <circle cx="120" cy="83" r="2" fill="#c9a96e" opacity="0.9"/>
+          <circle cx="133" cy="88" r="2" fill="#c9a96e" opacity="0.9"/>
+          <path d="M58 210 Q120 222 182 210" stroke="#c9a96e" stroke-width="2" fill="none"/>
+          <text x="120" y="235" text-anchor="middle" font-family="Georgia,serif" font-size="10" fill="#2c6a50" opacity="0.7">Peplum</text>
+        </svg>
+      </div>
+      <div class="blouse-body">
+        <span class="blouse-style">Festive · Contemporary</span>
+        <h3>Peplum Blouse</h3>
+        <p>Flattering peplum cut with sweetheart neckline. Adds beautiful structure.</p>
+        <div class="blouse-footer">
+          <span class="price">From $44</span>
+          <button class="add-btn" onclick="addToOrder('Peplum Blouse')">Customise</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TASSEL SECTION -->
+<section class="tassels" id="tassels">
+  <div class="section-eyebrow">Handcrafted Tassels</div>
+  <h2 class="section-title">Saree Tassel Collection</h2>
+
+  <div class="tassel-intro">
+    <div class="tassel-intro-text">
+      <h3>The Art of the Tassel</h3>
+      <p>A saree tassel is more than adornment — it is the final signature of a perfectly dressed woman. At Rasi by Sindhu, every tassel is handcrafted in our studio using silk threads, gold wire, seed beads, and stone accents.</p>
+      <p>Each tassel is custom-matched to your saree's colour, fabric, and occasion. Attached to the pallu end, waist knot, or blouse tie — wherever you wish to add that final touch of elegance.</p>
+      <button class="btn-dark" style="margin-top:8px" onclick="addToOrder('Custom Tassel')">Order Custom Tassels</button>
+    </div>
+    <div class="tassel-intro-visual">
+      <!-- Large decorative tassel illustration -->
+      <svg viewBox="0 0 320 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:320px;display:block;margin:0 auto">
+        <rect width="320" height="280" fill="#faf9f7" rx="2"/>
+        <!-- saree border strip at top -->
+        <rect x="0" y="0" width="320" height="48" fill="#c9355a" rx="0"/>
+        <rect x="0" y="44" width="320" height="8" fill="#c9a96e"/>
+        <!-- multiple tassels hanging from border -->
+        <!-- tassel 1 -->
+        <line x1="48" y1="52" x2="48" y2="88" stroke="#c9a96e" stroke-width="2"/>
+        <ellipse cx="48" cy="94" rx="8" ry="6" fill="#c9a96e"/>
+        <line x1="40" y1="100" x2="34" y2="145" stroke="#c9a96e" stroke-width="1.5"/>
+        <line x1="42" y1="100" x2="38" y2="145" stroke="#8b6f47" stroke-width="1.5"/>
+        <line x1="44" y1="100" x2="42" y2="145" stroke="#c9a96e" stroke-width="1.5"/>
+        <line x1="48" y1="100" x2="48" y2="145" stroke="#8b6f47" stroke-width="1.5"/>
+        <line x1="52" y1="100" x2="54" y2="145" stroke="#c9a96e" stroke-width="1.5"/>
+        <line x1="54" y1="100" x2="58" y2="145" stroke="#8b6f47" stroke-width="1.5"/>
+        <line x1="56" y1="100" x2="62" y2="145" stroke="#c9a96e" stroke-width="1.5"/>
+        <circle cx="34" cy="147" r="2.5" fill="#c9a96e"/>
+        <circle cx="38" cy="147" r="2.5" fill="#8b6f47"/>
+        <circle cx="42" cy="147" r="2.5" fill="#c9a96e"/>
+        <circle cx="48" cy="147" r="2.5" fill="#8b6f47"/>
+        <circle cx="54" cy="147" r="2.5" fill="#c9a96e"/>
+        <circle cx="58" cy="147" r="2.5" fill="#8b6f47"/>
+        <circle cx="62" cy="147" r="2.5" fill="#c9a96e"/>
+        <!-- tassel 2 -->
+        <line x1="100" y1="52" x2="100" y2="92" stroke="#c9a96e" stroke-width="2"/>
+        <ellipse cx="100" cy="98" rx="8" ry="6" fill="#c9a96e"/>
+        <line x1="92" y1="104" x2="86" y2="155" stroke="#b85c6e" stroke-width="1.5"/>
+        <line x1="94" y1="104" x2="90" y2="155" stroke="#c9a96e" stroke-width="1.5"/>
+        <line x1="97" y1="104" x2="95" y2="155" stroke="#b85c6e" stroke-width="1.5"/>
+        <line x1="100" y1="104" x2="100" y2="155" stroke="#c9a96e" stroke-width="1.5"/>
+        <line x1="103" y1="104" x2="105" y2="155" stroke="#b85c6e" stroke-width="1.5"/>
+        <line x1="106" y1="104" x2="110" y2="155" stroke="#c9a96e" stroke-width="1.5"/>
+        <line x1="108" y1="104" x2="114" y2="155" stroke="#b85c6e" stroke-width="1.5"/>
+        <circle cx="86" cy="157" r="2.5" fill="#b85c6e"/>
+        <circle cx="90" cy="157" r="2.5" fill="#c9a96e"/>
+        <circle cx="95" cy="157" r="2.5" fill="#b85c6e"/>
+        <circle cx="100" cy="157" r="2.5" fill="#c9a96e"/>
+        <circle cx="105" cy="157" r="2.5" fill="#b85c6e"/>
+        <circle cx="110" cy="157" r="2.5" fill="#c9a96e"/>
+        <circle cx="114" cy="157" r="2.5" fill="#b85c6e"/>
+        <!-- tassel 3 (centre, larger) -->
+        <line x1="160" y1="52" x2="160" y2="82" stroke="#c9a96e" stroke-width="2.5"/>
+        <ellipse cx="160" cy="90" rx="11" ry="8" fill="#c9a96e"/>
+        <circle cx="160" cy="83" r="5" fill="#8b6f47"/>
+        <line x1="146" y1="98" x2="138" y2="162" stroke="#8b6f47" stroke-width="1.8"/>
+        <line x1="149" y1="98" x2="144" y2="162" stroke="#c9a96e" stroke-width="1.8"/>
+        <line x1="153" y1="98" x2="150" y2="162" stroke="#8b6f47" stroke-width="1.8"/>
+        <line x1="157" y1="98" x2="156" y2="162" stroke="#c9a96e" stroke-width="1.8"/>
+        <line x1="160" y1="98" x2="160" y2="162" stroke="#8b6f47" stroke-width="1.8"/>
+        <line x1="163" y1="98" x2="164" y2="162" stroke="#c9a96e" stroke-width="1.8"/>
+        <line x1="167" y1="98" x2="170" y2="162" stroke="#8b6f47" stroke-width="1.8"/>
+        <line x1="171" y1="98" x2="176" y2="162" stroke="#c9a96e" stroke-width="1.8"/>
+        <line x1="174" y1="98" x2="182" y2="162" stroke="#8b6f47" stroke-width="1.8"/>
+        <circle cx="138" cy="165" r="3" fill="#8b6f47"/>
+        <circle cx="144" cy="165" r="3" fill="#c9a96e"/>
+        <circle cx="150" cy="165" r="3" fill="#8b6f47"/>
+        <circle cx="156" cy="165" r="3" fill="#c9a96e"/>
+        <circle cx="160" cy="165" r="3.5" fill="#8b6f47"/>
+        <circle cx="164" cy="165" r="3" fill="#c9a96e"/>
+        <circle cx="170" cy="165" r="3" fill="#8b6f47"/>
+        <circle cx="176" cy="165" r="3" fill="#c9a96e"/>
+        <circle cx="182" cy="165" r="3" fill="#8b6f47"/>
+        <!-- tassel 4 -->
+        <line x1="220" y1="52" x2="220" y2="92" stroke="#c9a96e" stroke-width="2"/>
+        <ellipse cx="220" cy="98" rx="8" ry="6" fill="#c9a96e"/>
+        <line x1="212" y1="104" x2="206" y2="155" stroke="#4a7a5c" stroke-width="1.5"/>
+        <line x1="215" y1="104" x2="211" y2="155" stroke="#c9a96e" stroke-width="1.5"/>
+        <line x1="218" y1="104" x2="216" y2="155" stroke="#4a7a5c" stroke-width="1.5"/>
+        <line x1="220" y1="104" x2="220" y2="155" stroke="#c9a96e" stroke-width="1.5"/>
+        <line x1="222" y1="104" x2="224" y2="155" stroke="#4a7a5c" stroke-width="1.5"/>
+        <line x1="225" y1="104" x2="229" y2="155" stroke="#c9a96e" stroke-width="1.5"/>
+        <line x1="228" y1="104" x2="234" y2="155" stroke="#4a7a5c" stroke-width="1.5"/>
+        <circle cx="206" cy="157" r="2.5" fill="#4a7a5c"/>
+        <circle cx="211" cy="157" r="2.5" fill="#c9a96e"/>
+        <circle cx="216" cy="157" r="2.5" fill="#4a7a5c"/>
+        <circle cx="220" cy="157" r="2.5" fill="#c9a96e"/>
+        <circle cx="224" cy="157" r="2.5" fill="#4a7a5c"/>
+        <circle cx="229" cy="157" r="2.5" fill="#c9a96e"/>
+        <circle cx="234" cy="157" r="2.5" fill="#4a7a5c"/>
+        <!-- tassel 5 -->
+        <line x1="272" y1="52" x2="272" y2="88" stroke="#c9a96e" stroke-width="2"/>
+        <ellipse cx="272" cy="94" rx="8" ry="6" fill="#c9a96e"/>
+        <line x1="264" y1="100" x2="258" y2="145" stroke="#3a2c5e" stroke-width="1.5"/>
+        <line x1="267" y1="100" x2="263" y2="145" stroke="#c9a96e" stroke-width="1.5"/>
+        <line x1="270" y1="100" x2="268" y2="145" stroke="#3a2c5e" stroke-width="1.5"/>
+        <line x1="272" y1="100" x2="272" y2="145" stroke="#c9a96e" stroke-width="1.5"/>
+        <line x1="274" y1="100" x2="276" y2="145" stroke="#3a2c5e" stroke-width="1.5"/>
+        <line x1="277" y1="100" x2="281" y2="145" stroke="#c9a96e" stroke-width="1.5"/>
+        <line x1="280" y1="100" x2="286" y2="145" stroke="#3a2c5e" stroke-width="1.5"/>
+        <circle cx="258" cy="147" r="2.5" fill="#3a2c5e"/>
+        <circle cx="263" cy="147" r="2.5" fill="#c9a96e"/>
+        <circle cx="268" cy="147" r="2.5" fill="#3a2c5e"/>
+        <circle cx="272" cy="147" r="2.5" fill="#c9a96e"/>
+        <circle cx="276" cy="147" r="2.5" fill="#3a2c5e"/>
+        <circle cx="281" cy="147" r="2.5" fill="#c9a96e"/>
+        <circle cx="286" cy="147" r="2.5" fill="#3a2c5e"/>
+        <!-- label -->
+        <text x="160" y="210" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#8b6f47" opacity="0.8">Saree Border with Handcrafted Tassels</text>
+        <text x="160" y="228" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#8b6f47" letter-spacing="2" opacity="0.6">RASI BY SINDHU</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="tassel-grid">
+
+    <!-- Gold Silk Tassel -->
+    <div class="tassel-card" onclick="addToOrder('Gold Silk Tassel')">
+      <div class="tassel-img">
+        <svg viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg">
+          <line x1="40" y1="0" x2="40" y2="18" stroke="#c9a96e" stroke-width="2.5"/>
+          <ellipse cx="40" cy="24" rx="12" ry="8" fill="#c9a96e"/>
+          <circle cx="40" cy="16" rx="7" ry="7" fill="#8b6f47" rx="7"/>
+          <line x1="24" y1="32" x2="18" y2="115" stroke="#c9a96e" stroke-width="2"/>
+          <line x1="27" y1="32" x2="23" y2="115" stroke="#8b6f47" stroke-width="2"/>
+          <line x1="31" y1="32" x2="29" y2="115" stroke="#c9a96e" stroke-width="2"/>
+          <line x1="35" y1="32" x2="34" y2="115" stroke="#8b6f47" stroke-width="2"/>
+          <line x1="40" y1="32" x2="40" y2="115" stroke="#c9a96e" stroke-width="2"/>
+          <line x1="45" y1="32" x2="46" y2="115" stroke="#8b6f47" stroke-width="2"/>
+          <line x1="49" y1="32" x2="51" y2="115" stroke="#c9a96e" stroke-width="2"/>
+          <line x1="53" y1="32" x2="57" y2="115" stroke="#8b6f47" stroke-width="2"/>
+          <line x1="56" y1="32" x2="62" y2="115" stroke="#c9a96e" stroke-width="2"/>
+          <circle cx="18" cy="117" r="3" fill="#c9a96e"/>
+          <circle cx="23" cy="117" r="3" fill="#8b6f47"/>
+          <circle cx="29" cy="117" r="3" fill="#c9a96e"/>
+          <circle cx="34" cy="117" r="3" fill="#8b6f47"/>
+          <circle cx="40" cy="117" r="3.5" fill="#c9a96e"/>
+          <circle cx="46" cy="117" r="3" fill="#8b6f47"/>
+          <circle cx="51" cy="117" r="3" fill="#c9a96e"/>
+          <circle cx="57" cy="117" r="3" fill="#8b6f47"/>
+          <circle cx="62" cy="117" r="3" fill="#c9a96e"/>
+        </svg>
+      </div>
+      <h3>Gold Silk Tassel</h3>
+      <p>Pure silk threads with gold wire wrap. Classic & timeless.</p>
+      <div class="tassel-price">₹180 / pair</div>
+    </div>
+
+    <!-- Rose & Gold Beaded -->
+    <div class="tassel-card" onclick="addToOrder('Rose Beaded Tassel')">
+      <div class="tassel-img">
+        <svg viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg">
+          <line x1="40" y1="0" x2="40" y2="16" stroke="#c9a96e" stroke-width="2.5"/>
+          <ellipse cx="40" cy="22" rx="11" ry="7" fill="#c9a96e"/>
+          <circle cx="40" cy="15" r="6" fill="#b85c6e"/>
+          <!-- seed beads on threads -->
+          <line x1="26" y1="29" x2="20" y2="112" stroke="#b85c6e" stroke-width="1.8"/>
+          <circle cx="23" cy="52" r="3" fill="#c9a96e"/>
+          <circle cx="21" cy="76" r="3" fill="#b85c6e"/>
+          <line x1="30" y1="29" x2="26" y2="112" stroke="#c9a96e" stroke-width="1.8"/>
+          <circle cx="28" cy="58" r="3" fill="#b85c6e"/>
+          <circle cx="27" cy="82" r="3" fill="#c9a96e"/>
+          <line x1="34" y1="29" x2="32" y2="112" stroke="#b85c6e" stroke-width="1.8"/>
+          <line x1="40" y1="29" x2="40" y2="112" stroke="#c9a96e" stroke-width="1.8"/>
+          <circle cx="40" cy="55" r="3" fill="#b85c6e"/>
+          <circle cx="40" cy="80" r="3" fill="#c9a96e"/>
+          <line x1="46" y1="29" x2="48" y2="112" stroke="#b85c6e" stroke-width="1.8"/>
+          <circle cx="47" cy="58" r="3" fill="#c9a96e"/>
+          <circle cx="48" cy="82" r="3" fill="#b85c6e"/>
+          <line x1="50" y1="29" x2="54" y2="112" stroke="#c9a96e" stroke-width="1.8"/>
+          <line x1="54" y1="29" x2="60" y2="112" stroke="#b85c6e" stroke-width="1.8"/>
+          <circle cx="57" cy="52" r="3" fill="#c9a96e"/>
+          <circle cx="59" cy="76" r="3" fill="#b85c6e"/>
+          <circle cx="20" cy="114" r="3" fill="#b85c6e"/>
+          <circle cx="26" cy="114" r="3" fill="#c9a96e"/>
+          <circle cx="32" cy="114" r="3" fill="#b85c6e"/>
+          <circle cx="40" cy="114" r="3.5" fill="#c9a96e"/>
+          <circle cx="48" cy="114" r="3" fill="#b85c6e"/>
+          <circle cx="54" cy="114" r="3" fill="#c9a96e"/>
+          <circle cx="60" cy="114" r="3" fill="#b85c6e"/>
+        </svg>
+      </div>
+      <h3>Rose Beaded Tassel</h3>
+      <p>Rose silk with gold seed beads. Bridal favourite.</p>
+      <div class="tassel-price">₹240 / pair</div>
+    </div>
+
+    <!-- Emerald Zari Tassel -->
+    <div class="tassel-card" onclick="addToOrder('Emerald Zari Tassel')">
+      <div class="tassel-img">
+        <svg viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg">
+          <line x1="40" y1="0" x2="40" y2="16" stroke="#c9a96e" stroke-width="2.5"/>
+          <ellipse cx="40" cy="22" rx="11" ry="7" fill="#c9a96e"/>
+          <circle cx="40" cy="15" r="6" fill="#4a7a5c"/>
+          <line x1="26" y1="29" x2="20" y2="112" stroke="#4a7a5c" stroke-width="2"/>
+          <line x1="29" y1="29" x2="25" y2="112" stroke="#c9a96e" stroke-width="2"/>
+          <line x1="33" y1="29" x2="31" y2="112" stroke="#4a7a5c" stroke-width="2"/>
+          <line x1="37" y1="29" x2="36" y2="112" stroke="#c9a96e" stroke-width="2"/>
+          <line x1="40" y1="29" x2="40" y2="112" stroke="#4a7a5c" stroke-width="2"/>
+          <line x1="43" y1="29" x2="44" y2="112" stroke="#c9a96e" stroke-width="2"/>
+          <line x1="47" y1="29" x2="49" y2="112" stroke="#4a7a5c" stroke-width="2"/>
+          <line x1="51" y1="29" x2="55" y2="112" stroke="#c9a96e" stroke-width="2"/>
+          <line x1="54" y1="29" x2="60" y2="112" stroke="#4a7a5c" stroke-width="2"/>
+          <!-- zari wrap bands -->
+          <path d="M24 50 Q40 46 56 50" stroke="#c9a96e" stroke-width="2" fill="none"/>
+          <path d="M22 75 Q40 71 58 75" stroke="#c9a96e" stroke-width="2" fill="none"/>
+          <circle cx="20" cy="114" r="3" fill="#4a7a5c"/>
+          <circle cx="25" cy="114" r="3" fill="#c9a96e"/>
+          <circle cx="31" cy="114" r="3" fill="#4a7a5c"/>
+          <circle cx="36" cy="114" r="3" fill="#c9a96e"/>
+          <circle cx="40" cy="114" r="3.5" fill="#4a7a5c"/>
+          <circle cx="44" cy="114" r="3" fill="#c9a96e"/>
+          <circle cx="49" cy="114" r="3" fill="#4a7a5c"/>
+          <circle cx="55" cy="114" r="3" fill="#c9a96e"/>
+          <circle cx="60" cy="114" r="3" fill="#4a7a5c"/>
+        </svg>
+      </div>
+      <h3>Emerald Zari Tassel</h3>
+      <p>Deep green silk with wrapped zari banding. Festive & rich.</p>
+      <div class="tassel-price">₹210 / pair</div>
+    </div>
+
+    <!-- Royal Blue Stone Tassel -->
+    <div class="tassel-card" onclick="addToOrder('Royal Blue Stone Tassel')">
+      <div class="tassel-img">
+        <svg viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg">
+          <line x1="40" y1="0" x2="40" y2="14" stroke="#c9a96e" stroke-width="2.5"/>
+          <ellipse cx="40" cy="20" rx="12" ry="8" fill="#c9a96e"/>
+          <!-- stone on cap -->
+          <polygon points="40,10 47,15 44,22 36,22 33,15" fill="#2060aa"/>
+          <polygon points="40,11 46,15 43,21 37,21 34,15" fill="#4080cc" opacity="0.7"/>
+          <line x1="25" y1="28" x2="18" y2="112" stroke="#2060aa" stroke-width="1.8"/>
+          <line x1="28" y1="28" x2="23" y2="112" stroke="#c9a96e" stroke-width="1.8"/>
+          <line x1="32" y1="28" x2="29" y2="112" stroke="#2060aa" stroke-width="1.8"/>
+          <line x1="36" y1="28" x2="35" y2="112" stroke="#c9a96e" stroke-width="1.8"/>
+          <line x1="40" y1="28" x2="40" y2="112" stroke="#2060aa" stroke-width="1.8"/>
+          <line x1="44" y1="28" x2="45" y2="112" stroke="#c9a96e" stroke-width="1.8"/>
+          <line x1="48" y1="28" x2="51" y2="112" stroke="#2060aa" stroke-width="1.8"/>
+          <line x1="52" y1="28" x2="57" y2="112" stroke="#c9a96e" stroke-width="1.8"/>
+          <line x1="55" y1="28" x2="62" y2="112" stroke="#2060aa" stroke-width="1.8"/>
+          <circle cx="18" cy="114" r="3" fill="#2060aa"/>
+          <circle cx="23" cy="114" r="3" fill="#c9a96e"/>
+          <circle cx="29" cy="114" r="3" fill="#2060aa"/>
+          <circle cx="35" cy="114" r="3" fill="#c9a96e"/>
+          <circle cx="40" cy="114" r="3.5" fill="#2060aa"/>
+          <circle cx="45" cy="114" r="3" fill="#c9a96e"/>
+          <circle cx="51" cy="114" r="3" fill="#2060aa"/>
+          <circle cx="57" cy="114" r="3" fill="#c9a96e"/>
+          <circle cx="62" cy="114" r="3" fill="#2060aa"/>
+        </svg>
+      </div>
+      <h3>Royal Blue Stone Tassel</h3>
+      <p>Blue silk with a faceted stone cap. Elegant for evening wear.</p>
+      <div class="tassel-price">₹295 / pair</div>
+    </div>
+
+    <!-- Ivory Pearl Tassel -->
+    <div class="tassel-card" onclick="addToOrder('Ivory Pearl Tassel')">
+      <div class="tassel-img">
+        <svg viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg">
+          <line x1="40" y1="0" x2="40" y2="16" stroke="#c9a96e" stroke-width="2.5"/>
+          <ellipse cx="40" cy="22" rx="11" ry="7" fill="#c9a96e"/>
+          <circle cx="40" cy="15" r="6" fill="#e8ddd5"/>
+          <line x1="26" y1="29" x2="20" y2="112" stroke="#d4c8be" stroke-width="2"/>
+          <line x1="29" y1="29" x2="25" y2="112" stroke="#e8ddd5" stroke-width="2"/>
+          <line x1="33" y1="29" x2="31" y2="112" stroke="#c9a96e" stroke-width="2"/>
+          <line x1="37" y1="29" x2="36" y2="112" stroke="#e8ddd5" stroke-width="2"/>
+          <line x1="40" y1="29" x2="40" y2="112" stroke="#c9a96e" stroke-width="2"/>
+          <line x1="43" y1="29" x2="44" y2="112" stroke="#e8ddd5" stroke-width="2"/>
+          <line x1="47" y1="29" x2="49" y2="112" stroke="#c9a96e" stroke-width="2"/>
+          <line x1="51" y1="29" x2="55" y2="112" stroke="#e8ddd5" stroke-width="2"/>
+          <line x1="54" y1="29" x2="60" y2="112" stroke="#d4c8be" stroke-width="2"/>
+          <!-- pearl beads -->
+          <circle cx="23" cy="55" r="4" fill="#f5f0ea" stroke="#c9a96e" stroke-width="0.5"/>
+          <circle cx="29" cy="72" r="4" fill="#f5f0ea" stroke="#c9a96e" stroke-width="0.5"/>
+          <circle cx="40" cy="60" r="4" fill="#f5f0ea" stroke="#c9a96e" stroke-width="0.5"/>
+          <circle cx="51" cy="72" r="4" fill="#f5f0ea" stroke="#c9a96e" stroke-width="0.5"/>
+          <circle cx="57" cy="55" r="4" fill="#f5f0ea" stroke="#c9a96e" stroke-width="0.5"/>
+          <circle cx="20" cy="114" r="3" fill="#d4c8be"/>
+          <circle cx="25" cy="114" r="3" fill="#c9a96e"/>
+          <circle cx="31" cy="114" r="3" fill="#d4c8be"/>
+          <circle cx="36" cy="114" r="3" fill="#c9a96e"/>
+          <circle cx="40" cy="114" r="3.5" fill="#d4c8be"/>
+          <circle cx="44" cy="114" r="3" fill="#c9a96e"/>
+          <circle cx="49" cy="114" r="3" fill="#d4c8be"/>
+          <circle cx="55" cy="114" r="3" fill="#c9a96e"/>
+          <circle cx="60" cy="114" r="3" fill="#d4c8be"/>
+        </svg>
+      </div>
+      <h3>Ivory Pearl Tassel</h3>
+      <p>Cream silk with pearl bead accents. Subtle bridal luxury.</p>
+      <div class="tassel-price">₹320 / pair</div>
+    </div>
+
+    <!-- Plum Kundan Tassel -->
+    <div class="tassel-card" onclick="addToOrder('Plum Kundan Tassel')">
+      <div class="tassel-img">
+        <svg viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg">
+          <line x1="40" y1="0" x2="40" y2="14" stroke="#c9a96e" stroke-width="2.5"/>
+          <ellipse cx="40" cy="20" rx="12" ry="8" fill="#c9a96e"/>
+          <!-- kundan cap decoration -->
+          <circle cx="40" cy="14" r="7" fill="#7c3a5c"/>
+          <circle cx="40" cy="14" r="4" fill="#c9a96e" opacity="0.5"/>
+          <circle cx="34" cy="15" r="2" fill="#c9a96e"/>
+          <circle cx="46" cy="15" r="2" fill="#c9a96e"/>
+          <circle cx="40" cy="9" r="2" fill="#c9a96e"/>
+          <line x1="26" y1="28" x2="19" y2="112" stroke="#7c3a5c" stroke-width="2"/>
+          <line x1="29" y1="28" x2="24" y2="112" stroke="#c9a96e" stroke-width="2"/>
+          <line x1="33" y1="28" x2="30" y2="112" stroke="#7c3a5c" stroke-width="2"/>
+          <line x1="37" y1="28" x2="35" y2="112" stroke="#c9a96e" stroke-width="2"/>
+          <line x1="40" y1="28" x2="40" y2="112" stroke="#7c3a5c" stroke-width="2"/>
+          <line x1="43" y1="28" x2="45" y2="112" stroke="#c9a96e" stroke-width="2"/>
+          <line x1="47" y1="28" x2="50" y2="112" stroke="#7c3a5c" stroke-width="2"/>
+          <line x1="51" y1="28" x2="56" y2="112" stroke="#c9a96e" stroke-width="2"/>
+          <line x1="54" y1="28" x2="61" y2="112" stroke="#7c3a5c" stroke-width="2"/>
+          <path d="M23 55 Q40 50 57 55" stroke="#c9a96e" stroke-width="1.5" fill="none"/>
+          <path d="M21 80 Q40 75 59 80" stroke="#c9a96e" stroke-width="1.5" fill="none"/>
+          <circle cx="19" cy="114" r="3" fill="#7c3a5c"/>
+          <circle cx="24" cy="114" r="3" fill="#c9a96e"/>
+          <circle cx="30" cy="114" r="3" fill="#7c3a5c"/>
+          <circle cx="35" cy="114" r="3" fill="#c9a96e"/>
+          <circle cx="40" cy="114" r="3.5" fill="#7c3a5c"/>
+          <circle cx="45" cy="114" r="3" fill="#c9a96e"/>
+          <circle cx="50" cy="114" r="3" fill="#7c3a5c"/>
+          <circle cx="56" cy="114" r="3" fill="#c9a96e"/>
+          <circle cx="61" cy="114" r="3" fill="#7c3a5c"/>
+        </svg>
+      </div>
+      <h3>Plum Kundan Tassel</h3>
+      <p>Plum silk with a kundan-set cap. South Indian style.</p>
+      <div class="tassel-price">₹350 / pair</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="center">
+    <div class="section-eyebrow">How It Works</div>
+    <h2 class="section-title">Four Steps to Your Dream Outfit</h2>
+    <p class="section-sub">Simple, personal, and crafted just for you.</p>
+    <div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
+  </div>
+  <div class="steps-grid">
+    <div class="step"><div class="step-num">01</div><h3>Pick a Style</h3><p>Browse our catalogue or describe your dream outfit from scratch — no idea is too big or too small.</p></div>
+    <div class="step"><div class="step-num">02</div><h3>Customise It</h3><p>Choose your fabric, colour, embroidery, cuts, and share your exact measurements.</p></div>
+    <div class="step"><div class="step-num">03</div><h3>Sindhu Crafts It</h3><p>Every garment is handcrafted in the studio with care, precision, and love for detail.</p></div>
+    <div class="step"><div class="step-num">04</div><h3>Delivered to You</h3><p>Your outfit arrives perfectly packaged at your doorstep, ready to wear and adore.</p></div>
+  </div>
+</section>
+
+<!-- WHY RASI -->
+<section class="why" id="why">
+  <div class="center">
+    <div class="section-eyebrow">Why Rasi by Sindhu</div>
+    <h2 class="section-title">Designed with Passion</h2>
+    <p class="section-sub">Sindhu goes beyond clothing — she creates experiences that stay with you.</p>
+    <div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
+  </div>
+  <div class="why-grid">
+    <div class="why-card"><div class="why-icon">📏</div><h3>Perfect Fit Guarantee</h3><p>We take your exact measurements. If it doesn't fit on arrival, we alter it free of charge.</p></div>
+    <div class="why-card"><div class="why-icon">🧵</div><h3>Premium Fabrics</h3><p>High-quality, ethically sourced fabrics from trusted suppliers — silk, cotton, chiffon and more.</p></div>
+    <div class="why-card"><div class="why-icon">⚡</div><h3>Quick Turnaround</h3><p>Standard orders ready in 7–10 days. Rush orders available for urgent needs.</p></div>
+    <div class="why-card"><div class="why-icon">🌍</div><h3>Worldwide Delivery</h3><p>We ship to 50+ countries with fully tracked, insured packaging.</p></div>
+    <div class="why-card"><div class="why-icon">🎨</div><h3>Unlimited Customisation</h3><p>Any colour, pattern, or embellishment — if you can imagine it, Sindhu can make it.</p></div>
+    <div class="why-card"><div class="why-icon">🤝</div><h3>Personal Consultant</h3><p>Every order gets a dedicated design consultant to guide you from idea to finished garment.</p></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="center">
+    <div class="section-eyebrow">Customer Stories</div>
+    <h2 class="section-title">Worn with Love</h2>
+    <p class="section-sub">Real people, real outfits, real moments.</p>
+    <div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>"My wedding lehenga was absolutely stunning. The embroidery was immaculate and it arrived 3 days early. Sindhu understood exactly what I wanted."</p>
+      <div class="testi-author"><div class="avatar">P</div><div><h4>Priya Sharma</h4><span>Bridal Lehenga · Women</span></div></div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>"Ordered matching kurtas for my family of 7 for Diwali. Every single piece fit perfectly and the fabric quality was exceptional."</p>
+      <div class="testi-author"><div class="avatar">A</div><div><h4>Arjun Mehta</h4><span>Family Set · Festival Wear</span></div></div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>"My daughter's birthday dress was a dream. The team was so patient with all my last-minute requests. She absolutely loved it."</p>
+      <div class="testi-author"><div class="avatar">S</div><div><h4>Sarah Williams</h4><span>Kids Party Dress</span></div></div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>"As a plus-size man, I struggle with off-the-shelf sherwanis. Rasi by Sindhu nailed my measurements. The fit was like a dream."</p>
+      <div class="testi-author"><div class="avatar">R</div><div><h4>Rahul Kapoor</h4><span>Sherwani · Men</span></div></div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>"My 80-year-old mother needed a comfortable yet elegant saree blouse. The team was respectful and the quality was absolutely beautiful."</p>
+      <div class="testi-author"><div class="avatar">M</div><div><h4>Maya Iyer</h4><span>Senior · Elegant Wear</span></div></div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>"Couple matching outfits for our anniversary. We got so many compliments! The colour coordination was perfect and delivery was on time."</p>
+      <div class="testi-author"><div class="avatar">K</div><div><h4>Kevin & Lisa</h4><span>Couple Set · Anniversary</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-banner" id="contact">
+  <div class="eyebrow">Begin Your Journey</div>
+  <h2>Ready to Wear a Sindhu Original?</h2>
+  <p>Free design consultation included. Thousands of happy customers across the world.</p>
+  <button class="btn-gold" onclick="document.getElementById('customise').scrollIntoView({behavior:'smooth'})">Get a Free Quote Today</button>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">Rasi by Sindhu<span>The Designer Studio</span></div>
+      <p>Sindhu's atelier — crafting bespoke clothing for men, women, kids, teens, and seniors since 2018. Every stitch is a story.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li>Women's Collection</li>
+        <li>Men's Collection</li>
+        <li>Kids & Teens</li>
+        <li>Couple Sets</li>
+        <li>Senior Styles</li>
+        <li>Saree &amp; Tassels</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li>Custom Orders</li>
+        <li>Bridal & Wedding</li>
+        <li>Bulk / Corporate</li>
+        <li>School Uniforms</li>
+        <li>Alterations</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <ul>
+        <li>Size Guide</li>
+        <li>Shipping Info</li>
+        <li>Returns Policy</li>
+        <li>Contact Us</li>
+        <li>FAQ</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Rasi by Sindhu. All rights reserved.</span>
+    <span>Privacy Policy · Terms of Service</span>
+  </div>
+</footer>
+
+<!-- SUCCESS MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-icon">✦</div>
+    <h3>Order Received</h3>
+    <p>Thank you! Sindhu's team will contact you within 24 hours with a personalised quote and design sketch.</p>
+    <button class="modal-close" onclick="closeModal()">Wonderful</button>
+  </div>
+</div>
+
+<script>
+  /* ── SVG illustrations for products ── */
+  const svgs = {
+    Women1: `<svg viewBox="0 0 240 320" xmlns="http://www.w3.org/2000/svg"><rect width="240" height="320" fill="#f0e0ec"/><ellipse cx="120" cy="55" rx="22" ry="25" fill="#c9a882"/><ellipse cx="120" cy="43" rx="21" ry="16" fill="#4a2c1a"/><rect cx="109" cy="77" width="22" height="14" rx="3" fill="#c9a882"/><path d="M90 90 Q120 82 150 90 L158 205 Q120 217 82 205 Z" fill="#b85c6e"/><path d="M82 205 Q120 217 158 205 L172 320 Q120 332 68 320 Z" fill="#b85c6e"/><circle cx="120" cy="115" r="2.5" fill="#c9a96e"/><circle cx="113" cy="127" r="2" fill="#c9a96e" opacity="0.8"/><circle cx="127" cy="127" r="2" fill="#c9a96e" opacity="0.8"/><path d="M90 98 Q72 125 70 162" stroke="#b85c6e" stroke-width="16" stroke-linecap="round" fill="none"/><path d="M150 98 Q168 125 170 162" stroke="#b85c6e" stroke-width="16" stroke-linecap="round" fill="none"/></svg>`,
+    Women2: `<svg viewBox="0 0 240 320" xmlns="http://www.w3.org/2000/svg"><rect width="240" height="320" fill="#fce8d5"/><ellipse cx="120" cy="55" rx="22" ry="25" fill="#c9a882"/><ellipse cx="120" cy="43" rx="21" ry="16" fill="#5c3d2e"/><rect x="109" y="77" width="22" height="14" rx="3" fill="#c9a882"/><path d="M88 90 Q120 80 152 90 L164 205 Q120 218 76 205 Z" fill="#c9a96e"/><path d="M76 205 Q120 218 164 205 L180 320 Q120 334 60 320 Z" fill="#c9a96e"/><path d="M76 205 Q120 218 164 205" stroke="#8b6f47" stroke-width="3" fill="none"/><circle cx="120" cy="110" r="3" fill="#fff" opacity="0.8"/><circle cx="110" cy="125" r="2.5" fill="#fff" opacity="0.7"/><circle cx="130" cy="125" r="2.5" fill="#fff" opacity="0.7"/><circle cx="102" cy="140" r="2" fill="#fff" opacity="0.6"/><circle cx="138" cy="140" r="2" fill="#fff" opacity="0.6"/><path d="M88 98 Q70 128 68 168" stroke="#c9a96e" stroke-width="17" stroke-linecap="round" fill="none"/><path d="M152 98 Q170 128 172 168" stroke="#c9a96e" stroke-width="17" stroke-linecap="round" fill="none"/></svg>`,
+    Women3: `<svg viewBox="0 0 240 320" xmlns="http://www.w3.org/2000/svg"><rect width="240" height="320" fill="#e8f0e4"/><ellipse cx="120" cy="52" rx="22" ry="24" fill="#d4a574"/><ellipse cx="120" cy="40" rx="20" ry="16" fill="#3a2010"/><rect x="109" y="73" width="22" height="14" rx="3" fill="#d4a574"/><path d="M90 86 Q120 78 150 86 L156 175 Q120 185 84 175 Z" fill="#4a7a5c"/><rect x="84" y="172" width="36" height="120" rx="5" fill="#3a6a4c"/><rect x="120" y="172" width="36" height="120" rx="5" fill="#3a6a4c"/><path d="M90 94 Q73 120 71 158" stroke="#4a7a5c" stroke-width="17" stroke-linecap="round" fill="none"/><path d="M150 94 Q167 120 169 158" stroke="#4a7a5c" stroke-width="17" stroke-linecap="round" fill="none"/><path d="M90 95 Q120 86 150 95" stroke="#c9a96e" stroke-width="1.5" fill="none" opacity="0.7"/></svg>`,
+    Men1: `<svg viewBox="0 0 240 320" xmlns="http://www.w3.org/2000/svg"><rect width="240" height="320" fill="#d8cfc4"/><ellipse cx="120" cy="55" rx="23" ry="27" fill="#d4a574"/><ellipse cx="120" cy="42" rx="22" ry="17" fill="#2c1f14"/><rect x="108" y="79" width="24" height="16" rx="3" fill="#d4a574"/><path d="M88 94 Q120 84 152 94 L162 245 Q120 257 78 245 Z" fill="#2c4a3e"/><path d="M118 94 L120 116 L122 94" fill="#1a3028" stroke="#c9a96e" stroke-width="1"/><line x1="120" y1="118" x2="120" y2="242" stroke="#c9a96e" stroke-width="1.5" stroke-dasharray="4,5"/><circle cx="120" cy="130" r="3.5" fill="#c9a96e"/><circle cx="120" cy="155" r="3.5" fill="#c9a96e"/><circle cx="120" cy="180" r="3.5" fill="#c9a96e"/><circle cx="120" cy="205" r="3.5" fill="#c9a96e"/><rect x="78" y="242" width="38" height="78" rx="6" fill="#1e3328"/><rect x="124" y="242" width="38" height="78" rx="6" fill="#1e3328"/><path d="M88 102 Q65 133 63 175" stroke="#2c4a3e" stroke-width="22" stroke-linecap="round" fill="none"/><path d="M152 102 Q175 133 177 175" stroke="#2c4a3e" stroke-width="22" stroke-linecap="round" fill="none"/></svg>`,
+    Men2: `<svg viewBox="0 0 240 320" xmlns="http://www.w3.org/2000/svg"><rect width="240" height="320" fill="#dde8f0"/><ellipse cx="120" cy="53" rx="22" ry="26" fill="#c9a882"/><ellipse cx="120" cy="40" rx="21" ry="17" fill="#2c1f14"/><rect x="109" y="76" width="22" height="15" rx="3" fill="#c9a882"/><path d="M90 90 Q120 82 150 90 L156 175 Q120 183 84 175 Z" fill="#8b6f47"/><rect x="84" y="172" width="36" height="130" rx="5" fill="#6a5038"/><rect x="120" y="172" width="36" height="130" rx="5" fill="#6a5038"/><path d="M90 98 Q73 126 71 162" stroke="#8b6f47" stroke-width="18" stroke-linecap="round" fill="none"/><path d="M150 98 Q167 126 169 162" stroke="#8b6f47" stroke-width="18" stroke-linecap="round" fill="none"/><path d="M90 98 Q120 88 150 98" stroke="#c9a96e" stroke-width="1.5" fill="none" opacity="0.7"/><line x1="120" y1="100" x2="120" y2="172" stroke="#c9a96e" stroke-width="1" stroke-dasharray="3,4" opacity="0.6"/></svg>`,
+    Men3: `<svg viewBox="0 0 240 320" xmlns="http://www.w3.org/2000/svg"><rect width="240" height="320" fill="#e8e0f0"/><ellipse cx="120" cy="53" rx="22" ry="26" fill="#d4a574"/><ellipse cx="120" cy="40" rx="21" ry="17" fill="#1a0f0a"/><rect x="109" y="76" width="22" height="15" rx="3" fill="#d4a574"/><path d="M88 90 Q120 80 152 90 L162 245 Q120 256 78 245 Z" fill="#3a2c5e"/><path d="M116 90 L120 108 L124 90" fill="#2a1e4a" stroke="#c9a96e" stroke-width="1.2"/><line x1="120" y1="110" x2="120" y2="242" stroke="#c9a96e" stroke-width="1.5" stroke-dasharray="4,5"/><path d="M92 115 Q106 108 114 115" stroke="#c9a96e" stroke-width="1.5" fill="none" opacity="0.8"/><path d="M126 115 Q134 108 148 115" stroke="#c9a96e" stroke-width="1.5" fill="none" opacity="0.8"/><rect x="78" y="242" width="38" height="78" rx="6" fill="#2a1e4a"/><rect x="124" y="242" width="38" height="78" rx="6" fill="#2a1e4a"/><path d="M88 98 Q65 130 63 174" stroke="#3a2c5e" stroke-width="22" stroke-linecap="round" fill="none"/><path d="M152 98 Q175 130 177 174" stroke="#3a2c5e" stroke-width="22" stroke-linecap="round" fill="none"/></svg>`,
+    Kids1: `<svg viewBox="0 0 240 320" xmlns="http://www.w3.org/2000/svg"><rect width="240" height="320" fill="#fce8f4"/><ellipse cx="120" cy="65" rx="26" ry="29" fill="#e8b896"/><ellipse cx="120" cy="50" rx="24" ry="19" fill="#8b4513"/><rect x="108" y="91" width="24" height="14" rx="4" fill="#e8b896"/><path d="M96 104 Q120 96 144 104 L150 200 Q120 210 90 200 Z" fill="#e87fa8"/><path d="M90 200 Q120 210 150 200 L168 320 Q120 332 72 320 Z" fill="#e87fa8"/><circle cx="120" cy="108" r="5" fill="#fff"/><circle cx="103" cy="140" r="4" fill="#fff" opacity="0.7"/><circle cx="120" cy="150" r="4" fill="#fff" opacity="0.7"/><circle cx="137" cy="140" r="4" fill="#fff" opacity="0.7"/><path d="M96 110 Q78 135 76 170" stroke="#e87fa8" stroke-width="16" stroke-linecap="round" fill="none"/><path d="M144 110 Q162 135 164 170" stroke="#e87fa8" stroke-width="16" stroke-linecap="round" fill="none"/><path d="M106 50 Q100 38 108 36 Q116 34 113 46" fill="#e87fa8"/><path d="M134 50 Q140 38 132 36 Q124 34 127 46" fill="#e87fa8"/></svg>`,
+    Kids2: `<svg viewBox="0 0 240 320" xmlns="http://www.w3.org/2000/svg"><rect width="240" height="320" fill="#fef8e4"/><ellipse cx="120" cy="65" rx="25" ry="28" fill="#e8b896"/><ellipse cx="120" cy="51" rx="23" ry="18" fill="#3a2010"/><rect x="108" y="90" width="24" height="14" rx="4" fill="#e8b896"/><path d="M96 103 Q120 95 144 103 L150 175 Q120 183 90 175 Z" fill="#c9a96e"/><rect x="90" y="172" width="30" height="118" rx="5" fill="#a88040"/><rect x="120" y="172" width="30" height="118" rx="5" fill="#a88040"/><path d="M96 110 Q78 135 76 168" stroke="#c9a96e" stroke-width="16" stroke-linecap="round" fill="none"/><path d="M144 110 Q162 135 164 168" stroke="#c9a96e" stroke-width="16" stroke-linecap="round" fill="none"/><line x1="120" y1="105" x2="120" y2="172" stroke="#8b6f47" stroke-width="1.5" stroke-dasharray="3,4" opacity="0.7"/><circle cx="120" cy="120" r="3" fill="#8b6f47" opacity="0.8"/><circle cx="120" cy="140" r="3" fill="#8b6f47" opacity="0.8"/><circle cx="120" cy="160" r="3" fill="#8b6f47" opacity="0.8"/></svg>`,
+    Teen1: `<svg viewBox="0 0 240 320" xmlns="http://www.w3.org/2000/svg"><rect width="240" height="320" fill="#e4eef8"/><ellipse cx="120" cy="58" rx="23" ry="26" fill="#d4956a"/><path d="M97 46 Q95 88 99 115" stroke="#3a2010" stroke-width="14" stroke-linecap="round" fill="none"/><path d="M143 46 Q145 88 141 115" stroke="#3a2010" stroke-width="14" stroke-linecap="round" fill="none"/><ellipse cx="120" cy="44" rx="22" ry="17" fill="#3a2010"/><rect x="108" y="81" width="24" height="15" rx="4" fill="#d4956a"/><path d="M92 95 Q120 86 148 95 L154 175 Q120 183 86 175 Z" fill="#4a7bc8"/><rect x="86" y="172" width="34" height="130" rx="5" fill="#2c4a6e"/><rect x="120" y="172" width="34" height="130" rx="5" fill="#2c4a6e"/><path d="M92 102 Q72 130 70 168" stroke="#4a7bc8" stroke-width="18" stroke-linecap="round" fill="none"/><path d="M148 102 Q168 130 170 168" stroke="#4a7bc8" stroke-width="18" stroke-linecap="round" fill="none"/><path d="M92 103 Q120 93 148 103" stroke="#fff" stroke-width="1.5" fill="none" opacity="0.5"/></svg>`,
+    Couple1: `<svg viewBox="0 0 240 320" xmlns="http://www.w3.org/2000/svg"><rect width="240" height="320" fill="#ede8e0"/><ellipse cx="82" cy="62" rx="18" ry="21" fill="#c9a882"/><ellipse cx="82" cy="51" rx="17" ry="13" fill="#4a2c1a"/><rect x="72" y="80" width="20" height="12" rx="3" fill="#c9a882"/><path d="M60 91 Q82 84 104 91 L110 200 Q82 209 54 200 Z" fill="#b85c6e"/><path d="M54 200 Q82 209 110 200 L122 320 Q82 330 42 320 Z" fill="#b85c6e"/><path d="M60 99 Q46 122 44 156" stroke="#b85c6e" stroke-width="14" stroke-linecap="round" fill="none"/><path d="M104 99 Q118 122 120 156" stroke="#b85c6e" stroke-width="14" stroke-linecap="round" fill="none"/><ellipse cx="165" cy="60" rx="19" ry="22" fill="#d4a574"/><ellipse cx="165" cy="48" rx="18" ry="14" fill="#2c1f14"/><rect x="155" y="79" width="20" height="12" rx="3" fill="#d4a574"/><path d="M143 90 Q165 83 187 90 L194 232 Q165 242 136 232 Z" fill="#2c4a3e"/><line x1="165" y1="103" x2="165" y2="229" stroke="#c9a96e" stroke-width="1.5" stroke-dasharray="3,4"/><circle cx="165" cy="115" r="3" fill="#c9a96e"/><circle cx="165" cy="138" r="3" fill="#c9a96e"/><circle cx="165" cy="161" r="3" fill="#c9a96e"/><rect x="136" y="229" width="27" height="91" rx="5" fill="#1e3328"/><rect x="167" y="229" width="27" height="91" rx="5" fill="#1e3328"/><path d="M187 98 Q200 122 202 158" stroke="#2c4a3e" stroke-width="18" stroke-linecap="round" fill="none"/><circle cx="124" cy="168" r="7" fill="#c9a96e" opacity="0.5"/></svg>`,
+    Senior1: `<svg viewBox="0 0 240 320" xmlns="http://www.w3.org/2000/svg"><rect width="240" height="320" fill="#dde8e0"/><ellipse cx="120" cy="58" rx="22" ry="24" fill="#c9a882"/><ellipse cx="120" cy="45" rx="21" ry="16" fill="#b8b0a8"/><path d="M98 45 Q96 82 100 105" stroke="#b8b0a8" stroke-width="12" stroke-linecap="round" fill="none"/><path d="M142 45 Q144 82 140 105" stroke="#b8b0a8" stroke-width="12" stroke-linecap="round" fill="none"/><rect x="109" y="79" width="22" height="14" rx="4" fill="#c9a882"/><path d="M90 92 Q120 84 150 92 L157 225 Q120 236 83 225 Z" fill="#4a7a5c"/><path d="M83 225 Q120 236 157 225 L165 320 Q120 330 75 320 Z" fill="#4a7a5c"/><path d="M83 225 Q120 236 157 225" stroke="#c9a96e" stroke-width="2.5" fill="none"/><path d="M150 92 Q168 118 172 178 Q175 215 165 265" stroke="#3a6a4c" stroke-width="16" stroke-linecap="round" fill="none" opacity="0.7"/><circle cx="100" cy="228" r="2.5" fill="#c9a96e"/><circle cx="112" cy="230" r="2.5" fill="#c9a96e"/><circle cx="124" cy="231" r="2.5" fill="#c9a96e"/><circle cx="136" cy="230" r="2.5" fill="#c9a96e"/><circle cx="148" cy="228" r="2.5" fill="#c9a96e"/><path d="M90 100 Q70 128 68 168" stroke="#4a7a5c" stroke-width="18" stroke-linecap="round" fill="none"/><path d="M150 100 Q170 128 172 168" stroke="#4a7a5c" stroke-width="18" stroke-linecap="round" fill="none"/></svg>`,
+    Women4: `<svg viewBox="0 0 240 320" xmlns="http://www.w3.org/2000/svg"><rect width="240" height="320" fill="#f8f0e8"/><ellipse cx="120" cy="53" rx="22" ry="25" fill="#c9a882"/><ellipse cx="120" cy="40" rx="21" ry="16" fill="#3a1a0a"/><rect x="109" y="75" width="22" height="14" rx="3" fill="#c9a882"/><path d="M90 88 Q120 80 150 88 L158 195 Q120 208 82 195 Z" fill="#8b4080"/><path d="M82 195 Q120 208 158 195 L178 320 Q120 335 62 320 Z" fill="#8b4080"/><circle cx="120" cy="110" r="3" fill="#c9a96e"/><circle cx="110" cy="125" r="2.5" fill="#c9a96e" opacity="0.8"/><circle cx="130" cy="125" r="2.5" fill="#c9a96e" opacity="0.8"/><circle cx="100" cy="142" r="2" fill="#c9a96e" opacity="0.6"/><circle cx="120" cy="140" r="2.5" fill="#c9a96e"/><circle cx="140" cy="142" r="2" fill="#c9a96e" opacity="0.6"/><path d="M90 96 Q71 125 69 164" stroke="#8b4080" stroke-width="17" stroke-linecap="round" fill="none"/><path d="M150 96 Q169 125 171 164" stroke="#8b4080" stroke-width="17" stroke-linecap="round" fill="none"/></svg>`,
+    SareeThread: `<svg viewBox="0 0 240 320" xmlns="http://www.w3.org/2000/svg"><rect width="240" height="320" fill="#f4f0e8"/><ellipse cx="120" cy="52" rx="22" ry="25" fill="#c9a882"/><ellipse cx="120" cy="39" rx="21" ry="16" fill="#3a2010"/><rect x="109" y="74" width="22" height="14" rx="3" fill="#c9a882"/><path d="M90 87 Q120 79 150 87 L155 165 Q120 173 85 165 Z" fill="#5a7a4a"/><path d="M85 165 Q120 173 155 165 L158 228 Q120 238 82 228 Z" fill="#6a8f58"/><path d="M82 228 Q120 238 158 228 L162 320 Q120 330 78 320 Z" fill="#6a8f58"/><path d="M82 228 Q120 238 158 228" stroke="#c9a96e" stroke-width="2" fill="none"/><path d="M78 320 Q120 330 162 320" stroke="#c9a96e" stroke-width="2" fill="none"/><path d="M150 87 Q172 112 178 180 Q182 225 172 280" stroke="#4a6a3a" stroke-width="17" stroke-linecap="round" fill="none" opacity="0.85"/><path d="M172 280 Q170 293 168 303" stroke="#4a6a3a" stroke-width="13" stroke-linecap="round" fill="none" opacity="0.7"/><line x1="168" y1="303" x2="160" y2="320" stroke="#c9a96e" stroke-width="1.8"/><line x1="168" y1="303" x2="165" y2="320" stroke="#c9a96e" stroke-width="1.8"/><line x1="168" y1="303" x2="171" y2="320" stroke="#c9a96e" stroke-width="1.8"/><line x1="168" y1="303" x2="176" y2="320" stroke="#c9a96e" stroke-width="1.8"/><circle cx="160" cy="320" r="2.5" fill="#c9a96e"/><circle cx="165" cy="320" r="2.5" fill="#c9a96e"/><circle cx="171" cy="320" r="2.5" fill="#c9a96e"/><circle cx="176" cy="320" r="2.5" fill="#c9a96e"/><path d="M90 95 Q70 124 68 165" stroke="#5a7a4a" stroke-width="17" stroke-linecap="round" fill="none"/><path d="M68 165 Q66 184 70 196" stroke="#c9a882" stroke-width="13" stroke-linecap="round" fill="none"/><path d="M94 170 Q105 166 116 170 Q127 174 138 170 Q149 166 156 170" stroke="#e8c87a" stroke-width="1.4" fill="none"/><path d="M94 178 Q105 174 116 178 Q127 182 138 178 Q149 174 156 178" stroke="#e8c87a" stroke-width="1.4" fill="none"/><path d="M94 186 Q105 182 116 186 Q127 190 138 186 Q149 182 156 186" stroke="#e8c87a" stroke-width="1.4" fill="none"/><path d="M94 194 Q105 190 116 194 Q127 198 138 194 Q149 190 156 194" stroke="#e8c87a" stroke-width="1.4" fill="none"/><path d="M94 202 Q105 198 116 202 Q127 206 138 202 Q149 198 156 202" stroke="#e8c87a" stroke-width="1.4" fill="none"/><circle cx="96" cy="100" r="3" fill="none" stroke="#e8c87a" stroke-width="1.2"/><circle cx="104" cy="95" r="3" fill="none" stroke="#e8c87a" stroke-width="1.2"/><circle cx="112" cy="93" r="3" fill="none" stroke="#e8c87a" stroke-width="1.2"/><circle cx="120" cy="92" r="3" fill="none" stroke="#e8c87a" stroke-width="1.2"/><circle cx="128" cy="93" r="3" fill="none" stroke="#e8c87a" stroke-width="1.2"/><circle cx="136" cy="95" r="3" fill="none" stroke="#e8c87a" stroke-width="1.2"/><circle cx="144" cy="100" r="3" fill="none" stroke="#e8c87a" stroke-width="1.2"/><path d="M96 100 Q104 95 112 93 Q120 92 128 93 Q136 95 144 100" stroke="#e8c87a" stroke-width="0.8" fill="none" opacity="0.7"/></svg>`,
+    SareeBeads: `<svg viewBox="0 0 240 320" xmlns="http://www.w3.org/2000/svg"><rect width="240" height="320" fill="#ede8f5"/><ellipse cx="120" cy="52" rx="22" ry="25" fill="#c9a882"/><ellipse cx="120" cy="39" rx="21" ry="16" fill="#2a1040"/><rect x="109" y="74" width="22" height="14" rx="3" fill="#c9a882"/><path d="M90 87 Q120 79 150 87 L155 165 Q120 173 85 165 Z" fill="#3a1f6a"/><path d="M85 165 Q120 173 155 165 L158 228 Q120 238 82 228 Z" fill="#4d2a8a"/><path d="M82 228 Q120 238 158 228 L162 320 Q120 330 78 320 Z" fill="#4d2a8a"/><path d="M82 228 Q120 238 158 228" stroke="#c9a96e" stroke-width="2" fill="none"/><path d="M78 320 Q120 330 162 320" stroke="#c9a96e" stroke-width="2" fill="none"/><path d="M150 87 Q172 112 178 180 Q182 225 172 280" stroke="#301858" stroke-width="17" stroke-linecap="round" fill="none" opacity="0.85"/><path d="M172 280 Q170 293 168 303" stroke="#301858" stroke-width="13" stroke-linecap="round" fill="none" opacity="0.7"/><line x1="168" y1="303" x2="160" y2="320" stroke="#c9a96e" stroke-width="1.8"/><line x1="168" y1="303" x2="165" y2="320" stroke="#c9a96e" stroke-width="1.8"/><line x1="168" y1="303" x2="171" y2="320" stroke="#c9a96e" stroke-width="1.8"/><line x1="168" y1="303" x2="176" y2="320" stroke="#c9a96e" stroke-width="1.8"/><circle cx="160" cy="320" r="2.5" fill="#c9a96e"/><circle cx="165" cy="320" r="2.5" fill="#c9a96e"/><circle cx="171" cy="320" r="2.5" fill="#c9a96e"/><circle cx="176" cy="320" r="2.5" fill="#c9a96e"/><path d="M90 95 Q70 124 68 165" stroke="#3a1f6a" stroke-width="17" stroke-linecap="round" fill="none"/><path d="M68 165 Q66 184 70 196" stroke="#c9a882" stroke-width="13" stroke-linecap="round" fill="none"/><circle cx="94" cy="172" r="2.8" fill="#f0c0e0"/><circle cx="101" cy="170" r="2.8" fill="#e8d0f8"/><circle cx="108" cy="169" r="2.8" fill="#f0c0e0"/><circle cx="115" cy="168" r="2.8" fill="#c9a96e"/><circle cx="122" cy="168" r="2.8" fill="#f0c0e0"/><circle cx="129" cy="169" r="2.8" fill="#e8d0f8"/><circle cx="136" cy="170" r="2.8" fill="#f0c0e0"/><circle cx="143" cy="172" r="2.8" fill="#c9a96e"/><circle cx="150" cy="174" r="2.8" fill="#f0c0e0"/><circle cx="94" cy="180" r="2.5" fill="#c9a96e"/><circle cx="101" cy="179" r="2.5" fill="#f0c0e0"/><circle cx="108" cy="178" r="2.5" fill="#e8d0f8"/><circle cx="115" cy="177" r="2.5" fill="#f0c0e0"/><circle cx="122" cy="177" r="2.5" fill="#c9a96e"/><circle cx="129" cy="178" r="2.5" fill="#f0c0e0"/><circle cx="136" cy="179" r="2.5" fill="#e8d0f8"/><circle cx="143" cy="180" r="2.5" fill="#f0c0e0"/><circle cx="150" cy="182" r="2.5" fill="#c9a96e"/><circle cx="96" cy="188" r="2.2" fill="#e8d0f8"/><circle cx="103" cy="187" r="2.2" fill="#c9a96e"/><circle cx="110" cy="186" r="2.2" fill="#f0c0e0"/><circle cx="117" cy="186" r="2.2" fill="#e8d0f8"/><circle cx="124" cy="186" r="2.2" fill="#f0c0e0"/><circle cx="131" cy="186" r="2.2" fill="#c9a96e"/><circle cx="138" cy="187" r="2.2" fill="#f0c0e0"/><circle cx="145" cy="188" r="2.2" fill="#e8d0f8"/><circle cx="102" cy="100" r="3" fill="#e8d0f8"/><circle cx="112" cy="96" r="3" fill="#f0c0e0"/><circle cx="120" cy="94" r="3.5" fill="#c9a96e"/><circle cx="128" cy="96" r="3" fill="#f0c0e0"/><circle cx="138" cy="100" r="3" fill="#e8d0f8"/></svg>`,
+    SareeEmbroidery: `<svg viewBox="0 0 240 320" xmlns="http://www.w3.org/2000/svg"><rect width="240" height="320" fill="#fdf0f4"/><ellipse cx="120" cy="52" rx="22" ry="25" fill="#c9a882"/><ellipse cx="120" cy="39" rx="21" ry="16" fill="#3a1020"/><rect x="109" y="74" width="22" height="14" rx="3" fill="#c9a882"/><path d="M90 87 Q120 79 150 87 L155 165 Q120 173 85 165 Z" fill="#8b1a3a"/><path d="M85 165 Q120 173 155 165 L158 228 Q120 238 82 228 Z" fill="#a82048"/><path d="M82 228 Q120 238 158 228 L162 320 Q120 330 78 320 Z" fill="#a82048"/><path d="M82 228 Q120 238 158 228" stroke="#c9a96e" stroke-width="2.5" fill="none"/><path d="M78 320 Q120 330 162 320" stroke="#c9a96e" stroke-width="2.5" fill="none"/><path d="M150 87 Q172 112 178 180 Q182 225 172 280" stroke="#6e1028" stroke-width="17" stroke-linecap="round" fill="none" opacity="0.85"/><path d="M172 280 Q170 293 168 303" stroke="#6e1028" stroke-width="13" stroke-linecap="round" fill="none" opacity="0.7"/><line x1="168" y1="303" x2="160" y2="320" stroke="#c9a96e" stroke-width="1.8"/><line x1="168" y1="303" x2="165" y2="320" stroke="#c9a96e" stroke-width="1.8"/><line x1="168" y1="303" x2="171" y2="320" stroke="#c9a96e" stroke-width="1.8"/><line x1="168" y1="303" x2="176" y2="320" stroke="#c9a96e" stroke-width="1.8"/><circle cx="160" cy="320" r="2.5" fill="#c9a96e"/><circle cx="165" cy="320" r="2.5" fill="#c9a96e"/><circle cx="171" cy="320" r="2.5" fill="#c9a96e"/><circle cx="176" cy="320" r="2.5" fill="#c9a96e"/><path d="M90 95 Q70 124 68 165" stroke="#8b1a3a" stroke-width="17" stroke-linecap="round" fill="none"/><path d="M68 165 Q66 184 70 196" stroke="#c9a882" stroke-width="13" stroke-linecap="round" fill="none"/><path d="M100 170 Q108 164 116 170 Q108 176 100 170 Z" fill="#c9a96e" opacity="0.9"/><path d="M116 170 Q124 164 132 170 Q124 176 116 170 Z" fill="#c9a96e" opacity="0.9"/><path d="M132 170 Q140 164 148 170 Q140 176 132 170 Z" fill="#c9a96e" opacity="0.9"/><path d="M100 182 Q108 176 116 182 Q108 188 100 182 Z" fill="#f0a0b8" opacity="0.9"/><path d="M116 182 Q124 176 132 182 Q124 188 116 182 Z" fill="#c9a96e" opacity="0.9"/><path d="M132 182 Q140 176 148 182 Q140 188 132 182 Z" fill="#f0a0b8" opacity="0.9"/><path d="M100 194 Q108 188 116 194 Q108 200 100 194 Z" fill="#c9a96e" opacity="0.9"/><path d="M116 194 Q124 188 132 194 Q124 200 116 194 Z" fill="#f0a0b8" opacity="0.9"/><path d="M132 194 Q140 188 148 194 Q140 200 132 194 Z" fill="#c9a96e" opacity="0.9"/><path d="M106 96 Q114 90 120 96 Q126 90 134 96" stroke="#f0a0b8" stroke-width="1.5" fill="none"/><path d="M108 104 Q116 98 120 104 Q124 98 132 104" stroke="#c9a96e" stroke-width="1.5" fill="none"/><circle cx="120" cy="96" r="2.5" fill="#c9a96e"/><circle cx="108" cy="104" r="2" fill="#f0a0b8"/><circle cx="132" cy="104" r="2" fill="#f0a0b8"/></svg>`,
+
+  };
+
+  const products = [
+    { id:1,  name:"Silk Bridal Lehenga",    category:"Women",  tag:"Women",   svgKey:"Women2", desc:"Heavy silk lehenga with gold zari embroidery. Bridal perfection.",      price:"$320" },
+    { id:2,  name:"Floral Maxi Dress",       category:"Women",  tag:"Women",   svgKey:"Women1", desc:"Light chiffon with hand-embroidered floral details. Summer elegance.",   price:"$89"  },
+    { id:3,  name:"Office Kurta Set",        category:"Women",  tag:"Women",   svgKey:"Women3", desc:"Elegant cotton kurta with matching palazzo. Perfect for formal settings.", price:"$65"  },
+    { id:4,  name:"Festival Anarkali",       category:"Women",  tag:"Women",   svgKey:"Women4", desc:"Full flare Anarkali with mirror-work detailing for festivals.",            price:"$110" },
+    { id:5,  name:"Designer Sherwani",       category:"Men",    tag:"Men",     svgKey:"Men1",   desc:"Royal sherwani with intricate hand embroidery. Wedding-ready.",            price:"$280" },
+    { id:6,  name:"Casual Linen Kurta",      category:"Men",    tag:"Men",     svgKey:"Men2",   desc:"Breathable linen kurta for everyday refined dressing.",                   price:"$45"  },
+    { id:7,  name:"Indo-Western Suit",       category:"Men",    tag:"Men",     svgKey:"Men3",   desc:"Contemporary fusion suit with mandarin collar and subtle embroidery.",     price:"$150" },
+    { id:8,  name:"Princess Birthday Frock", category:"Kids",   tag:"Kids",    svgKey:"Kids1",  desc:"Puffy tulle frock with polka dots and ribbon bow. Ages 2–10.",            price:"$38"  },
+    { id:9,  name:"Boys Ethnic Kurta Set",   category:"Kids",   tag:"Kids",    svgKey:"Kids2",  desc:"Soft cotton ethnic set for little boys. Festive & everyday. Ages 1–12.",  price:"$30"  },
+    { id:10, name:"Teen Casual Co-ord",      category:"Teen",   tag:"Teens",   svgKey:"Teen1",  desc:"Trendy top and jeans co-ord for confident teens. All sizes.",             price:"$72"  },
+    { id:11, name:"Couple Ethnic Set",       category:"Couple", tag:"Couples", svgKey:"Couple1",desc:"Matching sherwani & lehenga set for special occasions.",                  price:"$175" },
+    { id:12, name:"Elegant Saree Ensemble",  category:"Senior", tag:"Seniors", svgKey:"Senior1",desc:"Graceful saree with golden border. Comfortable, dignified, beautiful.",   price:"$95"  },
+    { id:13, name:"Sutra Weave Saree",       category:"Saree",  tag:"Saree",   svgKey:"SareeThread",     desc:"Sage green saree adorned with intricate hand-done thread & crochet work along the pallu and border.", price:"$155" },
+    { id:14, name:"Moti Drape Saree",        category:"Saree",  tag:"Saree",   svgKey:"SareeBeads",      desc:"Deep plum saree with clusters of hand-strung glass & pearl beads cascading across the skirt and pallu.", price:"$168" },
+    { id:15, name:"Naksha Embroidery Saree", category:"Saree",  tag:"Saree",   svgKey:"SareeEmbroidery", desc:"Dusty rose silk saree with dense zardozi-inspired hand embroidery in gold and blush thread.", price:"$195" },
+  ];
+
+  function renderProducts(filter) {
+    const grid = document.getElementById('product-grid');
+    const filtered = filter === 'All' ? products : products.filter(p => p.category === filter);
+    grid.innerHTML = filtered.map(p => `
+      <div class="product-card">
+        <div class="product-img">${svgs[p.svgKey] || ''}</div>
+        <div class="product-body">
+          <span class="product-tag">${p.tag}</span>
+          <h3>${p.name}</h3>
+          <p class="desc">${p.desc}</p>
+          <div class="product-footer">
+            <span class="price">${p.price}</span>
+            <button class="add-btn" onclick="addToOrder('${p.name}')">Customise</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function filterProducts(cat, btn) {
+    renderProducts(cat);
+    if (btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    } else {
+      document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  function addToOrder(name) {
+    document.getElementById('customise').scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => {
+      const textarea = document.querySelector('textarea');
+      if (textarea && !textarea.value) textarea.value = 'I would like to customise: ' + name + '. ';
+      textarea.focus();
+    }, 600);
+  }
+
+  function selectSwatch(el) {
+    document.querySelectorAll('.swatch').forEach(s => s.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  function submitOrder(e) {
+    e.preventDefault();
+    document.getElementById('modal').classList.add('open');
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+    document.querySelector('form').reset();
+    document.querySelectorAll('.swatch').forEach((s,i) => {
+      if (i === 0) s.classList.add('selected'); else s.classList.remove('selected');
+    });
+  }
+
+  renderProducts('All');
+</script>
+
+</body>
+</html>
