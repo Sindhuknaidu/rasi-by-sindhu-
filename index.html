@@ -16,7 +16,7 @@
       --text: #1a1612; --muted: #6b6560; --accent: #8b6f47;
       --accent-light: #f5efe8; --gold: #c9a96e; --rose: #b85c6e;
       --maroon: #7f1416; --copper: #bd733a;
-      --nav-h: 84px; --strip-h: 32px; --header-h: calc(var(--nav-h) + var(--strip-h));
+      --nav-h: 108px; --strip-h: 32px; --header-h: calc(var(--nav-h) + var(--strip-h));
     }
 
     a { color: inherit; text-decoration: none; }
@@ -38,13 +38,15 @@
       position: relative;
     }
     .nav-logo::after { content: ""; position: absolute; right: -7px; top: 50%; width: 12px; height: 12px; background: var(--gold); transform: translateY(-50%) rotate(45deg); }
-    .nav-logo .logo-kn { height: 58px; width: auto; display: block; }
-    .nav-logo .logo-divider { width: 1px; height: 46px; background: var(--gold); opacity: 0.7; }
-    .nav-logo .logo-text { display: flex; flex-direction: column; justify-content: center; line-height: 1; }
-    .nav-logo .logo-en { height: 40px; width: auto; display: block; }
-    .nav-logo .logo-by { margin-top: 6px; font-size: 0.62rem; font-weight: 500; color: var(--maroon); letter-spacing: 3.5px; text-transform: uppercase; font-family: -apple-system,"Segoe UI",sans-serif; white-space: nowrap; }
-    .nav-right { display: flex; align-items: center; justify-content: flex-end; gap: 28px; flex: 1; min-width: 0; padding-left: 28px; }
-    .nav-links { display: flex; gap: 24px; font-size: 0.78rem; color: var(--text); font-family: -apple-system,"Segoe UI",sans-serif; letter-spacing: 0.6px; text-transform: uppercase; flex-wrap: nowrap; }
+    .nav-logo .logo-kn { height: 78px; width: auto; display: block; }
+    .nav-logo .logo-divider { width: 2px; height: 64px; background: var(--maroon); opacity: 0.85; }
+    .nav-logo .logo-text { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; line-height: 1; }
+    .nav-logo .logo-en { height: 54px; width: auto; display: block; }
+    .nav-logo .logo-by { margin-top: 8px; padding: 5px 10px 5px 12px; font-size: 0.72rem; font-weight: 700; color: #fff; background: var(--maroon); letter-spacing: 3px; text-transform: uppercase; font-family: -apple-system,"Segoe UI",sans-serif; white-space: nowrap; border-left: 3px solid var(--gold); }
+    .nav-right { display: flex; align-items: center; justify-content: flex-end; gap: 22px; flex: 1; min-width: 0; padding-left: 28px; }
+    .nav-links { display: flex; gap: 20px; font-size: 0.78rem; color: var(--text); font-family: -apple-system,"Segoe UI",sans-serif; letter-spacing: 0.6px; text-transform: uppercase; flex-wrap: nowrap; min-width: 0; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; }
+    .nav-links::-webkit-scrollbar { display: none; }
+    .nav-links a { white-space: nowrap; }
     .nav-links a { position: relative; padding: 6px 0; }
     .nav-links a::after { content: ""; position: absolute; left: 0; bottom: 0; width: 0; height: 1px; background: var(--copper); transition: width 0.25s; }
     .nav-links a:hover { color: var(--copper); }
@@ -247,13 +249,27 @@
 
     /* ─── RESPONSIVE ─── */
 
-    /* Tablet: 900px and below */
-    @media (max-width: 900px) {
+    /* Small laptop: 1100px and below — slightly tighter nav so links fit */
+    @media (max-width: 1100px) {
+      .nav-logo { padding: 0 22px 0 4%; gap: 10px; }
+      .nav-logo .logo-kn { height: 66px; }
+      .nav-logo .logo-divider { height: 54px; }
+      .nav-logo .logo-en { height: 46px; }
+      .nav-logo .logo-by { font-size: 0.62rem; letter-spacing: 2.2px; padding: 4px 8px 4px 10px; }
+      .nav-right { gap: 14px; padding-left: 22px; }
+      .nav-links { gap: 14px; font-size: 0.7rem; letter-spacing: 0.3px; }
+      .nav-cta { padding: 9px 16px; font-size: 0.7rem; }
+    }
+
+    /* Hide link row before it can clip; logo + Design Now remain */
+    @media (max-width: 1000px) {
       nav { padding-right: 4%; }
       .nav-right { gap: 16px; padding-left: 20px; }
-      .nav-links { gap: 18px; font-size: 0.7rem; flex: 1; min-width: 0; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; }
-      .nav-links::-webkit-scrollbar { display: none; }
-      .nav-links a { white-space: nowrap; }
+      .nav-links { display: none; }
+    }
+
+    /* Tablet: 900px and below */
+    @media (max-width: 900px) {
       section { padding: 52px 4%; }
       .hero { grid-template-columns: 1fr; min-height: auto; }
       .hero-left { padding: 40px 5%; }
@@ -274,16 +290,16 @@
 
     /* Mobile: 600px and below */
     @media (max-width: 600px) {
-      :root { --nav-h: 66px; --strip-h: 28px; }
+      :root { --nav-h: 78px; --strip-h: 28px; }
       nav { padding-right: 3%; }
       .nav-links { display: none; }
       .nav-right { padding-left: 8px; }
       .nav-logo { gap: 10px; padding: 0 18px 0 4%; }
       .nav-logo::after { width: 10px; height: 10px; right: -6px; }
-      .nav-logo .logo-kn { height: 44px; }
-      .nav-logo .logo-divider { height: 34px; }
-      .nav-logo .logo-en { height: 30px; }
-      .nav-logo .logo-by { font-size: 0.5rem; letter-spacing: 2.5px; margin-top: 4px; }
+      .nav-logo .logo-kn { height: 56px; }
+      .nav-logo .logo-divider { height: 46px; }
+      .nav-logo .logo-en { height: 34px; }
+      .nav-logo .logo-by { font-size: 0.46rem; letter-spacing: 1.6px; margin-top: 5px; padding: 3px 7px 3px 8px; border-left-width: 2px; }
       .nav-cta { padding: 8px 12px; font-size: 0.64rem; letter-spacing: 1px; }
       .strip { font-size: 0.56rem; letter-spacing: 1px; }
       section { padding: 40px 4%; }
@@ -336,8 +352,8 @@
       <img class="logo-kn" src="images/rasi-kannada.png" alt="Rasi – Kannada logo" />
       <span class="logo-divider"></span>
       <span class="logo-text">
-        <img class="logo-en" src="images/rasi-wordmark.png" alt="Rasi" />
-        <span class="logo-by">by Sindhu</span>
+        <img class="logo-en" src="images/rasi-wordmark-maroon.png" alt="Rasi" />
+        <span class="logo-by">The Designer Studio</span>
       </span>
     </a>
     <div class="nav-right">
