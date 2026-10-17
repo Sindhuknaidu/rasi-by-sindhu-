@@ -8,47 +8,67 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { overflow-x: hidden; }
-    body { overflow-x: hidden; font-family: "Georgia","Times New Roman",serif; color: var(--text); background: var(--bg); line-height: 1.7; }
+    body { overflow-x: hidden; font-family: "Georgia","Times New Roman",serif; color: var(--text); background: var(--bg); line-height: 1.7; padding-top: var(--header-h); }
+    html { scroll-padding-top: var(--header-h); }
 
     :root {
       --bg: #ffffff; --surface: #faf9f7; --border: #e8e4df;
       --text: #1a1612; --muted: #6b6560; --accent: #8b6f47;
       --accent-light: #f5efe8; --gold: #c9a96e; --rose: #b85c6e;
+      --maroon: #7f1416; --copper: #bd733a;
+      --nav-h: 84px; --strip-h: 32px; --header-h: calc(var(--nav-h) + var(--strip-h));
     }
 
     a { color: inherit; text-decoration: none; }
 
-    /* NAV */
+    /* FIXED HEADER (nav + strip stay pinned on every scroll) */
+    .site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; width: 100%; box-shadow: 0 4px 18px rgba(26,22,18,0.08); }
     nav {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(255,255,255,0.97); backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 5%; height: 64px; width: 100%;
+      background: #fffdf9;
+      display: flex; align-items: stretch; justify-content: space-between;
+      padding: 0 5% 0 0; height: var(--nav-h); width: 100%;
+      border-bottom: 2px solid var(--gold);
     }
-    .nav-logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-    .nav-logo .logo-kn { height: 46px; width: auto; display: block; }
-    .nav-logo .logo-en { height: 48px; width: auto; display: block; }
-    .nav-logo .logo-by { font-size: 0.6rem; font-weight: 400; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; font-family: -apple-system,"Segoe UI",sans-serif; }
-    .nav-links { display: flex; gap: 24px; font-size: 0.78rem; color: var(--muted); font-family: -apple-system,"Segoe UI",sans-serif; letter-spacing: 0.4px; text-transform: uppercase; flex-wrap: nowrap; }
-    .nav-links a:hover { color: var(--accent); }
+    /* Highlighted brand block */
+    .nav-logo {
+      display: flex; align-items: center; gap: 14px; flex-shrink: 0;
+      padding: 0 28px 0 5%;
+      background: linear-gradient(135deg, #fbf3e8 0%, #f3e6d3 100%);
+      border-right: 1px solid var(--gold);
+      position: relative;
+    }
+    .nav-logo::after { content: ""; position: absolute; right: -7px; top: 50%; width: 12px; height: 12px; background: var(--gold); transform: translateY(-50%) rotate(45deg); }
+    .nav-logo .logo-kn { height: 58px; width: auto; display: block; }
+    .nav-logo .logo-divider { width: 1px; height: 46px; background: var(--gold); opacity: 0.7; }
+    .nav-logo .logo-text { display: flex; flex-direction: column; justify-content: center; line-height: 1; }
+    .nav-logo .logo-en { height: 40px; width: auto; display: block; }
+    .nav-logo .logo-by { margin-top: 6px; font-size: 0.62rem; font-weight: 500; color: var(--maroon); letter-spacing: 3.5px; text-transform: uppercase; font-family: -apple-system,"Segoe UI",sans-serif; white-space: nowrap; }
+    .nav-right { display: flex; align-items: center; justify-content: flex-end; gap: 28px; flex: 1; min-width: 0; padding-left: 28px; }
+    .nav-links { display: flex; gap: 24px; font-size: 0.78rem; color: var(--text); font-family: -apple-system,"Segoe UI",sans-serif; letter-spacing: 0.6px; text-transform: uppercase; flex-wrap: nowrap; }
+    .nav-links a { position: relative; padding: 6px 0; }
+    .nav-links a::after { content: ""; position: absolute; left: 0; bottom: 0; width: 0; height: 1px; background: var(--copper); transition: width 0.25s; }
+    .nav-links a:hover { color: var(--copper); }
+    .nav-links a:hover::after { width: 100%; }
     .nav-cta {
-      white-space: nowrap; background: var(--text); color: #fff;
-      padding: 8px 18px; font-size: 0.75rem; font-weight: 400;
-      letter-spacing: 1px; text-transform: uppercase;
+      white-space: nowrap; background: var(--maroon); color: #fff;
+      padding: 10px 22px; font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 1.5px; text-transform: uppercase;
       font-family: -apple-system,"Segoe UI",sans-serif;
-      border: 1px solid var(--text); transition: all 0.25s; flex-shrink: 0;
+      border: 1px solid var(--maroon); transition: all 0.25s; flex-shrink: 0;
     }
-    .nav-cta:hover { background: transparent; color: var(--text); }
+    .nav-cta:hover { background: transparent; color: var(--maroon); }
 
     /* STRIP */
     .strip {
-      background: var(--text); color: var(--gold);
-      text-align: center; padding: 10px 5%;
+      background: var(--maroon); color: #f3e6d3;
+      text-align: center; padding: 0 5%; height: var(--strip-h); line-height: var(--strip-h);
       font-family: -apple-system,"Segoe UI",sans-serif;
       font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
+    /* Inline Rasi wordmark used in place of the word "Rasi" */
+    .rasi-inline { height: 1.7em; width: auto; vertical-align: middle; display: inline-block; margin: -0.4em 2px; }
+    .hero-eyebrow .rasi-inline, .section-eyebrow .rasi-inline { height: 2.6em; margin: -0.8em 4px; }
 
     /* HERO */
     .hero { display: grid; grid-template-columns: 1fr 1fr; min-height: 52vh; width: 100%; }
@@ -206,9 +226,9 @@
     /* FOOTER */
     footer { background: #111108; color: #7a756e; padding: 48px 5% 24px; width: 100%; }
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 28px; margin-bottom: 40px; width: 100%; }
-    .footer-brand .logo { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
-    .footer-brand .logo .logo-kn { height: 56px; width: auto; display: block; filter: brightness(0) invert(1) sepia(0.25) opacity(0.85); }
-    .footer-brand .logo .logo-en { height: 56px; width: auto; display: block; }
+    .footer-brand .logo { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+    .footer-brand .logo .logo-kn { height: 64px; width: auto; display: block; filter: brightness(0) invert(1) sepia(0.25) opacity(0.85); }
+    .footer-brand .logo .logo-en { height: 64px; width: auto; display: block; }
     .footer-brand p { font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.8rem; line-height: 1.8; margin-top: 8px; }
     .footer-col h4 { color: #e8ddd0; font-size: 0.68rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px; font-family: -apple-system,"Segoe UI",sans-serif; }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
@@ -229,8 +249,11 @@
 
     /* Tablet: 900px and below */
     @media (max-width: 900px) {
-      nav { padding: 0 4%; gap: 12px; }
-      .nav-links { gap: 16px; font-size: 0.72rem; }
+      nav { padding-right: 4%; }
+      .nav-right { gap: 16px; padding-left: 20px; }
+      .nav-links { gap: 18px; font-size: 0.7rem; flex: 1; min-width: 0; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a { white-space: nowrap; }
       section { padding: 52px 4%; }
       .hero { grid-template-columns: 1fr; min-height: auto; }
       .hero-left { padding: 40px 5%; }
@@ -251,14 +274,18 @@
 
     /* Mobile: 600px and below */
     @media (max-width: 600px) {
-      nav { padding: 0 4%; height: 56px; }
+      :root { --nav-h: 66px; --strip-h: 28px; }
+      nav { padding-right: 3%; }
       .nav-links { display: none; }
-      .nav-logo { gap: 8px; }
-      .nav-logo .logo-kn { height: 38px; }
-      .nav-logo .logo-en { height: 40px; }
-      .nav-logo .logo-by { display: none; }
-      .nav-cta { padding: 7px 14px; font-size: 0.7rem; }
-      .strip { font-size: 0.6rem; letter-spacing: 1px; white-space: normal; }
+      .nav-right { padding-left: 8px; }
+      .nav-logo { gap: 10px; padding: 0 18px 0 4%; }
+      .nav-logo::after { width: 10px; height: 10px; right: -6px; }
+      .nav-logo .logo-kn { height: 44px; }
+      .nav-logo .logo-divider { height: 34px; }
+      .nav-logo .logo-en { height: 30px; }
+      .nav-logo .logo-by { font-size: 0.5rem; letter-spacing: 2.5px; margin-top: 4px; }
+      .nav-cta { padding: 8px 12px; font-size: 0.64rem; letter-spacing: 1px; }
+      .strip { font-size: 0.56rem; letter-spacing: 1px; }
       section { padding: 40px 4%; }
       .hero { grid-template-columns: 1fr; }
       .hero-left { padding: 32px 4%; }
@@ -302,32 +329,37 @@
   </style>
 </head>
 <body>
-<!-- NAV -->
-<nav>
-  <a href="#" class="nav-logo" aria-label="Rasi by Sindhu – The Design Studio">
-    <img class="logo-kn" src="images/rasi-kannada.png" alt="Rasi – Kannada logo" />
-    <img class="logo-en" src="images/rasi-english.png" alt="Rasi – The Design Studio" />
-    <span class="logo-by">by Sindhu</span>
-  </a>
-  <div class="nav-links">
-    <a href="#categories">Categories</a>
-    <a href="#products">Collection</a>
-    <a href="#customise">Customise</a>
-    <a href="#blouse">Blouses</a>
-    <a href="#tassels">Tassels</a>
-    <a href="#testimonials">Reviews</a>
-    <a href="#contact">Contact</a>
-  </div>
-  <a href="#customise" class="nav-cta">Design Now</a>
-</nav>
-
-<!-- ANNOUNCEMENT STRIP -->
-<div class="strip">Custom orders in 7–10 days &nbsp;·&nbsp; Free design consultation</div>
+<!-- FIXED HEADER: logo + name row stays pinned on every scroll -->
+<header class="site-header">
+  <nav>
+    <a href="#" class="nav-logo" aria-label="Rasi by Sindhu – The Design Studio">
+      <img class="logo-kn" src="images/rasi-kannada.png" alt="Rasi – Kannada logo" />
+      <span class="logo-divider"></span>
+      <span class="logo-text">
+        <img class="logo-en" src="images/rasi-wordmark.png" alt="Rasi" />
+        <span class="logo-by">by Sindhu</span>
+      </span>
+    </a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#categories">Categories</a>
+        <a href="#products">Collection</a>
+        <a href="#customise">Customise</a>
+        <a href="#blouse">Blouses</a>
+        <a href="#tassels">Tassels</a>
+        <a href="#testimonials">Reviews</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a href="#customise" class="nav-cta">Design Now</a>
+    </div>
+  </nav>
+  <div class="strip">Custom orders in 7–10 days &nbsp;·&nbsp; Free design consultation</div>
+</header>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
-    <div class="hero-eyebrow">Rasi by Sindhu &nbsp;·&nbsp; Est. 2018</div>
+    <div class="hero-eyebrow"><img class="rasi-inline" src="images/rasi-wordmark.png" alt="Rasi" /> by Sindhu &nbsp;·&nbsp; Est. 2018</div>
     <h1>Crafted for <em>You</em>,<br>Worn with Pride</h1>
     <p class="hero-desc">Bespoke designer dresses for men, women, kids, and everyone in between — every stitch is personal, every outfit tells your story.</p>
     <div class="hero-actions">
@@ -378,8 +410,9 @@
       <path d="M160 180 Q200 170 250 175 Q300 170 340 180 L355 260 Q300 240 250 245 Q200 240 145 260 Z" fill="#c9a96e" opacity="0.55"/>
       <!-- Studio tag -->
       <rect x="30" y="30" width="170" height="48" rx="0" fill="none" stroke="#8b6f47" stroke-width="1" opacity="0.5"/>
-      <text x="45" y="50" font-family="Georgia, serif" font-size="11" fill="#8b6f47" opacity="0.8">Rasi by Sindhu</text>
-      <text x="45" y="67" font-family="sans-serif" font-size="8" fill="#8b6f47" letter-spacing="2" opacity="0.6">THE DESIGNER STUDIO</text>
+      <image href="images/rasi-wordmark.png" x="45" y="35" width="53" height="30"/>
+      <text x="106" y="52" font-family="sans-serif" font-size="8" fill="#8b6f47" letter-spacing="2" opacity="0.8">BY SINDHU</text>
+      <text x="45" y="73" font-family="sans-serif" font-size="7" fill="#8b6f47" letter-spacing="2" opacity="0.6">THE DESIGNER STUDIO</text>
     </svg>
   </div>
 </section>
@@ -913,7 +946,7 @@
   <div class="tassel-intro">
     <div class="tassel-intro-text">
       <h3>The Art of the Tassel</h3>
-      <p>A saree tassel is more than adornment — it is the final signature of a perfectly dressed woman. At Rasi by Sindhu, every tassel is handcrafted in our studio using silk threads, gold wire, seed beads, and stone accents.</p>
+      <p>A saree tassel is more than adornment — it is the final signature of a perfectly dressed woman. At <img class="rasi-inline" src="images/rasi-wordmark.png" alt="Rasi" /> by Sindhu, every tassel is handcrafted in our studio using silk threads, gold wire, seed beads, and stone accents.</p>
       <p>Each tassel is custom-matched to your saree's colour, fabric, and occasion. Attached to the pallu end, waist knot, or blouse tie — wherever you wish to add that final touch of elegance.</p>
       <button class="btn-dark" style="margin-top:8px" onclick="addToOrder('Custom Tassel')">Order Custom Tassels</button>
     </div>
@@ -1017,7 +1050,8 @@
         <circle cx="286" cy="147" r="2.5" fill="#3a2c5e"/>
         <!-- label -->
         <text x="160" y="210" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#8b6f47" opacity="0.8">Saree Border with Handcrafted Tassels</text>
-        <text x="160" y="228" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#8b6f47" letter-spacing="2" opacity="0.6">RASI BY SINDHU</text>
+        <image href="images/rasi-wordmark.png" x="112" y="215" width="36" height="20"/>
+        <text x="154" y="229" font-family="sans-serif" font-size="9" fill="#8b6f47" letter-spacing="2" opacity="0.7">BY SINDHU</text>
       </svg>
     </div>
   </div>
@@ -1260,10 +1294,10 @@
   </div>
 </section>
 
-<!-- WHY RASI -->
+<!-- WHY RASI (wordmark) -->
 <section class="why" id="why">
   <div class="center">
-    <div class="section-eyebrow">Why Rasi by Sindhu</div>
+    <div class="section-eyebrow">Why <img class="rasi-inline" src="images/rasi-wordmark.png" alt="Rasi" /> by Sindhu</div>
     <h2 class="section-title">Designed with Passion</h2>
     <p class="section-sub">Sindhu goes beyond clothing — she creates experiences that stay with you.</p>
     <div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
@@ -1304,7 +1338,7 @@
     </div>
     <div class="testi-card">
       <div class="stars">★★★★★</div>
-      <p>"As a plus-size man, I struggle with off-the-shelf sherwanis. Rasi by Sindhu nailed my measurements. The fit was like a dream."</p>
+      <p>"As a plus-size man, I struggle with off-the-shelf sherwanis. <img class="rasi-inline" src="images/rasi-wordmark.png" alt="Rasi" /> by Sindhu nailed my measurements. The fit was like a dream."</p>
       <div class="testi-author"><div class="avatar">R</div><div><h4>Rahul Kapoor</h4><span>Sherwani · Men</span></div></div>
     </div>
     <div class="testi-card">
@@ -1334,7 +1368,7 @@
     <div class="footer-brand">
       <div class="logo">
         <img class="logo-kn" src="images/rasi-kannada.png" alt="Rasi – Kannada logo" />
-        <img class="logo-en" src="images/rasi-english.png" alt="Rasi – The Design Studio" />
+        <img class="logo-en" src="images/rasi-english-light.png" alt="Rasi – The Design Studio" />
       </div>
       <p>Sindhu's atelier — crafting bespoke clothing for men, women, kids, teens, and seniors since 2018. Every stitch is a story.</p>
     </div>
@@ -1371,7 +1405,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2025 Rasi by Sindhu. All rights reserved.</span>
+    <span>© 2025 <img class="rasi-inline" src="images/rasi-wordmark-light.png" alt="Rasi" /> by Sindhu. All rights reserved.</span>
     <span>Privacy Policy · Terms of Service</span>
   </div>
 </footer>
