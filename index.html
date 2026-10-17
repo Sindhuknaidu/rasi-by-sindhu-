@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rasi by Sindhu – The Designer Studio</title>
+  <link rel="icon" type="image/png" href="images/rasi-kannada.png" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { overflow-x: hidden; }
@@ -25,8 +26,10 @@
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 5%; height: 64px; width: 100%;
     }
-    .nav-logo { font-size: 1.3rem; font-weight: 700; color: var(--text); font-style: italic; line-height: 1.15; }
-    .nav-logo span { display: block; font-size: 0.6rem; font-weight: 400; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; font-style: normal; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .nav-logo .logo-kn { height: 46px; width: auto; display: block; }
+    .nav-logo .logo-en { height: 48px; width: auto; display: block; }
+    .nav-logo .logo-by { font-size: 0.6rem; font-weight: 400; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; font-family: -apple-system,"Segoe UI",sans-serif; }
     .nav-links { display: flex; gap: 24px; font-size: 0.78rem; color: var(--muted); font-family: -apple-system,"Segoe UI",sans-serif; letter-spacing: 0.4px; text-transform: uppercase; flex-wrap: nowrap; }
     .nav-links a:hover { color: var(--accent); }
     .nav-cta {
@@ -203,8 +206,9 @@
     /* FOOTER */
     footer { background: #111108; color: #7a756e; padding: 48px 5% 24px; width: 100%; }
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 28px; margin-bottom: 40px; width: 100%; }
-    .footer-brand .logo { font-size: 1.1rem; font-weight: 700; color: #e8ddd0; font-family: Georgia,serif; font-style: italic; margin-bottom: 8px; }
-    .footer-brand .logo span { display: block; font-size: 0.58rem; font-style: normal; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; font-weight: 400; }
+    .footer-brand .logo { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+    .footer-brand .logo .logo-kn { height: 56px; width: auto; display: block; filter: brightness(0) invert(1) sepia(0.25) opacity(0.85); }
+    .footer-brand .logo .logo-en { height: 56px; width: auto; display: block; }
     .footer-brand p { font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.8rem; line-height: 1.8; margin-top: 8px; }
     .footer-col h4 { color: #e8ddd0; font-size: 0.68rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px; font-family: -apple-system,"Segoe UI",sans-serif; }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
@@ -249,7 +253,10 @@
     @media (max-width: 600px) {
       nav { padding: 0 4%; height: 56px; }
       .nav-links { display: none; }
-      .nav-logo { font-size: 1.1rem; }
+      .nav-logo { gap: 8px; }
+      .nav-logo .logo-kn { height: 38px; }
+      .nav-logo .logo-en { height: 40px; }
+      .nav-logo .logo-by { display: none; }
       .nav-cta { padding: 7px 14px; font-size: 0.7rem; }
       .strip { font-size: 0.6rem; letter-spacing: 1px; white-space: normal; }
       section { padding: 40px 4%; }
@@ -297,7 +304,11 @@
 <body>
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">Rasi<span>by Sindhu</span></div>
+  <a href="#" class="nav-logo" aria-label="Rasi by Sindhu – The Design Studio">
+    <img class="logo-kn" src="images/rasi-kannada.png" alt="Rasi – Kannada logo" />
+    <img class="logo-en" src="images/rasi-english.png" alt="Rasi – The Design Studio" />
+    <span class="logo-by">by Sindhu</span>
+  </a>
   <div class="nav-links">
     <a href="#categories">Categories</a>
     <a href="#products">Collection</a>
@@ -1321,7 +1332,10 @@
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
-      <div class="logo">Rasi by Sindhu<span>The Designer Studio</span></div>
+      <div class="logo">
+        <img class="logo-kn" src="images/rasi-kannada.png" alt="Rasi – Kannada logo" />
+        <img class="logo-en" src="images/rasi-english.png" alt="Rasi – The Design Studio" />
+      </div>
       <p>Sindhu's atelier — crafting bespoke clothing for men, women, kids, teens, and seniors since 2018. Every stitch is a story.</p>
     </div>
     <div class="footer-col">
