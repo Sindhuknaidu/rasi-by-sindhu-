@@ -345,6 +345,56 @@
       .hero h1 { font-size: 1.5rem; }
       .section-title { font-size: 1.2rem; }
     }
+
+    /* BUY / CUSTOMISE / CART */
+    .size-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.68rem; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
+    .size-row select { flex: 1; min-width: 0; padding: 5px 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.72rem; color: var(--text); }
+    .ready-badge { display: inline-block; margin-left: 6px; padding: 1px 6px; font-size: 0.56rem; letter-spacing: 1px; background: var(--accent-light); color: var(--accent); }
+    .product-actions { display: flex; gap: 6px; margin-top: 10px; }
+    .product-actions button { flex: 1; padding: 8px 6px; font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.66rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+    .buy-btn { background: var(--maroon); color: #fff; border: 1px solid var(--maroon); }
+    .buy-btn:hover { background: transparent; color: var(--maroon); }
+    .cust-btn { background: transparent; color: var(--text); border: 1px solid var(--text); }
+    .cust-btn:hover { background: var(--text); color: #fff; }
+    .nav-cart { position: relative; background: transparent; border: 1px solid var(--maroon); color: var(--maroon); padding: 9px 14px; font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.72rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; white-space: nowrap; }
+    .nav-cart:hover { background: var(--maroon); color: #fff; }
+    .cart-count { display: inline-block; min-width: 18px; margin-left: 4px; padding: 1px 5px; border-radius: 9px; background: var(--maroon); color: #fff; font-size: 0.64rem; text-align: center; }
+    .nav-cart:hover .cart-count { background: #fff; color: var(--maroon); }
+    .drawer-overlay { display: none; position: fixed; inset: 0; background: rgba(26,22,18,0.6); z-index: 220; justify-content: flex-end; }
+    .drawer-overlay.open { display: flex; }
+    .drawer { background: var(--bg); width: 420px; max-width: 100%; height: 100%; display: flex; flex-direction: column; border-left: 3px solid var(--gold); font-family: -apple-system,"Segoe UI",sans-serif; }
+    .drawer-head { display: flex; justify-content: space-between; align-items: center; padding: 18px 20px; border-bottom: 1px solid var(--border); }
+    .drawer-head h3 { font-size: 1rem; font-family: Georgia,serif; }
+    .x-btn { background: none; border: none; font-size: 1.5rem; line-height: 1; cursor: pointer; color: var(--muted); }
+    .drawer-body { flex: 1; overflow-y: auto; padding: 8px 20px; }
+    .cart-empty { text-align: center; color: var(--muted); font-size: 0.85rem; padding: 40px 0; }
+    .cart-item { display: grid; grid-template-columns: 56px 1fr auto; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .cart-thumb { width: 56px; aspect-ratio: 3/4; overflow: hidden; background: #ddd5c8; }
+    .cart-thumb svg { width: 100%; height: 100%; display: block; }
+    .cart-item h4 { font-size: 0.85rem; font-family: Georgia,serif; margin-bottom: 2px; }
+    .cart-meta { font-size: 0.7rem; color: var(--muted); line-height: 1.5; }
+    .cart-custom { display: inline-block; margin-top: 3px; padding: 1px 6px; font-size: 0.6rem; letter-spacing: 1px; text-transform: uppercase; background: var(--accent-light); color: var(--accent); }
+    .cart-qty { display: flex; align-items: center; gap: 8px; margin-top: 6px; font-size: 0.8rem; }
+    .cart-qty button { width: 22px; height: 22px; border: 1px solid var(--border); background: var(--bg); cursor: pointer; }
+    .cart-right { text-align: right; font-size: 0.85rem; font-weight: 700; }
+    .cart-remove { display: block; margin-top: 8px; background: none; border: none; font-size: 0.65rem; color: var(--muted); text-decoration: underline; cursor: pointer; }
+    .drawer-foot { padding: 16px 20px 20px; border-top: 1px solid var(--border); background: var(--surface); }
+    .cart-total { display: flex; justify-content: space-between; font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
+    .cart-note { font-size: 0.68rem; color: var(--muted); margin-bottom: 12px; line-height: 1.5; }
+    .drawer-foot input { width: 100%; padding: 9px 10px; margin-bottom: 8px; border: 1px solid var(--border); font-family: inherit; font-size: 0.8rem; }
+    .drawer-foot .btn-submit { width: 100%; }
+    .cust-modal { text-align: left; max-width: 460px; max-height: 90vh; overflow-y: auto; font-family: -apple-system,"Segoe UI",sans-serif; }
+    .cust-modal h3 { text-align: center; font-family: Georgia,serif; }
+    .cust-modal .cm-sub { text-align: center; margin-bottom: 16px; }
+    .cust-modal label { display: block; margin: 12px 0 5px; font-size: 0.68rem; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
+    .cust-modal select, .cust-modal input[type=text], .cust-modal textarea { width: 100%; padding: 9px 10px; border: 1px solid var(--border); font-family: inherit; font-size: 0.82rem; }
+    .cust-modal textarea { min-height: 70px; resize: vertical; }
+    .cust-modal .modal-close { width: 100%; margin-top: 18px; }
+    .cust-modal .cm-cancel { display: block; margin: 10px auto 0; background: none; border: none; font-size: 0.72rem; color: var(--muted); text-decoration: underline; cursor: pointer; }
+    @media (max-width: 600px) {
+      .nav-cart { padding: 8px 10px; font-size: 0.62rem; letter-spacing: 0.5px; }
+      .product-actions { flex-direction: column; }
+    }
   </style>
 </head>
 <body>
@@ -369,6 +419,7 @@
         <a href="#testimonials">Reviews</a>
         <a href="#contact">Contact</a>
       </div>
+      <button class="nav-cart" onclick="openCart()" aria-label="Open cart">Cart<span class="cart-count" id="cart-count">0</span></button>
       <a href="#customise" class="nav-cta">Design Now</a>
     </div>
   </nav>
@@ -378,7 +429,7 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
-    <div class="hero-eyebrow"><img class="rasi-inline" src="images/rasi-wordmark.png" alt="Rasi" /> by Sindhu &nbsp;·&nbsp; Est. 2018</div>
+    <div class="hero-eyebrow"><img class="rasi-inline" src="images/rasi-wordmark.png" alt="Rasi" /> &nbsp;·&nbsp; Est. 2018</div>
     <h1>Crafted for <em>You</em>,<br>Worn with Pride</h1>
     <p class="hero-desc">Bespoke designer dresses for men, women, kids, and everyone in between — every stitch is personal, every outfit tells your story.</p>
     <div class="hero-actions">
@@ -430,7 +481,6 @@
       <!-- Studio tag -->
       <rect x="30" y="30" width="170" height="48" rx="0" fill="none" stroke="#8b6f47" stroke-width="1" opacity="0.5"/>
       <image href="images/rasi-wordmark.png" x="45" y="35" width="53" height="30"/>
-      <text x="106" y="52" font-family="sans-serif" font-size="8" fill="#8b6f47" letter-spacing="2" opacity="0.8">BY SINDHU</text>
       <text x="45" y="73" font-family="sans-serif" font-size="7" fill="#8b6f47" letter-spacing="2" opacity="0.6">THE DESIGNER STUDIO</text>
     </svg>
     <div class="hero-mini" id="hero-mini" onclick="addToOrder('Naksha Embroidery Saree')" title="Customise this saree">
@@ -640,7 +690,7 @@
   <div class="form-wrap">
     <div class="form-info">
       <h3>Tell us your vision</h3>
-      <p>Fill in the details below and Sindhu's team will reach out within 24 hours with a personalised quote, fabric swatches, and a design sketch — completely free.</p>
+      <p>Fill in the details below and our team will reach out within 24 hours with a personalised quote, fabric swatches, and a design sketch — completely free.</p>
       <p>We craft for every age, size, and occasion. No request is too unique.</p>
       <div class="form-promise">
         <p>✦ &nbsp;Perfect fit guarantee — free alterations if needed</p>
@@ -968,7 +1018,7 @@
   <div class="tassel-intro">
     <div class="tassel-intro-text">
       <h3>The Art of the Tassel</h3>
-      <p>A saree tassel is more than adornment — it is the final signature of a perfectly dressed woman. At <img class="rasi-inline" src="images/rasi-wordmark.png" alt="Rasi" /> by Sindhu, every tassel is handcrafted in our studio using silk threads, gold wire, seed beads, and stone accents.</p>
+      <p>A saree tassel is more than adornment — it is the final signature of a perfectly dressed woman. At <img class="rasi-inline" src="images/rasi-wordmark.png" alt="Rasi" />, every tassel is handcrafted in our studio using silk threads, gold wire, seed beads, and stone accents.</p>
       <p>Each tassel is custom-matched to your saree's colour, fabric, and occasion. Attached to the pallu end, waist knot, or blouse tie — wherever you wish to add that final touch of elegance.</p>
       <button class="btn-dark" style="margin-top:8px" onclick="addToOrder('Custom Tassel')">Order Custom Tassels</button>
     </div>
@@ -1072,8 +1122,7 @@
         <circle cx="286" cy="147" r="2.5" fill="#3a2c5e"/>
         <!-- label -->
         <text x="160" y="210" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#8b6f47" opacity="0.8">Saree Border with Handcrafted Tassels</text>
-        <image href="images/rasi-wordmark.png" x="112" y="215" width="36" height="20"/>
-        <text x="154" y="229" font-family="sans-serif" font-size="9" fill="#8b6f47" letter-spacing="2" opacity="0.7">BY SINDHU</text>
+        <image href="images/rasi-wordmark.png" x="142" y="215" width="36" height="20"/>
       </svg>
     </div>
   </div>
@@ -1311,7 +1360,7 @@
   <div class="steps-grid">
     <div class="step"><div class="step-num">01</div><h3>Pick a Style</h3><p>Browse our catalogue or describe your dream outfit from scratch — no idea is too big or too small.</p></div>
     <div class="step"><div class="step-num">02</div><h3>Customise It</h3><p>Choose your fabric, colour, embroidery, cuts, and share your exact measurements.</p></div>
-    <div class="step"><div class="step-num">03</div><h3>Sindhu Crafts It</h3><p>Every garment is handcrafted in the studio with care, precision, and love for detail.</p></div>
+    <div class="step"><div class="step-num">03</div><h3>Handcrafted in Studio</h3><p>Every garment is handcrafted in the studio with care, precision, and love for detail.</p></div>
     <div class="step"><div class="step-num">04</div><h3>Delivered to You</h3><p>Your outfit arrives perfectly packaged at your doorstep, ready to wear and adore.</p></div>
   </div>
 </section>
@@ -1319,9 +1368,9 @@
 <!-- WHY RASI (wordmark) -->
 <section class="why" id="why">
   <div class="center">
-    <div class="section-eyebrow">Why <img class="rasi-inline" src="images/rasi-wordmark.png" alt="Rasi" /> by Sindhu</div>
+    <div class="section-eyebrow">Why <img class="rasi-inline" src="images/rasi-wordmark.png" alt="Rasi" /></div>
     <h2 class="section-title">Designed with Passion</h2>
-    <p class="section-sub">Sindhu goes beyond clothing — she creates experiences that stay with you.</p>
+    <p class="section-sub">We go beyond clothing — we create experiences that stay with you.</p>
     <div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
   </div>
   <div class="why-grid">
@@ -1329,7 +1378,7 @@
     <div class="why-card"><div class="why-icon">🧵</div><h3>Premium Fabrics</h3><p>High-quality, ethically sourced fabrics from trusted suppliers — silk, cotton, chiffon and more.</p></div>
     <div class="why-card"><div class="why-icon">⚡</div><h3>Quick Turnaround</h3><p>Standard orders ready in 7–10 days. Rush orders available for urgent needs.</p></div>
     <div class="why-card"><div class="why-icon">🌍</div><h3>Worldwide Delivery</h3><p>We ship to 50+ countries with fully tracked, insured packaging.</p></div>
-    <div class="why-card"><div class="why-icon">🎨</div><h3>Unlimited Customisation</h3><p>Any colour, pattern, or embellishment — if you can imagine it, Sindhu can make it.</p></div>
+    <div class="why-card"><div class="why-icon">🎨</div><h3>Unlimited Customisation</h3><p>Any colour, pattern, or embellishment — if you can imagine it, we can make it.</p></div>
     <div class="why-card"><div class="why-icon">🤝</div><h3>Personal Consultant</h3><p>Every order gets a dedicated design consultant to guide you from idea to finished garment.</p></div>
   </div>
 </section>
@@ -1345,7 +1394,7 @@
   <div class="testi-grid">
     <div class="testi-card">
       <div class="stars">★★★★★</div>
-      <p>"My wedding lehenga was absolutely stunning. The embroidery was immaculate and it arrived 3 days early. Sindhu understood exactly what I wanted."</p>
+      <p>"My wedding lehenga was absolutely stunning. The embroidery was immaculate and it arrived 3 days early. The team understood exactly what I wanted."</p>
       <div class="testi-author"><div class="avatar">P</div><div><h4>Priya Sharma</h4><span>Bridal Lehenga · Women</span></div></div>
     </div>
     <div class="testi-card">
@@ -1360,7 +1409,7 @@
     </div>
     <div class="testi-card">
       <div class="stars">★★★★★</div>
-      <p>"As a plus-size man, I struggle with off-the-shelf sherwanis. <img class="rasi-inline" src="images/rasi-wordmark.png" alt="Rasi" /> by Sindhu nailed my measurements. The fit was like a dream."</p>
+      <p>"As a plus-size man, I struggle with off-the-shelf sherwanis. <img class="rasi-inline" src="images/rasi-wordmark.png" alt="Rasi" /> nailed my measurements. The fit was like a dream."</p>
       <div class="testi-author"><div class="avatar">R</div><div><h4>Rahul Kapoor</h4><span>Sherwani · Men</span></div></div>
     </div>
     <div class="testi-card">
@@ -1379,7 +1428,7 @@
 <!-- CTA -->
 <section class="cta-banner" id="contact">
   <div class="eyebrow">Begin Your Journey</div>
-  <h2>Be Among the First to Wear a Sindhu Original</h2>
+  <h2>Be Among the First to Wear Something Made Just for You</h2>
   <p>Every outfit is designed personally by Sindhu, stitched to your exact measurements and finished with care. Start with a free design consultation, and if it doesn't fit, we'll alter it free of charge.</p>
   <button class="btn-gold" onclick="document.getElementById('customise').scrollIntoView({behavior:'smooth'})">Get a Free Quote Today</button>
 </section>
@@ -1392,7 +1441,7 @@
         <img class="logo-kn" src="images/rasi-kannada.png" alt="Rasi – Kannada logo" />
         <img class="logo-en" src="images/rasi-english-light.png" alt="Rasi – The Design Studio" />
       </div>
-      <p>Sindhu's atelier — crafting bespoke clothing for men, women, kids, teens, and seniors since 2018. Every stitch is a story.</p>
+      <p>A designer studio crafting bespoke clothing for men, women, kids, teens, and seniors since 2018. Every stitch is a story.</p>
     </div>
     <div class="footer-col">
       <h4>Shop</h4>
@@ -1432,12 +1481,54 @@
   </div>
 </footer>
 
+<!-- CART DRAWER -->
+<div class="drawer-overlay" id="cart-overlay" onclick="if(event.target===this)closeCart()">
+  <aside class="drawer" aria-label="Shopping cart">
+    <div class="drawer-head"><h3>Your Cart</h3><button class="x-btn" onclick="closeCart()" aria-label="Close cart">&times;</button></div>
+    <div class="drawer-body" id="cart-body"></div>
+    <div class="drawer-foot" id="cart-foot">
+      <div class="cart-total"><span>Total</span><span id="cart-total">$0</span></div>
+      <p class="cart-note">Customised pieces are confirmed with a final quote by our team before stitching begins.</p>
+      <input type="text" id="co-name" placeholder="Full name" />
+      <input type="text" id="co-contact" placeholder="Phone / WhatsApp / Email" />
+      <input type="text" id="co-address" placeholder="Delivery address" />
+      <button class="btn-submit" onclick="checkout()">Place Order</button>
+    </div>
+  </aside>
+</div>
+
+<!-- CUSTOMISE-A-DESIGN MODAL -->
+<div class="modal-overlay" id="cust-modal">
+  <div class="modal cust-modal">
+    <h3 id="cm-title">Customise</h3>
+    <p class="cm-sub" id="cm-sub"></p>
+    <label for="cm-size">Size</label>
+    <select id="cm-size"></select>
+    <label for="cm-fabric">Fabric</label>
+    <select id="cm-fabric">
+      <option>As shown</option><option>Cotton</option><option>Silk</option><option>Linen</option>
+      <option>Chiffon</option><option>Georgette</option><option>Satin</option><option>Velvet</option>
+    </select>
+    <label for="cm-colour">Colour</label>
+    <select id="cm-colour">
+      <option>As shown</option><option>Rose</option><option>Camel</option><option>Blue</option>
+      <option>Forest Green</option><option>Gold</option><option>Plum</option><option>Black</option><option>Ivory</option>
+    </select>
+    <label for="cm-measure">Measurements (optional)</label>
+    <input type="text" id="cm-measure" placeholder="e.g. Chest 36in, Waist 30in, Height 5ft 6in" />
+    <label for="cm-notes">Design changes</label>
+    <textarea id="cm-notes" placeholder="Neckline, sleeves, embroidery, length, occasion…"></textarea>
+    <button class="modal-close" onclick="addCustomToCart()">Add Customised Piece to Cart</button>
+    <button class="cm-cancel" onclick="closeCustModal()">Cancel</button>
+  </div>
+</div>
+
 <!-- SUCCESS MODAL -->
 <div class="modal-overlay" id="modal">
   <div class="modal">
     <div class="modal-icon">✦</div>
     <h3>Order Received</h3>
-    <p>Thank you! Sindhu's team will contact you within 24 hours with a personalised quote and design sketch.</p>
+    <p>Thank you! Our team will contact you within 24 hours with a personalised quote and design sketch.</p>
     <button class="modal-close" onclick="closeModal()">Wonderful</button>
   </div>
 </div>
@@ -1486,14 +1577,18 @@
     const filtered = filter === 'All' ? products : products.filter(p => p.category === filter);
     grid.innerHTML = filtered.map(p => `
       <div class="product-card">
-        <div class="product-img">${svgs[p.svgKey] || ''}</div>
+        <div class="product-img">${p.img ? `<img src="${p.img}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;display:block" />` : (svgs[p.svgKey] || '')}</div>
         <div class="product-body">
-          <span class="product-tag">${p.tag}</span>
+          <span class="product-tag">${p.tag}<span class="ready-badge">Ready to ship</span></span>
           <h3>${p.name}</h3>
           <p class="desc">${p.desc}</p>
-          <div class="product-footer">
-            <span class="price">${p.price}</span>
-            <button class="add-btn" onclick="addToOrder('${p.name}')">Customise</button>
+          <div class="size-row">Size
+            <select id="size-${p.id}">${sizesFor(p).map(s => `<option>${s}</option>`).join('')}</select>
+          </div>
+          <div class="product-footer"><span class="price">${p.price}</span></div>
+          <div class="product-actions">
+            <button class="buy-btn" onclick="buyNow(${p.id})">Buy Now</button>
+            <button class="cust-btn" onclick="openCustModal(${p.id})">Customise</button>
           </div>
         </div>
       </div>
@@ -1519,6 +1614,142 @@
     }, 600);
   }
 
+  /* ── Cart, Buy Now & product customisation ── */
+  const SIZES = { Kids: ['2–4 yrs','5–7 yrs','8–10 yrs','11–12 yrs'], Teen: ['XS','S','M','L'] };
+  const sizesFor = p => (p.sizes && p.sizes.length) ? p.sizes : (SIZES[p.category] || ['XS','S','M','L','XL','XXL']);
+  const priceNum = p => parseInt(String(p.price).replace(/[^0-9]/g, ''), 10) || 0;
+  const findProduct = id => products.find(p => p.id === id) || { id, name: 'Unavailable item', price: '$0', category: '' };
+
+  /* ── Backend: paste your Google Apps Script web-app URL here (see backend/SETUP.md) ── */
+  const API_URL = '';
+
+  function postToSheet(payload) {
+    return fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) })
+      .then(r => r.json());
+  }
+
+  /* Products come from the Google Sheet "Products" tab; built-in list is the fallback */
+  if (API_URL) {
+    fetch(API_URL).then(r => r.json()).then(d => {
+      if (d.products && d.products.length) {
+        products.length = 0;
+        d.products.forEach(p => products.push({
+          id: p.id, name: p.name, category: p.category, tag: p.category === 'Teen' ? 'Teens' : p.category === 'Couple' ? 'Couples' : p.category === 'Senior' ? 'Seniors' : p.category,
+          img: p.img, desc: p.desc, price: '$' + p.price, sizes: p.sizes
+        }));
+        renderProducts('All');
+        renderCart();
+      }
+    }).catch(() => {});
+  }
+  let cart = [];
+  try { cart = JSON.parse(localStorage.getItem('rasi-cart') || '[]'); } catch (e) { cart = []; }
+  let custId = null;
+
+  function saveCart() {
+    try { localStorage.setItem('rasi-cart', JSON.stringify(cart)); } catch (e) {}
+    renderCart();
+  }
+
+  function addLine(line) {
+    const key = JSON.stringify([line.id, line.size, line.custom || null]);
+    const existing = cart.find(l => JSON.stringify([l.id, l.size, l.custom || null]) === key);
+    if (existing) existing.qty += 1; else cart.push(Object.assign({ qty: 1 }, line));
+    saveCart();
+  }
+
+  function buyNow(id) {
+    const size = document.getElementById('size-' + id).value;
+    addLine({ id, size });
+    openCart();
+  }
+
+  function openCustModal(id) {
+    const p = findProduct(id);
+    custId = id;
+    document.getElementById('cm-title').textContent = 'Customise: ' + p.name;
+    document.getElementById('cm-sub').textContent = 'Start from this design and make it yours. ' + p.price + ' base price — final quote confirmed by our team.';
+    document.getElementById('cm-size').innerHTML = sizesFor(p).map(s => `<option>${s}</option>`).join('');
+    ['cm-fabric','cm-colour'].forEach(i => document.getElementById(i).selectedIndex = 0);
+    ['cm-measure','cm-notes'].forEach(i => document.getElementById(i).value = '');
+    document.getElementById('cust-modal').classList.add('open');
+  }
+
+  function closeCustModal() { document.getElementById('cust-modal').classList.remove('open'); }
+
+  function addCustomToCart() {
+    const v = i => document.getElementById(i).value.trim();
+    addLine({
+      id: custId, size: v('cm-size'),
+      custom: { fabric: v('cm-fabric'), colour: v('cm-colour'), measure: v('cm-measure'), notes: v('cm-notes') }
+    });
+    closeCustModal();
+    openCart();
+  }
+
+  function openCart() { document.getElementById('cart-overlay').classList.add('open'); }
+  function closeCart() { document.getElementById('cart-overlay').classList.remove('open'); }
+
+  function changeQty(i, d) {
+    cart[i].qty += d;
+    if (cart[i].qty < 1) cart.splice(i, 1);
+    saveCart();
+  }
+  function removeLine(i) { cart.splice(i, 1); saveCart(); }
+
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+  function customSummary(c) {
+    return [c.fabric !== 'As shown' && 'Fabric: ' + c.fabric, c.colour !== 'As shown' && 'Colour: ' + c.colour,
+            c.measure && 'Measurements: ' + c.measure, c.notes && 'Notes: ' + c.notes].filter(Boolean).join(' · ');
+  }
+
+  function renderCart() {
+    const count = cart.reduce((n, l) => n + l.qty, 0);
+    const total = cart.reduce((n, l) => n + priceNum(findProduct(l.id)) * l.qty, 0);
+    document.getElementById('cart-count').textContent = count;
+    document.getElementById('cart-total').textContent = '$' + total;
+    document.getElementById('cart-foot').style.display = cart.length ? '' : 'none';
+    document.getElementById('cart-body').innerHTML = cart.length ? cart.map((l, i) => {
+      const p = findProduct(l.id);
+      return `<div class="cart-item">
+        <div class="cart-thumb">${p.img ? `<img src="${p.img}" alt="" style="width:100%;height:100%;object-fit:cover" />` : (svgs[p.svgKey] || '')}</div>
+        <div>
+          <h4>${esc(p.name)}</h4>
+          <div class="cart-meta">Size: ${esc(l.size)} · ${p.price}</div>
+          ${l.custom ? `<span class="cart-custom">Customised</span><div class="cart-meta">${esc(customSummary(l.custom))}</div>` : ''}
+          <div class="cart-qty"><button onclick="changeQty(${i},-1)" aria-label="Decrease">−</button>${l.qty}<button onclick="changeQty(${i},1)" aria-label="Increase">+</button></div>
+        </div>
+        <div class="cart-right">$${priceNum(p) * l.qty}<button class="cart-remove" onclick="removeLine(${i})">Remove</button></div>
+      </div>`;
+    }).join('') : '<p class="cart-empty">Your cart is empty.</p>';
+  }
+
+  function checkout() {
+    const name = document.getElementById('co-name').value.trim();
+    const contact = document.getElementById('co-contact').value.trim();
+    const address = document.getElementById('co-address').value.trim();
+    if (!name || !contact || !address) { alert('Please enter your name, contact and delivery address.'); return; }
+    const done = res => {
+      cart = []; saveCart(); closeCart();
+      ['co-name','co-contact','co-address'].forEach(i => document.getElementById(i).value = '');
+      document.querySelector('#modal h3').textContent = 'Order Received';
+      document.querySelector('#modal p').textContent = res && res.orderId
+        ? 'Thank you! Your order number is ' + res.orderId + '. Our team will contact you shortly to confirm payment and delivery.'
+        : 'Thank you! Our team will contact you shortly to confirm payment and delivery.';
+      document.getElementById('modal').classList.add('open');
+    };
+    if (!API_URL) { done(); return; }
+    const btn = document.querySelector('#cart-foot .btn-submit');
+    btn.disabled = true; btn.textContent = 'Placing order…';
+    postToSheet({ type: 'order', name, contact, address, items: cart.map(l => ({ id: l.id, size: l.size, qty: l.qty, custom: l.custom || null })) })
+      .then(res => { if (!res.ok) throw new Error(res.error); done(res); })
+      .catch(() => alert('Sorry, we could not place your order. Please try again or contact us directly.'))
+      .finally(() => { btn.disabled = false; btn.textContent = 'Place Order'; });
+  }
+
+  renderCart();
+
   function selectSwatch(el) {
     document.querySelectorAll('.swatch').forEach(s => s.classList.remove('selected'));
     el.classList.add('selected');
@@ -1526,7 +1757,22 @@
 
   function submitOrder(e) {
     e.preventDefault();
-    document.getElementById('modal').classList.add('open');
+    const show = () => {
+      document.querySelector('#modal h3').textContent = 'Order Received';
+      document.querySelector('#modal p').textContent = 'Thank you! Our team will contact you within 24 hours with a personalised quote and design sketch.';
+      document.getElementById('modal').classList.add('open');
+    };
+    if (!API_URL) { show(); return; }
+    const f = [...e.target.querySelectorAll('input,select,textarea')].map(x => x.value.trim());
+    const sw = e.target.querySelector('.swatch.selected');
+    const btn = e.target.querySelector('.btn-submit');
+    btn.disabled = true;
+    postToSheet({ type: 'enquiry', fields: {
+      name: f[0], email: f[1], phone: f[2], forWhom: f[3], dressType: f[4], fabric: f[5], budget: f[6],
+      colour: sw ? sw.title : '', measurements: f[7], requests: f[8]
+    } }).then(res => { if (!res.ok) throw new Error(res.error); show(); })
+      .catch(() => alert('Sorry, we could not send your request. Please try again.'))
+      .finally(() => { btn.disabled = false; });
   }
 
   function closeModal() {
