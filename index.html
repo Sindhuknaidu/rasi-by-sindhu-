@@ -241,7 +241,7 @@
     .footer-bottom { border-top: 1px solid #222215; padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.74rem; }
 
     /* MODAL */
-    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(26,22,18,0.6); z-index: 200; align-items: center; justify-content: center; }
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(26,22,18,0.6); z-index: 2000; align-items: center; justify-content: center; }
     .modal-overlay.open { display: flex; }
     .modal { background: var(--bg); padding: 36px 28px; max-width: 380px; width: 90%; text-align: center; border-top: 3px solid var(--gold); }
     .modal-icon { font-size: 1.8rem; margin-bottom: 12px; }
@@ -350,7 +350,14 @@
     .size-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.68rem; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
     .size-row select { flex: 1; min-width: 0; padding: 5px 6px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 0.72rem; color: var(--text); }
     .ready-badge { display: inline-block; margin-left: 6px; padding: 1px 6px; font-size: 0.56rem; letter-spacing: 1px; background: var(--accent-light); color: var(--accent); }
-    .product-actions { display: flex; gap: 6px; margin-top: 10px; }
+    .product-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .product-actions .cart-add-btn { flex: 1 1 100%; background: var(--text); color: #fff; border: 1px solid var(--text); }
+    .product-actions .cart-add-btn:hover { background: transparent; color: var(--text); }
+    .cart-size { margin-top: 4px; padding: 3px 4px; border: 1px solid var(--border); font-family: inherit; font-size: 0.7rem; background: var(--bg); }
+    .buy-modal .size-opts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+    .buy-modal .size-opts label { margin: 0; padding: 8px 14px; border: 1px solid var(--border); cursor: pointer; font-size: 0.78rem; letter-spacing: 0; text-transform: none; color: var(--text); }
+    .buy-modal .size-opts input { display: none; }
+    .buy-modal .size-opts label:has(input:checked) { background: var(--text); color: #fff; border-color: var(--text); }
     .product-actions button { flex: 1; padding: 8px 6px; font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.66rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
     .buy-btn { background: var(--maroon); color: #fff; border: 1px solid var(--maroon); }
     .buy-btn:hover { background: transparent; color: var(--maroon); }
@@ -360,7 +367,7 @@
     .nav-cart:hover { background: var(--maroon); color: #fff; }
     .cart-count { display: inline-block; min-width: 18px; margin-left: 4px; padding: 1px 5px; border-radius: 9px; background: var(--maroon); color: #fff; font-size: 0.64rem; text-align: center; }
     .nav-cart:hover .cart-count { background: #fff; color: var(--maroon); }
-    .drawer-overlay { display: none; position: fixed; inset: 0; background: rgba(26,22,18,0.6); z-index: 220; justify-content: flex-end; }
+    .drawer-overlay { display: none; position: fixed; inset: 0; background: rgba(26,22,18,0.6); z-index: 2100; justify-content: flex-end; }
     .drawer-overlay.open { display: flex; }
     .drawer { background: var(--bg); width: 420px; max-width: 100%; height: 100%; display: flex; flex-direction: column; border-left: 3px solid var(--gold); font-family: -apple-system,"Segoe UI",sans-serif; }
     .drawer-head { display: flex; justify-content: space-between; align-items: center; padding: 18px 20px; border-bottom: 1px solid var(--border); }
@@ -393,7 +400,7 @@
     .cust-modal .cm-cancel { display: block; margin: 10px auto 0; background: none; border: none; font-size: 0.72rem; color: var(--muted); text-decoration: underline; cursor: pointer; }
     @media (max-width: 600px) {
       .nav-cart { padding: 8px 10px; font-size: 0.62rem; letter-spacing: 0.5px; }
-      .product-actions { flex-direction: column; }
+      .drawer { width: 100%; border-left: none; }
     }
   </style>
 </head>
@@ -1497,6 +1504,18 @@
   </aside>
 </div>
 
+<!-- BUY NOW MODAL (size selection) -->
+<div class="modal-overlay" id="buy-modal">
+  <div class="modal cust-modal buy-modal">
+    <h3 id="bm-title">Buy Now</h3>
+    <p class="cm-sub" id="bm-sub"></p>
+    <label>Select your size</label>
+    <div class="size-opts" id="bm-sizes"></div>
+    <button class="modal-close" onclick="confirmBuy()">Continue to Checkout</button>
+    <button class="cm-cancel" onclick="closeBuyModal()">Cancel</button>
+  </div>
+</div>
+
 <!-- CUSTOMISE-A-DESIGN MODAL -->
 <div class="modal-overlay" id="cust-modal">
   <div class="modal cust-modal">
@@ -1582,11 +1601,9 @@
           <span class="product-tag">${p.tag}<span class="ready-badge">Ready to ship</span></span>
           <h3>${p.name}</h3>
           <p class="desc">${p.desc}</p>
-          <div class="size-row">Size
-            <select id="size-${p.id}">${sizesFor(p).map(s => `<option>${s}</option>`).join('')}</select>
-          </div>
           <div class="product-footer"><span class="price">${p.price}</span></div>
           <div class="product-actions">
+            <button class="cart-add-btn" onclick="addToCart(${p.id}, this)">Add to Cart</button>
             <button class="buy-btn" onclick="buyNow(${p.id})">Buy Now</button>
             <button class="cust-btn" onclick="openCustModal(${p.id})">Customise</button>
           </div>
@@ -1658,11 +1675,33 @@
     saveCart();
   }
 
+  function addToCart(id, btn) {
+    addLine({ id, size: sizesFor(findProduct(id))[0] });
+    if (btn) {
+      const t = btn.textContent;
+      btn.textContent = 'Added ✓';
+      setTimeout(() => { btn.textContent = t; }, 1200);
+    }
+  }
+
+  let buyId = null;
   function buyNow(id) {
-    const size = document.getElementById('size-' + id).value;
-    addLine({ id, size });
+    const p = findProduct(id);
+    buyId = id;
+    document.getElementById('bm-title').textContent = 'Buy: ' + p.name;
+    document.getElementById('bm-sub').textContent = p.price + ' · Ready to ship';
+    document.getElementById('bm-sizes').innerHTML = sizesFor(p).map((s, i) =>
+      `<label><input type="radio" name="bm-size" value="${esc(s)}" ${i === 0 ? 'checked' : ''}>${esc(s)}</label>`).join('');
+    document.getElementById('buy-modal').classList.add('open');
+  }
+  function closeBuyModal() { document.getElementById('buy-modal').classList.remove('open'); }
+  function confirmBuy() {
+    const sel = document.querySelector('input[name="bm-size"]:checked');
+    addLine({ id: buyId, size: sel ? sel.value : sizesFor(findProduct(buyId))[0] });
+    closeBuyModal();
     openCart();
   }
+  function changeSize(i, size) { cart[i].size = size; saveCart(); }
 
   function openCustModal(id) {
     const p = findProduct(id);
@@ -1716,7 +1755,7 @@
         <div class="cart-thumb">${p.img ? `<img src="${p.img}" alt="" style="width:100%;height:100%;object-fit:cover" />` : (svgs[p.svgKey] || '')}</div>
         <div>
           <h4>${esc(p.name)}</h4>
-          <div class="cart-meta">Size: ${esc(l.size)} · ${p.price}</div>
+          <div class="cart-meta">${p.price} · Size <select class="cart-size" onchange="changeSize(${i}, this.value)">${sizesFor(p).map(s => `<option ${s === l.size ? 'selected' : ''}>${esc(s)}</option>`).join('')}</select></div>
           ${l.custom ? `<span class="cart-custom">Customised</span><div class="cart-meta">${esc(customSummary(l.custom))}</div>` : ''}
           <div class="cart-qty"><button onclick="changeQty(${i},-1)" aria-label="Decrease">−</button>${l.qty}<button onclick="changeQty(${i},1)" aria-label="Increase">+</button></div>
         </div>
