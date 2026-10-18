@@ -11,16 +11,16 @@
 
 const NOTIFY_EMAIL = '';   // optional: put your email to get a mail for every order/enquiry
 
-const PRODUCT_HEADERS = ['id', 'name', 'category', 'price', 'desc', 'image', 'sizes', 'active'];
-const ORDER_HEADERS = ['Time', 'Order ID', 'Name', 'Contact', 'Address', 'Items', 'Total ($)', 'Status'];
+const PRODUCT_HEADERS = ['id', 'name', 'category', 'price', 'desc', 'image', 'sizes', 'colours', 'active'];
+const ORDER_HEADERS = ['Time', 'Order ID', 'Name', 'Contact', 'Address', 'Items', 'Total (₹)', 'UPI Ref / UTR', 'Amount Paid (₹)', 'Status'];
 const ENQUIRY_HEADERS = ['Time', 'Name', 'Email', 'Phone', 'For Whom', 'Dress Type', 'Fabric', 'Budget', 'Colour', 'Measurements', 'Requests', 'Status'];
 
 /** Run once from the editor: creates the three tabs with headers and sample rows. */
 function setup() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   ensureSheet_(ss, 'Products', PRODUCT_HEADERS, [
-    [1, 'Silk Bridal Lehenga', 'Women', 320, 'Heavy silk lehenga with gold zari embroidery.', '', '', 'Y'],
-    [2, 'Floral Maxi Dress', 'Women', 89, 'Light chiffon with hand-embroidered florals.', '', '', 'Y']
+    [1, 'Silk Bridal Lehenga', 'Women', 24999, 'Heavy silk lehenga with gold zari embroidery.', '', '', '', 'Y'],
+    [2, 'Floral Maxi Dress', 'Women', 3499, 'Light chiffon with hand-embroidered florals.', '', '', 'Rose,Blue,Ivory', 'Y']
   ]);
   ensureSheet_(ss, 'Orders', ORDER_HEADERS);
   ensureSheet_(ss, 'Enquiries', ENQUIRY_HEADERS);
@@ -69,7 +69,7 @@ function saveOrder_(ss, d) {
     if (!p) return null;
     const qty = Math.max(1, Math.min(50, parseInt(it.qty, 10) || 1));
     total += p.price * qty;
-    let line = qty + ' x ' + p.name + ' (#' + p.id + ') – size ' + clean_(it.size);
+    let line = qty + ' x ' + p.name + ' (#' + p.id + ') – size ' + clean_(it.size) + (it.colour && it.colour !== 'As shown' ? ', colour ' + clean_(it.colour) : '');
     if (it.custom) {
       const c = it.custom;
       line += ' – CUSTOM: fabric ' + clean_(c.fabric) + ', colour ' + clean_(c.colour) +
@@ -81,9 +81,11 @@ function saveOrder_(ss, d) {
 
   const orderId = 'RS-' + Utilities.formatDate(new Date(), 'Asia/Kolkata', 'yyMMdd-HHmmss');
   ensureSheet_(ss, 'Orders', ORDER_HEADERS).appendRow([
-    new Date(), orderId, clean_(d.name), clean_(d.contact), clean_(d.address), lines.join('\n'), total, 'New'
+    new Date(), orderId, clean_(d.name), clean_(d.contact), clean_(d.address), lines.join('\n'), total,
+    clean_((d.payment || {}).utr), Number((d.payment || {}).amount) || 0,
+    Number((d.payment || {}).amount) === total ? 'Paid – verify UTR' : 'CHECK AMOUNT'
   ]);
-  notify_('New order ' + orderId, lines.join('\n') + '\n\nTotal $' + total + '\n' + clean_(d.name) + ' / ' + clean_(d.contact) + '\n' + clean_(d.address));
+  notify_('New order ' + orderId, lines.join('\n') + '\n\nTotal Rs ' + total + '\nUPI ref: ' + clean_((d.payment || {}).utr) + '\n' + clean_(d.name) + ' / ' + clean_(d.contact) + '\n' + clean_(d.address));
   return { ok: true, orderId: orderId, total: total };
 }
 
@@ -111,6 +113,7 @@ function readProducts_() {
     desc: String(r[col('desc')] || ''),
     img: imageUrl_(String(r[col('image')] || '').trim()),
     sizes: String(r[col('sizes')] || '').split(',').map(s => s.trim()).filter(Boolean),
+    colours: col('colours') < 0 ? [] : String(r[col('colours')] || '').split(',').map(s => s.trim()).filter(Boolean),
     active: String(r[col('active')]).trim().toUpperCase() !== 'N'
   }));
 }

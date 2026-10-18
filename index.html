@@ -398,6 +398,19 @@
     .cust-modal textarea { min-height: 70px; resize: vertical; }
     .cust-modal .modal-close { width: 100%; margin-top: 18px; }
     .cust-modal .cm-cancel { display: block; margin: 10px auto 0; background: none; border: none; font-size: 0.72rem; color: var(--muted); text-decoration: underline; cursor: pointer; }
+    .colour-row { display: flex; align-items: center; gap: 6px; margin: 8px 0 4px; flex-wrap: wrap; }
+    .colour-row small { font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.66rem; color: var(--muted); margin-left: 4px; }
+    .cdot { width: 18px; height: 18px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.25); cursor: pointer; display: inline-block; }
+    .cdot.sel { outline: 2px solid var(--maroon); outline-offset: 2px; }
+    .dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; border: 1px solid rgba(0,0,0,0.25); }
+    .mini-actions { display: flex; flex-wrap: wrap; gap: 4px; width: 100%; margin-top: 8px; }
+    .mini-actions button { flex: 1 1 auto; padding: 7px 6px; font-family: -apple-system,"Segoe UI",sans-serif; font-size: 0.6rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+    .mini-actions .cart-add-btn { flex: 1 1 100%; background: var(--text); color: #fff; border: 1px solid var(--text); }
+    .mini-actions .cart-add-btn:hover { background: transparent; color: var(--text); }
+    .drawer-foot { max-height: 72vh; overflow-y: auto; }
+    .pay-box { display: flex; justify-content: center; padding: 8px 0; }
+    .pay-box img { border: 1px solid var(--border); background: #fff; max-width: 100%; height: auto; }
+    .pay-link { display: block; text-align: center; margin: 4px 0 12px; font-size: 0.78rem; color: var(--maroon); }
     @media (max-width: 600px) {
       .nav-cart { padding: 8px 10px; font-size: 0.62rem; letter-spacing: 0.5px; }
       .drawer { width: 100%; border-left: none; }
@@ -761,11 +774,11 @@
       <div class="form-group">
         <label>Budget Range</label>
         <select>
-          <option>Under $50</option>
-          <option>$50 – $100</option>
-          <option>$100 – $200</option>
-          <option>$200 – $500</option>
-          <option>$500+</option>
+          <option>Under ₹5,000</option>
+          <option>₹5,000 – ₹10,000</option>
+          <option>₹10,000 – ₹20,000</option>
+          <option>₹20,000 – ₹50,000</option>
+          <option>₹50,000+</option>
         </select>
       </div>
       <div class="form-group">
@@ -805,7 +818,7 @@
   <div class="blouse-grid">
 
     <!-- Deep V-Neck -->
-    <div class="blouse-card" onclick="addToOrder('Deep V-Neck Blouse')">
+    <div class="blouse-card" data-pid="101">
       <div class="blouse-img">
         <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
           <rect width="240" height="240" fill="#f5ece4"/>
@@ -836,14 +849,18 @@
         <h3>Deep V-Neck Blouse</h3>
         <p>Plunging V-neckline with zari embroidery trim. Available in all fabrics.</p>
         <div class="blouse-footer">
-          <span class="price">From $35</span>
-          <button class="add-btn" onclick="addToOrder('Deep V-Neck Blouse')">Customise</button>
+          <span class="price" data-price-for="101" data-fmt="from">From ₹1,499</span>
+          <div class="mini-actions">
+            <button class="cart-add-btn" onclick="addToCart(101, this)">Add to Cart</button>
+            <button class="buy-btn" onclick="buyNow(101)">Buy Now</button>
+            <button class="cust-btn" onclick="openCustModal(101)">Customise</button>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- Boat Neck -->
-    <div class="blouse-card" onclick="addToOrder('Boat Neck Blouse')">
+    <div class="blouse-card" data-pid="102">
       <div class="blouse-img">
         <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
           <rect width="240" height="240" fill="#e8f0e4"/>
@@ -870,14 +887,18 @@
         <h3>Boat Neck Blouse</h3>
         <p>Wide horizontal neckline with delicate gold embroidery border.</p>
         <div class="blouse-footer">
-          <span class="price">From $30</span>
-          <button class="add-btn" onclick="addToOrder('Boat Neck Blouse')">Customise</button>
+          <span class="price" data-price-for="102" data-fmt="from">From ₹1,299</span>
+          <div class="mini-actions">
+            <button class="cart-add-btn" onclick="addToCart(102, this)">Add to Cart</button>
+            <button class="buy-btn" onclick="buyNow(102)">Buy Now</button>
+            <button class="cust-btn" onclick="openCustModal(102)">Customise</button>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- Backless -->
-    <div class="blouse-card" onclick="addToOrder('Backless Blouse')">
+    <div class="blouse-card" data-pid="103">
       <div class="blouse-img">
         <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
           <rect width="240" height="240" fill="#f0e8f5"/>
@@ -907,14 +928,18 @@
         <h3>Backless Blouse</h3>
         <p>Open back design with tassel string ties. Glamorous and bold.</p>
         <div class="blouse-footer">
-          <span class="price">From $42</span>
-          <button class="add-btn" onclick="addToOrder('Backless Blouse')">Customise</button>
+          <span class="price" data-price-for="103" data-fmt="from">From ₹1,799</span>
+          <div class="mini-actions">
+            <button class="cart-add-btn" onclick="addToCart(103, this)">Add to Cart</button>
+            <button class="buy-btn" onclick="buyNow(103)">Buy Now</button>
+            <button class="cust-btn" onclick="openCustModal(103)">Customise</button>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- High Neck -->
-    <div class="blouse-card" onclick="addToOrder('High Neck Blouse')">
+    <div class="blouse-card" data-pid="104">
       <div class="blouse-img">
         <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
           <rect width="240" height="240" fill="#e8e0f0"/>
@@ -940,14 +965,18 @@
         <h3>High Neck Blouse</h3>
         <p>Elegant stand collar with full sleeves and zari embroidery work.</p>
         <div class="blouse-footer">
-          <span class="price">From $38</span>
-          <button class="add-btn" onclick="addToOrder('High Neck Blouse')">Customise</button>
+          <span class="price" data-price-for="104" data-fmt="from">From ₹1,599</span>
+          <div class="mini-actions">
+            <button class="cart-add-btn" onclick="addToCart(104, this)">Add to Cart</button>
+            <button class="buy-btn" onclick="buyNow(104)">Buy Now</button>
+            <button class="cust-btn" onclick="openCustModal(104)">Customise</button>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- Off-Shoulder -->
-    <div class="blouse-card" onclick="addToOrder('Off-Shoulder Blouse')">
+    <div class="blouse-card" data-pid="105">
       <div class="blouse-img">
         <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
           <rect width="240" height="240" fill="#fce8f0"/>
@@ -973,14 +1002,18 @@
         <h3>Off-Shoulder Blouse</h3>
         <p>Trendy off-shoulder cut with ruffle detail. Perfect for fusion looks.</p>
         <div class="blouse-footer">
-          <span class="price">From $40</span>
-          <button class="add-btn" onclick="addToOrder('Off-Shoulder Blouse')">Customise</button>
+          <span class="price" data-price-for="105" data-fmt="from">From ₹1,699</span>
+          <div class="mini-actions">
+            <button class="cart-add-btn" onclick="addToCart(105, this)">Add to Cart</button>
+            <button class="buy-btn" onclick="buyNow(105)">Buy Now</button>
+            <button class="cust-btn" onclick="openCustModal(105)">Customise</button>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- Peplum -->
-    <div class="blouse-card" onclick="addToOrder('Peplum Blouse')">
+    <div class="blouse-card" data-pid="106">
       <div class="blouse-img">
         <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
           <rect width="240" height="240" fill="#e4f0e8"/>
@@ -1008,8 +1041,12 @@
         <h3>Peplum Blouse</h3>
         <p>Flattering peplum cut with sweetheart neckline. Adds beautiful structure.</p>
         <div class="blouse-footer">
-          <span class="price">From $44</span>
-          <button class="add-btn" onclick="addToOrder('Peplum Blouse')">Customise</button>
+          <span class="price" data-price-for="106" data-fmt="from">From ₹1,899</span>
+          <div class="mini-actions">
+            <button class="cart-add-btn" onclick="addToCart(106, this)">Add to Cart</button>
+            <button class="buy-btn" onclick="buyNow(106)">Buy Now</button>
+            <button class="cust-btn" onclick="openCustModal(106)">Customise</button>
+          </div>
         </div>
       </div>
     </div>
@@ -1137,7 +1174,7 @@
   <div class="tassel-grid">
 
     <!-- Gold Silk Tassel -->
-    <div class="tassel-card" onclick="addToOrder('Gold Silk Tassel')">
+    <div class="tassel-card" data-pid="201">
       <div class="tassel-img">
         <svg viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg">
           <line x1="40" y1="0" x2="40" y2="18" stroke="#c9a96e" stroke-width="2.5"/>
@@ -1165,11 +1202,16 @@
       </div>
       <h3>Gold Silk Tassel</h3>
       <p>Pure silk threads with gold wire wrap. Classic & timeless.</p>
-      <div class="tassel-price">₹180 / pair</div>
+      <div class="tassel-price" data-price-for="201" data-fmt="pair">₹180 / pair</div>
+      <div class="mini-actions">
+        <button class="cart-add-btn" onclick="addToCart(201, this)">Add to Cart</button>
+        <button class="buy-btn" onclick="buyNow(201)">Buy Now</button>
+        <button class="cust-btn" onclick="openCustModal(201)">Customise</button>
+      </div>
     </div>
 
     <!-- Rose & Gold Beaded -->
-    <div class="tassel-card" onclick="addToOrder('Rose Beaded Tassel')">
+    <div class="tassel-card" data-pid="202">
       <div class="tassel-img">
         <svg viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg">
           <line x1="40" y1="0" x2="40" y2="16" stroke="#c9a96e" stroke-width="2.5"/>
@@ -1204,11 +1246,16 @@
       </div>
       <h3>Rose Beaded Tassel</h3>
       <p>Rose silk with gold seed beads. Bridal favourite.</p>
-      <div class="tassel-price">₹240 / pair</div>
+      <div class="tassel-price" data-price-for="202" data-fmt="pair">₹240 / pair</div>
+      <div class="mini-actions">
+        <button class="cart-add-btn" onclick="addToCart(202, this)">Add to Cart</button>
+        <button class="buy-btn" onclick="buyNow(202)">Buy Now</button>
+        <button class="cust-btn" onclick="openCustModal(202)">Customise</button>
+      </div>
     </div>
 
     <!-- Emerald Zari Tassel -->
-    <div class="tassel-card" onclick="addToOrder('Emerald Zari Tassel')">
+    <div class="tassel-card" data-pid="203">
       <div class="tassel-img">
         <svg viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg">
           <line x1="40" y1="0" x2="40" y2="16" stroke="#c9a96e" stroke-width="2.5"/>
@@ -1239,11 +1286,16 @@
       </div>
       <h3>Emerald Zari Tassel</h3>
       <p>Deep green silk with wrapped zari banding. Festive & rich.</p>
-      <div class="tassel-price">₹210 / pair</div>
+      <div class="tassel-price" data-price-for="203" data-fmt="pair">₹210 / pair</div>
+      <div class="mini-actions">
+        <button class="cart-add-btn" onclick="addToCart(203, this)">Add to Cart</button>
+        <button class="buy-btn" onclick="buyNow(203)">Buy Now</button>
+        <button class="cust-btn" onclick="openCustModal(203)">Customise</button>
+      </div>
     </div>
 
     <!-- Royal Blue Stone Tassel -->
-    <div class="tassel-card" onclick="addToOrder('Royal Blue Stone Tassel')">
+    <div class="tassel-card" data-pid="204">
       <div class="tassel-img">
         <svg viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg">
           <line x1="40" y1="0" x2="40" y2="14" stroke="#c9a96e" stroke-width="2.5"/>
@@ -1273,11 +1325,16 @@
       </div>
       <h3>Royal Blue Stone Tassel</h3>
       <p>Blue silk with a faceted stone cap. Elegant for evening wear.</p>
-      <div class="tassel-price">₹295 / pair</div>
+      <div class="tassel-price" data-price-for="204" data-fmt="pair">₹295 / pair</div>
+      <div class="mini-actions">
+        <button class="cart-add-btn" onclick="addToCart(204, this)">Add to Cart</button>
+        <button class="buy-btn" onclick="buyNow(204)">Buy Now</button>
+        <button class="cust-btn" onclick="openCustModal(204)">Customise</button>
+      </div>
     </div>
 
     <!-- Ivory Pearl Tassel -->
-    <div class="tassel-card" onclick="addToOrder('Ivory Pearl Tassel')">
+    <div class="tassel-card" data-pid="205">
       <div class="tassel-img">
         <svg viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg">
           <line x1="40" y1="0" x2="40" y2="16" stroke="#c9a96e" stroke-width="2.5"/>
@@ -1311,11 +1368,16 @@
       </div>
       <h3>Ivory Pearl Tassel</h3>
       <p>Cream silk with pearl bead accents. Subtle bridal luxury.</p>
-      <div class="tassel-price">₹320 / pair</div>
+      <div class="tassel-price" data-price-for="205" data-fmt="pair">₹320 / pair</div>
+      <div class="mini-actions">
+        <button class="cart-add-btn" onclick="addToCart(205, this)">Add to Cart</button>
+        <button class="buy-btn" onclick="buyNow(205)">Buy Now</button>
+        <button class="cust-btn" onclick="openCustModal(205)">Customise</button>
+      </div>
     </div>
 
     <!-- Plum Kundan Tassel -->
-    <div class="tassel-card" onclick="addToOrder('Plum Kundan Tassel')">
+    <div class="tassel-card" data-pid="206">
       <div class="tassel-img">
         <svg viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg">
           <line x1="40" y1="0" x2="40" y2="14" stroke="#c9a96e" stroke-width="2.5"/>
@@ -1350,7 +1412,12 @@
       </div>
       <h3>Plum Kundan Tassel</h3>
       <p>Plum silk with a kundan-set cap. South Indian style.</p>
-      <div class="tassel-price">₹350 / pair</div>
+      <div class="tassel-price" data-price-for="206" data-fmt="pair">₹350 / pair</div>
+      <div class="mini-actions">
+        <button class="cart-add-btn" onclick="addToCart(206, this)">Add to Cart</button>
+        <button class="buy-btn" onclick="buyNow(206)">Buy Now</button>
+        <button class="cust-btn" onclick="openCustModal(206)">Customise</button>
+      </div>
     </div>
 
   </div>
@@ -1494,12 +1561,23 @@
     <div class="drawer-head"><h3>Your Cart</h3><button class="x-btn" onclick="closeCart()" aria-label="Close cart">&times;</button></div>
     <div class="drawer-body" id="cart-body"></div>
     <div class="drawer-foot" id="cart-foot">
-      <div class="cart-total"><span>Total</span><span id="cart-total">$0</span></div>
-      <p class="cart-note">Customised pieces are confirmed with a final quote by our team before stitching begins.</p>
-      <input type="text" id="co-name" placeholder="Full name" />
-      <input type="text" id="co-contact" placeholder="Phone / WhatsApp / Email" />
-      <input type="text" id="co-address" placeholder="Delivery address" />
-      <button class="btn-submit" onclick="checkout()">Place Order</button>
+      <div class="cart-total"><span>Total</span><span id="cart-total">₹0</span></div>
+      <div id="checkout-step">
+        <p class="cart-note">Step 1 of 2 – Delivery details. Customised pieces are confirmed with a final quote by our team before stitching begins.</p>
+        <input type="text" id="co-name" placeholder="Full name" autocomplete="name" />
+        <input type="text" id="co-contact" placeholder="Phone / WhatsApp / Email" autocomplete="tel" />
+        <input type="text" id="co-address" placeholder="Delivery address" autocomplete="street-address" />
+        <button class="btn-submit" onclick="proceedToPay()">Proceed to Pay</button>
+      </div>
+      <div id="pay-step" style="display:none">
+        <p class="cart-note">Step 2 of 2 – Pay <b id="pay-amount"></b> by UPI</p>
+        <div class="pay-box"><div id="pay-qr"></div></div>
+        <p class="cart-note" id="pay-note"></p>
+        <a id="pay-link" class="pay-link" href="#">Open UPI app (on mobile)</a>
+        <input type="text" id="co-utr" placeholder="UPI transaction / UTR number" autocomplete="off" />
+        <button class="btn-submit" id="place-btn" onclick="placeOrder()">I've Paid – Place Order</button>
+        <button class="cm-cancel" onclick="backToDetails()">&larr; Back to delivery details</button>
+      </div>
     </div>
   </aside>
 </div>
@@ -1509,8 +1587,10 @@
   <div class="modal cust-modal buy-modal">
     <h3 id="bm-title">Buy Now</h3>
     <p class="cm-sub" id="bm-sub"></p>
-    <label>Select your size</label>
-    <div class="size-opts" id="bm-sizes"></div>
+    <div id="bm-size-wrap"><label>Select your size</label>
+    <div class="size-opts" id="bm-sizes"></div></div>
+    <div id="bm-colour-wrap"><label>Select colour</label>
+    <div class="size-opts" id="bm-colours"></div></div>
     <button class="modal-close" onclick="confirmBuy()">Continue to Checkout</button>
     <button class="cm-cancel" onclick="closeBuyModal()">Cancel</button>
   </div>
@@ -1574,26 +1654,39 @@
   };
 
   const products = [
-    { id:1,  name:"Silk Bridal Lehenga",    category:"Women",  tag:"Women",   svgKey:"Women2", desc:"Heavy silk lehenga with gold zari embroidery. Bridal perfection.",      price:"$320" },
-    { id:2,  name:"Floral Maxi Dress",       category:"Women",  tag:"Women",   svgKey:"Women1", desc:"Light chiffon with hand-embroidered floral details. Summer elegance.",   price:"$89"  },
-    { id:3,  name:"Office Kurta Set",        category:"Women",  tag:"Women",   svgKey:"Women3", desc:"Elegant cotton kurta with matching palazzo. Perfect for formal settings.", price:"$65"  },
-    { id:4,  name:"Festival Anarkali",       category:"Women",  tag:"Women",   svgKey:"Women4", desc:"Full flare Anarkali with mirror-work detailing for festivals.",            price:"$110" },
-    { id:5,  name:"Designer Sherwani",       category:"Men",    tag:"Men",     svgKey:"Men1",   desc:"Royal sherwani with intricate hand embroidery. Wedding-ready.",            price:"$280" },
-    { id:6,  name:"Casual Linen Kurta",      category:"Men",    tag:"Men",     svgKey:"Men2",   desc:"Breathable linen kurta for everyday refined dressing.",                   price:"$45"  },
-    { id:7,  name:"Indo-Western Suit",       category:"Men",    tag:"Men",     svgKey:"Men3",   desc:"Contemporary fusion suit with mandarin collar and subtle embroidery.",     price:"$150" },
-    { id:8,  name:"Princess Birthday Frock", category:"Kids",   tag:"Kids",    svgKey:"Kids1",  desc:"Puffy tulle frock with polka dots and ribbon bow. Ages 2–10.",            price:"$38"  },
-    { id:9,  name:"Boys Ethnic Kurta Set",   category:"Kids",   tag:"Kids",    svgKey:"Kids2",  desc:"Soft cotton ethnic set for little boys. Festive & everyday. Ages 1–12.",  price:"$30"  },
-    { id:10, name:"Teen Casual Co-ord",      category:"Teen",   tag:"Teens",   svgKey:"Teen1",  desc:"Trendy top and jeans co-ord for confident teens. All sizes.",             price:"$72"  },
-    { id:11, name:"Couple Ethnic Set",       category:"Couple", tag:"Couples", svgKey:"Couple1",desc:"Matching sherwani & lehenga set for special occasions.",                  price:"$175" },
-    { id:12, name:"Elegant Saree Ensemble",  category:"Senior", tag:"Seniors", svgKey:"Senior1",desc:"Graceful saree with golden border. Comfortable, dignified, beautiful.",   price:"$95"  },
-    { id:13, name:"Sutra Weave Saree",       category:"Saree",  tag:"Saree",   svgKey:"SareeThread",     desc:"Sage green saree adorned with intricate hand-done thread & crochet work along the pallu and border.", price:"$155" },
-    { id:14, name:"Moti Drape Saree",        category:"Saree",  tag:"Saree",   svgKey:"SareeBeads",      desc:"Deep plum saree with clusters of hand-strung glass & pearl beads cascading across the skirt and pallu.", price:"$168" },
-    { id:15, name:"Naksha Embroidery Saree", category:"Saree",  tag:"Saree",   svgKey:"SareeEmbroidery", desc:"Dusty rose silk saree with dense zardozi-inspired hand embroidery in gold and blush thread.", price:"$195" },
+    { id:1,  name:"Silk Bridal Lehenga",    category:"Women",  tag:"Women",   svgKey:"Women2", desc:"Heavy silk lehenga with gold zari embroidery. Bridal perfection.",      price:24999 },
+    { id:2,  name:"Floral Maxi Dress",       category:"Women",  tag:"Women",   svgKey:"Women1", desc:"Light chiffon with hand-embroidered floral details. Summer elegance.",   price:3499  },
+    { id:3,  name:"Office Kurta Set",        category:"Women",  tag:"Women",   svgKey:"Women3", desc:"Elegant cotton kurta with matching palazzo. Perfect for formal settings.", price:2499  },
+    { id:4,  name:"Festival Anarkali",       category:"Women",  tag:"Women",   svgKey:"Women4", desc:"Full flare Anarkali with mirror-work detailing for festivals.",            price:4499 },
+    { id:5,  name:"Designer Sherwani",       category:"Men",    tag:"Men",     svgKey:"Men1",   desc:"Royal sherwani with intricate hand embroidery. Wedding-ready.",            price:14999 },
+    { id:6,  name:"Casual Linen Kurta",      category:"Men",    tag:"Men",     svgKey:"Men2",   desc:"Breathable linen kurta for everyday refined dressing.",                   price:1799  },
+    { id:7,  name:"Indo-Western Suit",       category:"Men",    tag:"Men",     svgKey:"Men3",   desc:"Contemporary fusion suit with mandarin collar and subtle embroidery.",     price:6999 },
+    { id:8,  name:"Princess Birthday Frock", category:"Kids",   tag:"Kids",    svgKey:"Kids1",  desc:"Puffy tulle frock with polka dots and ribbon bow. Ages 2–10.",            price:1499  },
+    { id:9,  name:"Boys Ethnic Kurta Set",   category:"Kids",   tag:"Kids",    svgKey:"Kids2",  desc:"Soft cotton ethnic set for little boys. Festive & everyday. Ages 1–12.",  price:1299  },
+    { id:10, name:"Teen Casual Co-ord",      category:"Teen",   tag:"Teens",   svgKey:"Teen1",  desc:"Trendy top and jeans co-ord for confident teens. All sizes.",             price:2799  },
+    { id:11, name:"Couple Ethnic Set",       category:"Couple", tag:"Couples", svgKey:"Couple1",desc:"Matching sherwani & lehenga set for special occasions.",                  price:9999 },
+    { id:12, name:"Elegant Saree Ensemble",  category:"Senior", tag:"Seniors", svgKey:"Senior1",desc:"Graceful saree with golden border. Comfortable, dignified, beautiful.",   price:3999  },
+    { id:13, name:"Sutra Weave Saree",       category:"Saree",  tag:"Saree",   svgKey:"SareeThread",     desc:"Sage green saree adorned with intricate hand-done thread & crochet work along the pallu and border.", price:6499 },
+    { id:14, name:"Moti Drape Saree",        category:"Saree",  tag:"Saree",   svgKey:"SareeBeads",      desc:"Deep plum saree with clusters of hand-strung glass & pearl beads cascading across the skirt and pallu.", price:6999 },
+    { id:15, name:"Naksha Embroidery Saree", category:"Saree",  tag:"Saree",   svgKey:"SareeEmbroidery", desc:"Dusty rose silk saree with dense zardozi-inspired hand embroidery in gold and blush thread.", price:7999 },
+    { id:101, name:"Deep V-Neck Blouse", category:"Blouse", tag:"Blouse", desc:"Plunging V-neckline with zari embroidery trim.", price:1499 },
+    { id:102, name:"Boat Neck Blouse", category:"Blouse", tag:"Blouse", desc:"Classic wide boat neckline.", price:1299 },
+    { id:103, name:"Backless Blouse", category:"Blouse", tag:"Blouse", desc:"Elegant backless design with tie-up back.", price:1799 },
+    { id:104, name:"High Neck Blouse", category:"Blouse", tag:"Blouse", desc:"Regal high neck with fine detailing.", price:1599 },
+    { id:105, name:"Off-Shoulder Blouse", category:"Blouse", tag:"Blouse", desc:"Modern off-shoulder cut.", price:1699 },
+    { id:106, name:"Peplum Blouse", category:"Blouse", tag:"Blouse", desc:"Flared peplum hem for a contemporary look.", price:1899 },
+    { id:201, name:"Gold Silk Tassel", category:"Tassel", tag:"Tassel", desc:"Handcrafted saree tassels, sold per pair.", price:180 },
+    { id:202, name:"Rose Beaded Tassel", category:"Tassel", tag:"Tassel", desc:"Handcrafted saree tassels, sold per pair.", price:240 },
+    { id:203, name:"Emerald Zari Tassel", category:"Tassel", tag:"Tassel", desc:"Handcrafted saree tassels, sold per pair.", price:210 },
+    { id:204, name:"Royal Blue Stone Tassel", category:"Tassel", tag:"Tassel", desc:"Handcrafted saree tassels, sold per pair.", price:295 },
+    { id:205, name:"Ivory Pearl Tassel", category:"Tassel", tag:"Tassel", desc:"Handcrafted saree tassels, sold per pair.", price:320 },
+    { id:206, name:"Plum Kundan Tassel", category:"Tassel", tag:"Tassel", desc:"Handcrafted saree tassels, sold per pair.", price:350 },
   ];
 
   function renderProducts(filter) {
     const grid = document.getElementById('product-grid');
-    const filtered = filter === 'All' ? products : products.filter(p => p.category === filter);
+    const shown = products.filter(p => !EXTRA_CATS.includes(p.category));
+    const filtered = filter === 'All' ? shown : shown.filter(p => p.category === filter);
     grid.innerHTML = filtered.map(p => `
       <div class="product-card">
         <div class="product-img">${p.img ? `<img src="${p.img}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;display:block" />` : (svgs[p.svgKey] || '')}</div>
@@ -1601,7 +1694,8 @@
           <span class="product-tag">${p.tag}<span class="ready-badge">Ready to ship</span></span>
           <h3>${p.name}</h3>
           <p class="desc">${p.desc}</p>
-          <div class="product-footer"><span class="price">${p.price}</span></div>
+          ${colourRow(p)}
+          <div class="product-footer"><span class="price">${inr(p.price)}</span></div>
           <div class="product-actions">
             <button class="cart-add-btn" onclick="addToCart(${p.id}, this)">Add to Cart</button>
             <button class="buy-btn" onclick="buyNow(${p.id})">Buy Now</button>
@@ -1631,37 +1725,95 @@
     }, 600);
   }
 
-  /* ── Cart, Buy Now & product customisation ── */
-  const SIZES = { Kids: ['2–4 yrs','5–7 yrs','8–10 yrs','11–12 yrs'], Teen: ['XS','S','M','L'] };
+/* ── Cart, Buy Now, colours & UPI payment ── */
+  const SIZES = {
+    Kids: ['2–4 yrs','5–7 yrs','8–10 yrs','11–12 yrs'], Teen: ['XS','S','M','L'],
+    Blouse: ['32','34','36','38','40','42'], Tassel: ['Pair']
+  };
+  const EXTRA_CATS = ['Blouse', 'Tassel'];          // sold from their own sections, not Featured Designs
+  const PALETTE = {
+    'Rose':'#b85c6e', 'Maroon':'#7f1416', 'Camel':'#8b6f47', 'Blue':'#4a7bc8', 'Forest Green':'#4a7a5c',
+    'Gold':'#c9a96e', 'Plum':'#7c3a5c', 'Black':'#1a1612', 'Ivory':'#f5f0ea'
+  };
   const sizesFor = p => (p.sizes && p.sizes.length) ? p.sizes : (SIZES[p.category] || ['XS','S','M','L','XL','XXL']);
-  const priceNum = p => parseInt(String(p.price).replace(/[^0-9]/g, ''), 10) || 0;
-  const findProduct = id => products.find(p => p.id === id) || { id, name: 'Unavailable item', price: '$0', category: '' };
+  const coloursFor = p => {
+    if (p.category === 'Tassel') return [];
+    const names = (p.colours && p.colours.length) ? p.colours : Object.keys(PALETTE);
+    return ['As shown'].concat(names);
+  };
+  const priceNum = p => Number(p.price) || 0;
+  const inr = n => '₹' + Number(n).toLocaleString('en-IN');
+  const findProduct = id => products.find(p => p.id === id) || { id, name: 'Unavailable item', price: 0, category: '' };
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
   /* ── Backend: paste your Google Apps Script web-app URL here (see backend/SETUP.md) ── */
   const API_URL = '';
+
+  /* ── UPI payment: put your UPI ID here. Optionally also put the path of your own QR image
+        (e.g. 'images/upi-qr.png') to show your QR instead of an auto-generated one. ── */
+  const UPI_ID = '';
+  const UPI_NAME = 'Rasi by Sindhu';
+  const UPI_QR_IMAGE = '';
 
   function postToSheet(payload) {
     return fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) })
       .then(r => r.json());
   }
 
+  /* blouse & tassel cards: remember their drawing for the cart thumbnail */
+  products.forEach(p => {
+    if (EXTRA_CATS.includes(p.category)) {
+      const s = document.querySelector('[data-pid="' + p.id + '"] svg');
+      if (s) p.svgHtml = s.outerHTML;
+    }
+  });
+
+  function updatePriceLabels() {
+    document.querySelectorAll('[data-price-for]').forEach(el => {
+      const p = products.find(x => String(x.id) === el.dataset.priceFor);
+      if (!p) return;
+      el.textContent = (el.dataset.fmt === 'from' ? 'From ' : '') + inr(p.price) + (el.dataset.fmt === 'pair' ? ' / pair' : '');
+    });
+  }
+
   /* Products come from the Google Sheet "Products" tab; built-in list is the fallback */
   if (API_URL) {
     fetch(API_URL).then(r => r.json()).then(d => {
       if (d.products && d.products.length) {
+        const old = {};
+        products.forEach(p => old[p.id] = p);
+        const fresh = d.products.map(p => {
+          const o = old[p.id] || {};
+          return {
+            id: p.id, name: p.name, category: p.category,
+            tag: p.category === 'Teen' ? 'Teens' : p.category === 'Couple' ? 'Couples' : p.category === 'Senior' ? 'Seniors' : p.category,
+            img: p.img, desc: p.desc, price: p.price, sizes: p.sizes, colours: p.colours,
+            svgKey: o.svgKey, svgHtml: o.svgHtml
+          };
+        });
+        const ids = new Set(fresh.map(p => p.id));
+        const keep = products.filter(p => EXTRA_CATS.includes(p.category) && !ids.has(p.id));
         products.length = 0;
-        d.products.forEach(p => products.push({
-          id: p.id, name: p.name, category: p.category, tag: p.category === 'Teen' ? 'Teens' : p.category === 'Couple' ? 'Couples' : p.category === 'Senior' ? 'Seniors' : p.category,
-          img: p.img, desc: p.desc, price: '$' + p.price, sizes: p.sizes
-        }));
+        products.push(...fresh, ...keep);
         renderProducts('All');
+        updatePriceLabels();
         renderCart();
       }
     }).catch(() => {});
   }
+
   let cart = [];
   try { cart = JSON.parse(localStorage.getItem('rasi-cart') || '[]'); } catch (e) { cart = []; }
   let custId = null;
+  let buyId = null;
+  const cardColour = {};                              // colour picked on a Featured Designs card
+
+  function pickColour(id, name, el) {
+    const row = el.parentNode;
+    if (cardColour[id] === name) delete cardColour[id]; else cardColour[id] = name;
+    row.querySelectorAll('.cdot').forEach(d => d.classList.toggle('sel', d.title === cardColour[id]));
+    row.querySelector('small').textContent = cardColour[id] || 'As shown';
+  }
 
   function saveCart() {
     try { localStorage.setItem('rasi-cart', JSON.stringify(cart)); } catch (e) {}
@@ -1669,14 +1821,15 @@
   }
 
   function addLine(line) {
-    const key = JSON.stringify([line.id, line.size, line.custom || null]);
-    const existing = cart.find(l => JSON.stringify([l.id, l.size, l.custom || null]) === key);
+    const k = l => JSON.stringify([l.id, l.size, l.colour || null, l.custom || null]);
+    const existing = cart.find(l => k(l) === k(line));
     if (existing) existing.qty += 1; else cart.push(Object.assign({ qty: 1 }, line));
     saveCart();
   }
 
   function addToCart(id, btn) {
-    addLine({ id, size: sizesFor(findProduct(id))[0] });
+    const p = findProduct(id);
+    addLine({ id, size: sizesFor(p)[0], colour: cardColour[id] || coloursFor(p)[0] });
     if (btn) {
       const t = btn.textContent;
       btn.textContent = 'Added ✓';
@@ -1684,31 +1837,44 @@
     }
   }
 
-  let buyId = null;
   function buyNow(id) {
     const p = findProduct(id);
+    const sizes = sizesFor(p), cols = coloursFor(p);
+    if (sizes.length < 2 && !cols.length) {            // nothing to choose (e.g. tassels)
+      addLine({ id, size: sizes[0] });
+      openCart();
+      return;
+    }
     buyId = id;
     document.getElementById('bm-title').textContent = 'Buy: ' + p.name;
-    document.getElementById('bm-sub').textContent = p.price + ' · Ready to ship';
-    document.getElementById('bm-sizes').innerHTML = sizesFor(p).map((s, i) =>
+    document.getElementById('bm-sub').textContent = inr(p.price) + ' · Ready to ship';
+    document.getElementById('bm-size-wrap').style.display = sizes.length > 1 ? '' : 'none';
+    document.getElementById('bm-colour-wrap').style.display = cols.length ? '' : 'none';
+    document.getElementById('bm-sizes').innerHTML = sizes.map((s, i) =>
       `<label><input type="radio" name="bm-size" value="${esc(s)}" ${i === 0 ? 'checked' : ''}>${esc(s)}</label>`).join('');
+    document.getElementById('bm-colours').innerHTML = cols.map((c, i) =>
+      `<label class="col-opt"><input type="radio" name="bm-colour" value="${esc(c)}" ${c === (cardColour[id] || 'As shown') ? 'checked' : ''}>` +
+      (PALETTE[c] ? `<span class="dot" style="background:${PALETTE[c]}"></span>` : '') + `${esc(c)}</label>`).join('');
     document.getElementById('buy-modal').classList.add('open');
   }
   function closeBuyModal() { document.getElementById('buy-modal').classList.remove('open'); }
   function confirmBuy() {
-    const sel = document.querySelector('input[name="bm-size"]:checked');
-    addLine({ id: buyId, size: sel ? sel.value : sizesFor(findProduct(buyId))[0] });
+    const p = findProduct(buyId);
+    const sz = document.querySelector('input[name="bm-size"]:checked');
+    const co = document.querySelector('input[name="bm-colour"]:checked');
+    addLine({ id: buyId, size: sz ? sz.value : sizesFor(p)[0], colour: co ? co.value : undefined });
     closeBuyModal();
     openCart();
   }
-  function changeSize(i, size) { cart[i].size = size; saveCart(); }
+  function changeSize(i, v) { cart[i].size = v; saveCart(); }
+  function changeColour(i, v) { cart[i].colour = v; saveCart(); }
 
   function openCustModal(id) {
     const p = findProduct(id);
     custId = id;
     document.getElementById('cm-title').textContent = 'Customise: ' + p.name;
-    document.getElementById('cm-sub').textContent = 'Start from this design and make it yours. ' + p.price + ' base price — final quote confirmed by our team.';
-    document.getElementById('cm-size').innerHTML = sizesFor(p).map(s => `<option>${s}</option>`).join('');
+    document.getElementById('cm-sub').textContent = 'Start from this design and make it yours. ' + inr(p.price) + ' base price — final quote confirmed by our team.';
+    document.getElementById('cm-size').innerHTML = sizesFor(p).map(s => `<option>${esc(s)}</option>`).join('');
     ['cm-fabric','cm-colour'].forEach(i => document.getElementById(i).selectedIndex = 0);
     ['cm-measure','cm-notes'].forEach(i => document.getElementById(i).value = '');
     document.getElementById('cust-modal').classList.add('open');
@@ -1736,58 +1902,109 @@
   }
   function removeLine(i) { cart.splice(i, 1); saveCart(); }
 
-  const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-
   function customSummary(c) {
     return [c.fabric !== 'As shown' && 'Fabric: ' + c.fabric, c.colour !== 'As shown' && 'Colour: ' + c.colour,
             c.measure && 'Measurements: ' + c.measure, c.notes && 'Notes: ' + c.notes].filter(Boolean).join(' · ');
   }
 
+  const thumb = p => p.img ? `<img src="${esc(p.img)}" alt="" style="width:100%;height:100%;object-fit:cover" />` : (svgs[p.svgKey] || p.svgHtml || '');
+  const cartTotal = () => cart.reduce((n, l) => n + priceNum(findProduct(l.id)) * l.qty, 0);
+
   function renderCart() {
     const count = cart.reduce((n, l) => n + l.qty, 0);
-    const total = cart.reduce((n, l) => n + priceNum(findProduct(l.id)) * l.qty, 0);
     document.getElementById('cart-count').textContent = count;
-    document.getElementById('cart-total').textContent = '$' + total;
+    document.getElementById('cart-total').textContent = inr(cartTotal());
     document.getElementById('cart-foot').style.display = cart.length ? '' : 'none';
+    backToDetails();                                   // any cart change returns to the details step
     document.getElementById('cart-body').innerHTML = cart.length ? cart.map((l, i) => {
       const p = findProduct(l.id);
+      const sizes = sizesFor(p), cols = coloursFor(p);
+      const sizeSel = sizes.length > 1 ? ` · Size <select class="cart-size" onchange="changeSize(${i}, this.value)">${sizes.map(s => `<option ${s === l.size ? 'selected' : ''}>${esc(s)}</option>`).join('')}</select>` : '';
+      const colSel = (!l.custom && cols.length) ? `<div class="cart-meta">Colour <select class="cart-size" onchange="changeColour(${i}, this.value)">${cols.map(c => `<option ${c === (l.colour || 'As shown') ? 'selected' : ''}>${esc(c)}</option>`).join('')}</select></div>` : '';
       return `<div class="cart-item">
-        <div class="cart-thumb">${p.img ? `<img src="${p.img}" alt="" style="width:100%;height:100%;object-fit:cover" />` : (svgs[p.svgKey] || '')}</div>
+        <div class="cart-thumb">${thumb(p)}</div>
         <div>
           <h4>${esc(p.name)}</h4>
-          <div class="cart-meta">${p.price} · Size <select class="cart-size" onchange="changeSize(${i}, this.value)">${sizesFor(p).map(s => `<option ${s === l.size ? 'selected' : ''}>${esc(s)}</option>`).join('')}</select></div>
+          <div class="cart-meta">${inr(priceNum(p))}${sizeSel}</div>
+          ${colSel}
           ${l.custom ? `<span class="cart-custom">Customised</span><div class="cart-meta">${esc(customSummary(l.custom))}</div>` : ''}
           <div class="cart-qty"><button onclick="changeQty(${i},-1)" aria-label="Decrease">−</button>${l.qty}<button onclick="changeQty(${i},1)" aria-label="Increase">+</button></div>
         </div>
-        <div class="cart-right">$${priceNum(p) * l.qty}<button class="cart-remove" onclick="removeLine(${i})">Remove</button></div>
+        <div class="cart-right">${inr(priceNum(p) * l.qty)}<button class="cart-remove" onclick="removeLine(${i})">Remove</button></div>
       </div>`;
     }).join('') : '<p class="cart-empty">Your cart is empty.</p>';
   }
 
-  function checkout() {
-    const name = document.getElementById('co-name').value.trim();
-    const contact = document.getElementById('co-contact').value.trim();
-    const address = document.getElementById('co-address').value.trim();
-    if (!name || !contact || !address) { alert('Please enter your name, contact and delivery address.'); return; }
+  /* ── Checkout: delivery details → UPI payment → order placed ── */
+  const val = id => document.getElementById(id).value.trim();
+
+  function backToDetails() {
+    document.getElementById('checkout-step').style.display = '';
+    document.getElementById('pay-step').style.display = 'none';
+  }
+
+  function proceedToPay() {
+    if (!val('co-name') || !val('co-contact') || !val('co-address')) {
+      alert('Please enter your name, contact and delivery address.');
+      return;
+    }
+    if (!UPI_ID && !UPI_QR_IMAGE) {
+      alert('Online payment is being set up. Please contact us to place your order.');
+      return;
+    }
+    const total = cartTotal();
+    const link = UPI_ID ? 'upi://pay?pa=' + encodeURIComponent(UPI_ID) + '&pn=' + encodeURIComponent(UPI_NAME) +
+      '&am=' + total + '&cu=INR&tn=' + encodeURIComponent('Rasi order') : '';
+    const qrSrc = UPI_QR_IMAGE || ('https://api.qrserver.com/v1/create-qr-code/?size=260x260&margin=8&data=' + encodeURIComponent(link));
+    document.getElementById('pay-amount').textContent = inr(total);
+    document.getElementById('pay-qr').innerHTML = `<img src="${esc(qrSrc)}" alt="UPI QR code" width="220" height="220" />`;
+    document.getElementById('pay-note').innerHTML = 'Scan with any UPI app (GPay, PhonePe, Paytm…) and pay <b>' + inr(total) + '</b>' +
+      (UPI_ID ? '<br>UPI ID: <b>' + esc(UPI_ID) + '</b>' : '') + '<br>After paying, enter the transaction / UTR number below.';
+    const a = document.getElementById('pay-link');
+    a.style.display = link ? '' : 'none';
+    a.href = link || '#';
+    document.getElementById('co-utr').value = '';
+    document.getElementById('checkout-step').style.display = 'none';
+    document.getElementById('pay-step').style.display = '';
+  }
+
+  function placeOrder() {
+    const utr = val('co-utr');
+    if (!/^[A-Za-z0-9]{8,30}$/.test(utr)) {
+      alert('Please enter the UPI transaction / UTR number shown in your payment app (letters and digits only).');
+      return;
+    }
+    const total = cartTotal();
     const done = res => {
       cart = []; saveCart(); closeCart();
-      ['co-name','co-contact','co-address'].forEach(i => document.getElementById(i).value = '');
-      document.querySelector('#modal h3').textContent = 'Order Received';
-      document.querySelector('#modal p').textContent = res && res.orderId
-        ? 'Thank you! Your order number is ' + res.orderId + '. Our team will contact you shortly to confirm payment and delivery.'
-        : 'Thank you! Our team will contact you shortly to confirm payment and delivery.';
+      ['co-name','co-contact','co-address','co-utr'].forEach(i => document.getElementById(i).value = '');
+      document.querySelector('#modal h3').textContent = 'Order Placed';
+      document.querySelector('#modal p').textContent =
+        'Thank you! ' + (res && res.orderId ? 'Your order number is ' + res.orderId + '. ' : '') +
+        'We have your payment reference (' + utr + ') and will verify it and confirm your order shortly.';
       document.getElementById('modal').classList.add('open');
     };
     if (!API_URL) { done(); return; }
-    const btn = document.querySelector('#cart-foot .btn-submit');
+    const btn = document.getElementById('place-btn');
     btn.disabled = true; btn.textContent = 'Placing order…';
-    postToSheet({ type: 'order', name, contact, address, items: cart.map(l => ({ id: l.id, size: l.size, qty: l.qty, custom: l.custom || null })) })
-      .then(res => { if (!res.ok) throw new Error(res.error); done(res); })
-      .catch(() => alert('Sorry, we could not place your order. Please try again or contact us directly.'))
-      .finally(() => { btn.disabled = false; btn.textContent = 'Place Order'; });
+    postToSheet({
+      type: 'order', name: val('co-name'), contact: val('co-contact'), address: val('co-address'),
+      payment: { utr: utr, amount: total },
+      items: cart.map(l => ({ id: l.id, size: l.size, colour: l.colour || '', qty: l.qty, custom: l.custom || null }))
+    }).then(res => { if (!res.ok) throw new Error(res.error); done(res); })
+      .catch(err => alert('Sorry, we could not place your order' + (err && err.message ? ' (' + err.message + ')' : '') + '. Please try again or contact us directly.'))
+      .finally(() => { btn.disabled = false; btn.textContent = "I've Paid – Place Order"; });
   }
 
+  updatePriceLabels();
   renderCart();
+
+  function colourRow(p) {
+    const cols = coloursFor(p).slice(1);
+    if (!cols.length) return '';
+    return `<div class="colour-row">${cols.map(c => `<span class="cdot ${cardColour[p.id] === c ? 'sel' : ''}" title="${esc(c)}" style="background:${PALETTE[c] || '#ccc'}" onclick="pickColour(${p.id},'${esc(c)}',this)"></span>`).join('')}<small>${esc(cardColour[p.id] || 'As shown')}</small></div>`;
+  }
+
 
   function selectSwatch(el) {
     document.querySelectorAll('.swatch').forEach(s => s.classList.remove('selected'));

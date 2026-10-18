@@ -1,16 +1,28 @@
-id,name,category,price,desc,image,sizes,active
-1,Silk Bridal Lehenga,Women,320,Heavy silk lehenga with gold zari embroidery. Bridal perfection.,,,Y
-2,Floral Maxi Dress,Women,89,Light chiffon with hand-embroidered floral details. Summer elegance.,,,Y
-3,Office Kurta Set,Women,65,Elegant cotton kurta with matching palazzo. Perfect for formal settings.,,,Y
-4,Festival Anarkali,Women,110,Full flare Anarkali with mirror-work detailing for festivals.,,,Y
-5,Designer Sherwani,Men,280,Royal sherwani with intricate hand embroidery. Wedding-ready.,,,Y
-6,Casual Linen Kurta,Men,45,Breathable linen kurta for everyday refined dressing.,,,Y
-7,Indo-Western Suit,Men,150,Contemporary fusion suit with mandarin collar and subtle embroidery.,,,Y
-8,Princess Birthday Frock,Kids,38,Puffy tulle frock with polka dots and ribbon bow. Ages 2–10.,,,Y
-9,Boys Ethnic Kurta Set,Kids,30,Soft cotton ethnic set for little boys. Festive & everyday. Ages 1–12.,,,Y
-10,Teen Casual Co-ord,Teen,72,Trendy top and jeans co-ord for confident teens. All sizes.,,,Y
-11,Couple Ethnic Set,Couple,175,Matching sherwani & lehenga set for special occasions.,,,Y
-12,Elegant Saree Ensemble,Senior,95,"Graceful saree with golden border. Comfortable, dignified, beautiful.",,,Y
-13,Sutra Weave Saree,Saree,155,Sage green saree adorned with intricate hand-done thread & crochet work along the pallu and border.,,,Y
-14,Moti Drape Saree,Saree,168,Deep plum saree with clusters of hand-strung glass & pearl beads cascading across the skirt and pallu.,,,Y
-15,Naksha Embroidery Saree,Saree,195,Dusty rose silk saree with dense zardozi-inspired hand embroidery in gold and blush thread.,,,Y
+id,name,category,price,desc,image,sizes,colours,active
+1,Silk Bridal Lehenga,Women,24999,Heavy silk lehenga with gold zari embroidery. Bridal perfection.,,,,Y
+2,Floral Maxi Dress,Women,3499,Light chiffon with hand-embroidered floral details. Summer elegance.,,,,Y
+3,Office Kurta Set,Women,2499,Elegant cotton kurta with matching palazzo. Perfect for formal settings.,,,,Y
+4,Festival Anarkali,Women,4499,Full flare Anarkali with mirror-work detailing for festivals.,,,,Y
+5,Designer Sherwani,Men,14999,Royal sherwani with intricate hand embroidery. Wedding-ready.,,,,Y
+6,Casual Linen Kurta,Men,1799,Breathable linen kurta for everyday refined dressing.,,,,Y
+7,Indo-Western Suit,Men,6999,Contemporary fusion suit with mandarin collar and subtle embroidery.,,,,Y
+8,Princess Birthday Frock,Kids,1499,Puffy tulle frock with polka dots and ribbon bow. Ages 2–10.,,,,Y
+9,Boys Ethnic Kurta Set,Kids,1299,Soft cotton ethnic set for little boys. Festive & everyday. Ages 1–12.,,,,Y
+10,Teen Casual Co-ord,Teen,2799,Trendy top and jeans co-ord for confident teens. All sizes.,,,,Y
+11,Couple Ethnic Set,Couple,9999,Matching sherwani & lehenga set for special occasions.,,,,Y
+12,Elegant Saree Ensemble,Senior,3999,"Graceful saree with golden border. Comfortable, dignified, beautiful.",,,,Y
+13,Sutra Weave Saree,Saree,6499,Sage green saree adorned with intricate hand-done thread & crochet work along the pallu and border.,,,,Y
+14,Moti Drape Saree,Saree,6999,Deep plum saree with clusters of hand-strung glass & pearl beads cascading across the skirt and pallu.,,,,Y
+15,Naksha Embroidery Saree,Saree,7999,Dusty rose silk saree with dense zardozi-inspired hand embroidery in gold and blush thread.,,,,Y
+101,Deep V-Neck Blouse,Blouse,1499,Handcrafted by Rasi.,,,,Y
+102,Boat Neck Blouse,Blouse,1299,Handcrafted by Rasi.,,,,Y
+103,Backless Blouse,Blouse,1799,Handcrafted by Rasi.,,,,Y
+104,High Neck Blouse,Blouse,1599,Handcrafted by Rasi.,,,,Y
+105,Off-Shoulder Blouse,Blouse,1699,Handcrafted by Rasi.,,,,Y
+106,Peplum Blouse,Blouse,1899,Handcrafted by Rasi.,,,,Y
+201,Gold Silk Tassel,Tassel,180,Handcrafted by Rasi.,,,,Y
+202,Rose Beaded Tassel,Tassel,240,Handcrafted by Rasi.,,,,Y
+203,Emerald Zari Tassel,Tassel,210,Handcrafted by Rasi.,,,,Y
+204,Royal Blue Stone Tassel,Tassel,295,Handcrafted by Rasi.,,,,Y
+205,Ivory Pearl Tassel,Tassel,320,Handcrafted by Rasi.,,,,Y
+206,Plum Kundan Tassel,Tassel,350,Handcrafted by Rasi.,,,,Y
